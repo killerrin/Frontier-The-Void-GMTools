@@ -5,15 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Frontier_The_Void_GMTools"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
+        Title="Frontier: The Void - GMTools" Height="600" Width="800">
     
     <Grid>
         <DockPanel>
             <Menu x:Name="menu" DockPanel.Dock="Top">
                 <MenuItem Header="File" />
             </Menu>
-            
-            <Frame x:Name="frame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+            <Frame x:Name="frame" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                   Loaded="frame_Loaded" />
         </DockPanel>    
     </Grid>
 </Window>

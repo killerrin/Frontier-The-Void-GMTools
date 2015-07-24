@@ -43,16 +43,34 @@ namespace Frontier_The_Void_GMTools.ViewModel
             ////}
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<RollDiceViewModel>();
+            SimpleIoc.Default.Register<FTLPlanetaryGenerationViewModel>();
         }
 
-        public MainViewModel Main
+        public MainViewModel vm_MainViewModel
         {
             get
             {
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
-        
+
+        public RollDiceViewModel vm_RollDiceViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<RollDiceViewModel>();
+            }
+        }
+
+        public FTLPlanetaryGenerationViewModel vm_FTLPlanetGenerationViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<FTLPlanetaryGenerationViewModel>();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

@@ -16,21 +16,23 @@ using System.Windows.Shapes;
 namespace Frontier_The_Void_GMTools
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MainPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainPage : Page
     {
-        public static MainWindow Instance;
-
-        public MainWindow()
+        public MainPage()
         {
-            Instance = this;
             InitializeComponent();
         }
 
-        private void frame_Loaded(object sender, RoutedEventArgs e)
+        private void RollDiceButton_Click(object sender, RoutedEventArgs e)
         {
-            frame.Navigate(new Uri("MainPage.xaml", UriKind.Relative));
+            MainWindow.Instance.frame.Navigate(new Uri("RollDicePage.xaml", UriKind.Relative));
+        }
+
+        private void FTLPlanetGenerationButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Instance.frame.Navigate(new Uri("FTLPlanetGenerationPage.xaml", UriKind.Relative));
         }
     }
 }

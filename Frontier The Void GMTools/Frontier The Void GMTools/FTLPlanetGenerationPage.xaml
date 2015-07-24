@@ -1,0 +1,86 @@
+﻿<Page x:Class="Frontier_The_Void_GMTools.FTLPlanetGenerationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Frontier_The_Void_GMTools"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="FTL and Planet Generation"
+      DataContext="{Binding Source={StaticResource Locator}, Path=vm_FTLPlanetGenerationViewModel}">
+
+    <Grid>
+        <DockPanel>
+            <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
+                <TextBlock Text="FTL and Planet Generation" FontSize="24" />
+
+                <TabControl>
+                    <TabItem Header="Hex">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                <TextBlock Text="Hex Coordinates" />
+
+                                <TextBlock Text="X" Margin="10,0,5,0"/>
+                                <TextBox x:Name="hexXCoordinateTextBox" Width="40" PreviewTextInput="CheckNumbersOnly_PreviewTextInput" DataObject.Pasting="TextBoxPaste_CheckNumbers"/>
+
+                                <TextBlock Text="Y" Margin="5,0,5,0"/>
+                                <TextBox x:Name="hexYCoordinateTextBox" Width="40" PreviewTextInput="CheckNumbersOnly_PreviewTextInput" DataObject.Pasting="TextBoxPaste_CheckNumbers"/>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Dice">
+                        <Grid>
+
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="Planetary Generation" HorizontalAlignment="Center"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                        <TextBlock Text="Roll 1" Margin="0,0,5,0"/>
+                                        <TextBox x:Name="planetaryGenerationRoll1TextBox" Width="40" PreviewTextInput="CheckNumbersOnly_PreviewTextInput" DataObject.Pasting="TextBoxPaste_CheckNumbers"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
+                                        <TextBlock Text="Roll 2" Margin="0,0,5,0"/>
+                                        <TextBox x:Name="planetaryGenerationRoll2TextBox" Width="40" PreviewTextInput="CheckNumbersOnly_PreviewTextInput" DataObject.Pasting="TextBoxPaste_CheckNumbers"/>
+                                    </StackPanel>
+                                    <TextBlock Text=" "  Margin="0,2,0,0"/>
+                                    <Button Content="Roll" Width="50" Click="PlanetaryGenerationRoll" Margin="0,2,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Vertical" Margin="20,0,0,0">
+                                    <TextBlock Text="FTL" HorizontalAlignment="Center"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                        <TextBlock Text="Roll 1" Margin="0,0,5,0"/>
+                                        <TextBox x:Name="ftlRoll1TextBox" Width="40" PreviewTextInput="CheckNumbersOnly_PreviewTextInput" DataObject.Pasting="TextBoxPaste_CheckNumbers"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
+                                        <TextBlock Text="Roll 2" Margin="0,0,5,0"/>
+                                        <TextBox x:Name="ftlRoll2TextBox" IsEnabled="{Binding ElementName=ftlExplorerCheckbox, Path=IsChecked}" Width="40" PreviewTextInput="CheckNumbersOnly_PreviewTextInput" DataObject.Pasting="TextBoxPaste_CheckNumbers"/>
+                                    </StackPanel>
+                                    <CheckBox x:Name="ftlExplorerCheckbox" Content="Explorer" IsChecked="False" Margin="0,2,0,0"/>
+                                    <Button Content="Roll" Width="50" Click="FTLGenerationRoll" Margin="0,2,0,0"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Generate">
+                        <Grid>
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel Orientation="Vertical">
+                                        <CheckBox x:Name="seedHexCheckBox" Content="Seed Hex" IsChecked="True"/>
+                                        <CheckBox x:Name="seedPlanetaryGenerationCheckBox" Content="Seed Planetary Generation Roll" IsChecked="False"/>
+                                        <CheckBox x:Name="seedFTLCheckBox" Content="Seed FTL Roll" IsChecked="False"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                
+                                <Button Width="100" Content="Generate" Click="GenerateButtonClicked"/>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </StackPanel>
+
+            <ListBox x:Name="generatedPlanets" ItemsSource="{Binding Path=GeneratedSystem}" Margin="0,20,0,0" />
+        </DockPanel>
+    </Grid>
+</Page>
