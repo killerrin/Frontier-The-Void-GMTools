@@ -104,6 +104,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\EnumSpaceConverter.cs" />
     <Compile Include="DnDTools\HexCoordinate.cs" />
     <Compile Include="DnDTools\StringHelpers.cs" />
     <Compile Include="FTLPlanetGenerationPage.xaml.cs">
@@ -112,6 +113,8 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\CelestialObject.cs" />
+    <Compile Include="Models\StarSystem.cs" />
     <Compile Include="RollDicePage.xaml.cs">
       <DependentUpon>RollDicePage.xaml</DependentUpon>
     </Compile>
@@ -147,12 +150,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\EnumTypes\AnimalClassification.cs" />
-    <Compile Include="Models\EnumTypes\CelestialObjectType.cs" />
+    <Compile Include="Models\EnumTypes\CelestialBodyType.cs" />
     <Compile Include="Models\EnumTypes\CivilizationTechLevel.cs" />
     <Compile Include="Models\EnumTypes\CivTraits.cs" />
     <Compile Include="Models\EnumTypes\FTLTravel.cs" />
     <Compile Include="Models\EnumTypes\LifeStage.cs" />
-    <Compile Include="Models\EnumTypes\HababilityTier.cs" />
+    <Compile Include="Models\EnumTypes\TerraformationTier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -180,9 +183,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Converters\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

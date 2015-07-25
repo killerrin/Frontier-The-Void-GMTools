@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Frontier_The_Void_GMTools.Models.EnumTypes
 {
-    public enum HababilityTier
+    public enum TerraformationTier
     {
+        Uninhabitable,
+
         T1,
         T2,
         T3,

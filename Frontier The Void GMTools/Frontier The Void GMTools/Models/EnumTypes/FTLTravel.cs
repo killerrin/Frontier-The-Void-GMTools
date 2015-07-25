@@ -8,12 +8,11 @@ namespace Frontier_The_Void_GMTools.Models.EnumTypes
 {
     public enum FTLTravel
     {
+        None,
+
         DeathEvent,
         HazardousEvent,
         WitnessEvent,
-
-        Wormhole,
-        Blackhole,
 
         DeadPrimitiveCivilization,
         AlreadyColonized,

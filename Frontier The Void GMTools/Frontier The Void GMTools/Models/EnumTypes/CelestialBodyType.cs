@@ -6,16 +6,19 @@ using System.Threading.Tasks;
 
 namespace Frontier_The_Void_GMTools.Models.EnumTypes
 {
-    public enum StarSystemType
+    public enum CelestialBodyType
     {
         Star,
 
-        Planet,
+        TerrestrialPlanet,
+        GasPlanet,
+        AsteroidBelt,
+
         Moon,
         Rings,
 
-        AsteroidBelt,
-
-        Comet
+        Comet,
+        Wormhole,
+        Blackhole,
     }
 }

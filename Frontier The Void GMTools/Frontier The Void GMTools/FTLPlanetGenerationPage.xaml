@@ -80,7 +80,12 @@
                 </TabControl>
             </StackPanel>
 
-            <ListBox x:Name="generatedPlanets" ItemsSource="{Binding Path=GeneratedSystem}" Margin="0,20,0,0" />
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                <TextBlock Text="FTL Result" />
+                <TextBlock Text="{Binding Path=FTLTravelResult, Converter={StaticResource EnumSpaceConverter}}" Margin="5,0,0,0" />
+            </StackPanel>
+            
+            <ListBox x:Name="generatedPlanets" ItemsSource="{Binding Path=GeneratedSystem}"/>
         </DockPanel>
     </Grid>
 </Page>

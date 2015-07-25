@@ -33,16 +33,16 @@ namespace Frontier_The_Void_GMTools
 
         private void PlanetaryGenerationRoll(object sender, RoutedEventArgs e)
         {
-            planetaryGenerationRoll1TextBox.Text = ""+ViewModel.Dice.Roll(20);
-            planetaryGenerationRoll2TextBox.Text = ""+ViewModel.Dice.Roll(20);
+            planetaryGenerationRoll1TextBox.Text = ""+ViewModel.Die.Roll(20);
+            planetaryGenerationRoll2TextBox.Text = ""+ViewModel.Die.Roll(20);
         }
 
         private void FTLGenerationRoll(object sender, RoutedEventArgs e)
         {
-            ftlRoll1TextBox.Text = "" + ViewModel.Dice.Roll(100);
+            ftlRoll1TextBox.Text = "" + ViewModel.Die.Roll(100);
 
             if (ftlExplorerCheckbox.IsChecked.Value == true)
-                ftlRoll2TextBox.Text = "" + ViewModel.Dice.Roll(100);
+                ftlRoll2TextBox.Text = "" + ViewModel.Die.Roll(100);
             else
                 ftlRoll2TextBox.Text = "";
         }

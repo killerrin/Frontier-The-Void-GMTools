@@ -10,25 +10,14 @@ namespace Frontier_The_Void_GMTools.DnDTools
     {
         Random m_random;
 
-        public Dice()
-        {
-            m_random = new Random();
-        }
+        public Dice() { m_random = new Random(); }
+        public Dice(int seed) { ChangeSeed(seed); }
+        public void ChangeSeed(int seed) { m_random = new Random(seed); }
 
-        public Dice(int seed)
-        {
-            m_random = new Random(seed);
-        }
 
-        public void ChangeSeed(int seed)
-        {
-            m_random = new Random(seed);
-        }
-
-        public int Roll(int sidesOnDice)
-        {
-            return m_random.Next(1, sidesOnDice + 1);
-        }
+        public int Roll(int sidesOnDice) { return m_random.Next(1, sidesOnDice + 1); }
+        public int Roll(int numberOfDice, int sidesOnDice) { return Roll(sidesOnDice) + Roll(sidesOnDice); }
+        public int RollBetween(int min, int max) { return m_random.Next(min, max); }
 
         public List<int> RollMultiple(int numberOfDice, int sidesOnDice)
         {
@@ -40,6 +29,20 @@ namespace Frontier_The_Void_GMTools.DnDTools
             }
 
             return rolls;
+        }
+        public List<int> RollMultiple(string dieString)
+        {
+            string[] dieSplit = dieString.Split('d');
+
+            int numberOfDice;
+            int sidesOnDice;
+
+            if (!int.TryParse(dieSplit[0], out numberOfDice))
+                return new List<int>();
+            if (!int.TryParse(dieSplit[1], out sidesOnDice))
+                return new List<int>();
+
+            return RollMultiple(numberOfDice, sidesOnDice);
         }
     }
 }
