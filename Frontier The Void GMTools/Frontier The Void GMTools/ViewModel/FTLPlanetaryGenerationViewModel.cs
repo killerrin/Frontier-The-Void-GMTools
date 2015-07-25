@@ -83,8 +83,7 @@ namespace Frontier_The_Void_GMTools.ViewModel
                 int seed = 1;
                 if (seedHex)
                 {
-                    seed *= hexCoordinate.X;
-                    seed *= hexCoordinate.Y;
+                    seed = int.Parse(hexCoordinate.X + "" + hexCoordinate.Y);
                 }
                 if (seedPlanetaryGeneration)
                 {
@@ -150,6 +149,11 @@ namespace Frontier_The_Void_GMTools.ViewModel
 
             if (celestialBody.StageOfLife == LifeStage.SentientLife)
             {
+                int numSpeciesRoll = Die.Roll(20);
+                int numSpecies = 1;
+                if (numSpeciesRoll < 15) numSpeciesRoll = 1;
+                else numSpeciesRoll = Die.Roll(5); 
+
 
             }
 
