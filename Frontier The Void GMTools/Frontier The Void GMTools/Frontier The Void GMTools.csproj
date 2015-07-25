@@ -114,6 +114,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\CelestialObject.cs" />
+    <Compile Include="Models\SentientSpecies.cs" />
     <Compile Include="Models\StarSystem.cs" />
     <Compile Include="RollDicePage.xaml.cs">
       <DependentUpon>RollDicePage.xaml</DependentUpon>

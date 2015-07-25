@@ -142,6 +142,17 @@ namespace Frontier_The_Void_GMTools.ViewModel
             celestialBody.StageOfLife = CalculateStageOfLife();
             celestialBody.ResourceValue = CalculateResourceValue(ftlTravel);
 
+            if (celestialBody.CelestialType == CelestialBodyType.Wormhole ||
+                celestialBody.CelestialType == CelestialBodyType.Blackhole)
+            {
+                celestialBody.StageOfLife = LifeStage.None;
+            }
+
+            if (celestialBody.StageOfLife == LifeStage.SentientLife)
+            {
+
+            }
+
             return celestialBody;
         }
 
@@ -211,7 +222,7 @@ namespace Frontier_The_Void_GMTools.ViewModel
 
             return LifeStage.None;
         }
-        private int CalculateResourceValue(FTLTravel ftlTravelResult)
+        public int CalculateResourceValue(FTLTravel ftlTravelResult)
         {
             if (ftlTravelResult == FTLTravel.DeathWorld)                return Die.Roll(20);
             else if (ftlTravelResult == FTLTravel.GoodSystem)           return Die.RollBetween(4, 5 + 1);
