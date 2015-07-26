@@ -45,6 +45,8 @@ namespace Frontier_The_Void_GMTools.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<RollDiceViewModel>();
             SimpleIoc.Default.Register<FTLPlanetaryGenerationViewModel>();
+            SimpleIoc.Default.Register<SpaceCombatViewModel>();
+            SimpleIoc.Default.Register<GroundCombatViewModel>();
         }
 
         public MainViewModel vm_MainViewModel
@@ -68,6 +70,22 @@ namespace Frontier_The_Void_GMTools.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<FTLPlanetaryGenerationViewModel>();
+            }
+        }
+
+        public SpaceCombatViewModel vm_SpaceCombatViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<SpaceCombatViewModel>();
+            }
+        }
+
+        public GroundCombatViewModel vm_GroundCombatViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<GroundCombatViewModel>();
             }
         }
 

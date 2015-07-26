@@ -105,3 +105,7 @@ D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier
 D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\Frontier The Void GMTools.g.resources
 D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\Frontier_The_Void_GMTools.Properties.Resources.resources
 D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\Frontier The Void GMTools.csproj.GenerateResource.Cache
+C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\SpaceCombatPage.g.cs
+C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\SpaceCombatPage.baml
+C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\GroundCombatPage.g.cs
+C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\GroundCombatPage.baml

@@ -118,9 +118,9 @@ namespace Frontier_The_Void_GMTools.ViewModel
             {
                 Debug.WriteLine("New Star");
                 StarSystem star = new StarSystem();
-                star.Radiation = ((RadiationLevel)Die.RollBetween(0,((int)RadiationLevel.Extreme)));
-                star.Classification = ((StarClassification)Die.RollBetween(0, (int)StarClassification.Blackhole));
-                star.Age = ((StarAge)Die.RollBetween(0, (int)StarAge.EndOfLife));
+                star.Radiation = ((RadiationLevel)Die.RollBetween(0, ((int)RadiationLevel.Extreme) + 1));
+                star.Classification = ((StarClassification)Die.RollBetween(0, (int)StarClassification.Blackhole) + 1);
+                star.Age = ((StarAge)Die.RollBetween(0, (int)StarAge.EndOfLife) + 1);
 
                 int totalBodies = Die.Roll(10);
                 for (int x = 0; x < totalBodies; x++)
@@ -138,7 +138,7 @@ namespace Frontier_The_Void_GMTools.ViewModel
             tempStarSystem[0].CelestialBodies.Add(generatedPlanet);
 
             // Finally, update the collection
-            Debug.WriteLine("Finishied Generating System");
+            Debug.WriteLine("Finished Generating System");
             GeneratedSystem = tempStarSystem;
         }
 
@@ -150,7 +150,7 @@ namespace Frontier_The_Void_GMTools.ViewModel
             celestialBody.CelestialType = CalculateCelestialType();
             celestialBody.TerraformingTier = CalculateTerraformingTier();
             celestialBody.StageOfLife = CalculateStageOfLife();
-            celestialBody.ResourceValue = CalculateResourceValue(ftlTravel);
+            celestialBody.ResourceValue = CalculateResourceValue(ftlTravel, celestialBody.TerraformingTier);
 
             if (celestialBody.CelestialType == CelestialBodyType.Wormhole ||
                 celestialBody.CelestialType == CelestialBodyType.Blackhole)
@@ -173,7 +173,6 @@ namespace Frontier_The_Void_GMTools.ViewModel
 
             return celestialBody;
         }
-
         public SentientSpecies GenerateSentientSpecies()
         {
             Debug.WriteLine("Generating Sentient Species");
@@ -186,7 +185,7 @@ namespace Frontier_The_Void_GMTools.ViewModel
             else if (techLevelRoll <= 16)   sentientSpecies.TechLevel = CivilizationTechLevel.BronzeAge;
             else if (techLevelRoll <= 20)   sentientSpecies.TechLevel = CivilizationTechLevel.IronAge;
             else if (techLevelRoll <= 24)   sentientSpecies.TechLevel = CivilizationTechLevel.IndustrialRevolution;
-            else if (techLevelRoll <= 28)   sentientSpecies.TechLevel = CivilizationTechLevel.AtomicAge;
+            else if (techLevelRoll <= 30)   sentientSpecies.TechLevel = CivilizationTechLevel.AtomicAge;
             else if (techLevelRoll <= 32)   sentientSpecies.TechLevel = CivilizationTechLevel.SpaceAge;
             else if (techLevelRoll <= 36)   sentientSpecies.TechLevel = CivilizationTechLevel.DigitalAge;
             else if (techLevelRoll <= 40)   sentientSpecies.TechLevel = CivilizationTechLevel.InterstellarAge;
@@ -329,12 +328,13 @@ namespace Frontier_The_Void_GMTools.ViewModel
 
             return LifeStage.None;
         }
-        public int CalculateResourceValue(FTLTravel ftlTravelResult)
+        public int CalculateResourceValue(FTLTravel ftlTravelResult, TerraformationTier terraformationTier)
         {
             if (ftlTravelResult == FTLTravel.DeathWorld)                return Die.Roll(20);
             else if (ftlTravelResult == FTLTravel.GoodSystem)           return Die.RollBetween(4, 5 + 1);
             else if (ftlTravelResult == FTLTravel.BeyondComprehension)  return 5;
             else if (ftlTravelResult == FTLTravel.HyperResourceWorld)   return Die.RollBetween(6, 10 + 1);
+            else if (terraformationTier == TerraformationTier.T5)       return Die.RollBetween(3, 5 + 1);
             return Die.Roll(4);
         }
     }

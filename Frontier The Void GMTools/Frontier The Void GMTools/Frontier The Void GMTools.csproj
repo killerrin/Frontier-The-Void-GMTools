@@ -111,6 +111,9 @@
     <Compile Include="FTLPlanetGenerationPage.xaml.cs">
       <DependentUpon>FTLPlanetGenerationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GroundCombatPage.xaml.cs">
+      <DependentUpon>GroundCombatPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -123,11 +126,20 @@
     <Compile Include="RollDicePage.xaml.cs">
       <DependentUpon>RollDicePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SpaceCombatPage.xaml.cs">
+      <DependentUpon>SpaceCombatPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\FTLPlanetaryGenerationViewModel.cs" />
+    <Compile Include="ViewModel\GroundCombatViewModel.cs" />
+    <Compile Include="ViewModel\SpaceCombatViewModel.cs" />
     <Compile Include="ViewModel\RollDiceViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="FTLPlanetGenerationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GroundCombatPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -149,6 +161,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="RollDicePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SpaceCombatPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

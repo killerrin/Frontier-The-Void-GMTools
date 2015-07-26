@@ -84,8 +84,13 @@ namespace Frontier_The_Void_GMTools
 
             Debug.WriteLine("FTL Rolls Validated");
 
-            ViewModel.GenerateSystem(hexCoordinate, planetGenerationRoll1, planetGenerationRoll2, ftlRoll1, ftlRoll2, ftlExplorerCheckbox.IsChecked.Value, seedHexCheckBox.IsChecked.Value, seedPlanetaryGenerationCheckBox.IsChecked.Value, seedFTLCheckBox.IsChecked.Value);
+            try
+            {
+                ViewModel.GenerateSystem(hexCoordinate, planetGenerationRoll1, planetGenerationRoll2, ftlRoll1, ftlRoll2, ftlExplorerCheckbox.IsChecked.Value, seedHexCheckBox.IsChecked.Value, seedPlanetaryGenerationCheckBox.IsChecked.Value, seedFTLCheckBox.IsChecked.Value);
+            }
+            catch (Exception) { }
         }
+            
 
         private void CheckNumbersOnly_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
