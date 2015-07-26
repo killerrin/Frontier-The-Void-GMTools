@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Frontier_The_Void_GMTools.Models.EnumTypes
 {
-    public enum CivTraits
+    public enum CivilizationTraits
     {
         Warmonger,
         Imperialist,

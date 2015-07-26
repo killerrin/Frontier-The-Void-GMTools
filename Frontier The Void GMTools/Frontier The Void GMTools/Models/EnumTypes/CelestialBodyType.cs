@@ -9,6 +9,7 @@ namespace Frontier_The_Void_GMTools.Models.EnumTypes
     public enum CelestialBodyType
     {
         Star,
+        Blackhole,
 
         TerrestrialPlanet,
         GasPlanet,
@@ -19,6 +20,5 @@ namespace Frontier_The_Void_GMTools.Models.EnumTypes
 
         Comet,
         Wormhole,
-        Blackhole,
     }
 }

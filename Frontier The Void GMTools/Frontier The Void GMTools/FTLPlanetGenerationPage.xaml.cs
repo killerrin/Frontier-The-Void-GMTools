@@ -52,7 +52,7 @@ namespace Frontier_The_Void_GMTools
             Debug.WriteLine("Generate System Button Clicked");
 
             if (string.IsNullOrWhiteSpace(hexXCoordinateTextBox.Text) || string.IsNullOrWhiteSpace(hexYCoordinateTextBox.Text))
-                return;
+            { }
             if (string.IsNullOrWhiteSpace(planetaryGenerationRoll1TextBox.Text) || string.IsNullOrWhiteSpace(planetaryGenerationRoll2TextBox.Text))
                 return;
             if (string.IsNullOrWhiteSpace(ftlRoll1TextBox.Text) && string.IsNullOrWhiteSpace(ftlRoll2TextBox.Text))
@@ -62,9 +62,9 @@ namespace Frontier_The_Void_GMTools
 
             HexCoordinate hexCoordinate = new HexCoordinate();
             if (!int.TryParse(hexXCoordinateTextBox.Text, out hexCoordinate.X))
-                return;
+                hexCoordinate.X = ViewModel.Die.Roll(100);
             if (!int.TryParse(hexYCoordinateTextBox.Text, out hexCoordinate.Y))
-                return;
+                hexCoordinate.Y = ViewModel.Die.Roll(100);
 
             Debug.WriteLine("Hex Coordinate Validated");
 
@@ -82,7 +82,7 @@ namespace Frontier_The_Void_GMTools
             if (!int.TryParse(ftlRoll1TextBox.Text, out ftlRoll1)) { }
             if (!int.TryParse(ftlRoll2TextBox.Text, out ftlRoll2)) { }
 
-            Debug.Write("FTL Rolls Validated");
+            Debug.WriteLine("FTL Rolls Validated");
 
             ViewModel.GenerateSystem(hexCoordinate, planetGenerationRoll1, planetGenerationRoll2, ftlRoll1, ftlRoll2, ftlExplorerCheckbox.IsChecked.Value, seedHexCheckBox.IsChecked.Value, seedPlanetaryGenerationCheckBox.IsChecked.Value, seedFTLCheckBox.IsChecked.Value);
         }

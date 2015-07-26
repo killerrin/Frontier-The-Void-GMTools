@@ -10,18 +10,19 @@ namespace Frontier_The_Void_GMTools.Models
 {
     public class CelestialObject
     {
-        public ObservableCollection<CelestialObject> OrbitingObjects = new ObservableCollection<CelestialObject>();
-        public ObservableCollection<SentientSpecies> Sentients = new ObservableCollection<SentientSpecies>();
+        public ObservableCollection<CelestialObject> OrbitingObjects { get; set; }
+        public ObservableCollection<SentientSpecies> Sentients { get; set; }
 
-        public CelestialBodyType CelestialType;
-        public TerraformationTier TerraformingTier;
-        public LifeStage StageOfLife;
-        public int ResourceValue;
+        public CelestialBodyType CelestialType { get; set; }
+        public TerraformationTier TerraformingTier { get; set; }
+        public LifeStage StageOfLife { get; set; }
+        public int ResourceValue { get; set; }
      
 
         public CelestialObject()
         {
-
+            OrbitingObjects = new ObservableCollection<CelestialObject>();
+            Sentients = new ObservableCollection<SentientSpecies>();
         }   
     }
 }

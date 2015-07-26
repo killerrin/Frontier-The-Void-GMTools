@@ -10,13 +10,14 @@ namespace Frontier_The_Void_GMTools.Models
 {
     public class SentientSpecies
     {
-        public ObservableCollection<AnimalClassification> Classifications = new ObservableCollection<AnimalClassification>();
-        public ObservableCollection<CivTraits> Traits = new ObservableCollection<CivTraits>();
-        public CivilizationTechLevel TechLevel;
+        public ObservableCollection<AnimalClassification> Classifications { get; set; }
+        public ObservableCollection<CivilizationTraits> Traits { get; set; }
+        public CivilizationTechLevel TechLevel { get; set; }
 
         public SentientSpecies()
         {
-
+            Classifications = new ObservableCollection<AnimalClassification>();
+            Traits = new ObservableCollection<CivilizationTraits>();
         }
     }
 }

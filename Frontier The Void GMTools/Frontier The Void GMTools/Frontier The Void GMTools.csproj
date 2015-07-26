@@ -104,6 +104,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\EnumSpaceConverter.cs" />
     <Compile Include="DnDTools\HexCoordinate.cs" />
     <Compile Include="DnDTools\StringHelpers.cs" />
@@ -114,6 +115,9 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\CelestialObject.cs" />
+    <Compile Include="Models\EnumTypes\RadiationLevel.cs" />
+    <Compile Include="Models\EnumTypes\StarAge.cs" />
+    <Compile Include="Models\EnumTypes\StarClassification.cs" />
     <Compile Include="Models\SentientSpecies.cs" />
     <Compile Include="Models\StarSystem.cs" />
     <Compile Include="RollDicePage.xaml.cs">
@@ -153,7 +157,7 @@
     <Compile Include="Models\EnumTypes\AnimalClassification.cs" />
     <Compile Include="Models\EnumTypes\CelestialBodyType.cs" />
     <Compile Include="Models\EnumTypes\CivilizationTechLevel.cs" />
-    <Compile Include="Models\EnumTypes\CivTraits.cs" />
+    <Compile Include="Models\EnumTypes\CivilizationTraits.cs" />
     <Compile Include="Models\EnumTypes\FTLTravel.cs" />
     <Compile Include="Models\EnumTypes\LifeStage.cs" />
     <Compile Include="Models\EnumTypes\TerraformationTier.cs" />

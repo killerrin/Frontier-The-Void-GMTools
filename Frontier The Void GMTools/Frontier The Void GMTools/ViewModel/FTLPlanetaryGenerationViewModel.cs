@@ -89,7 +89,7 @@ namespace Frontier_The_Void_GMTools.ViewModel
                 {
                     seed += planetaryGenerationRoll1;
                     seed += planetaryGenerationRoll2;
-                } 
+                }
                 if (seedFTL)
                 {
                     seed += ftlRoll1;
@@ -97,7 +97,9 @@ namespace Frontier_The_Void_GMTools.ViewModel
                 }
 
                 Die.ChangeSeed(seed);
+                Debug.WriteLine("Seeded Dice");
             }
+            else Die = new Dice();
 
             // Now that everything is setup, begin generating the system
             ObservableCollection<StarSystem> tempStarSystem = new ObservableCollection<StarSystem>();
@@ -111,9 +113,14 @@ namespace Frontier_The_Void_GMTools.ViewModel
                 totalStars = Die.Roll(4);
 
             // Fill the system with random bodies
+            Debug.WriteLine("Rolling Objects in System");
             for (int i = 0; i < totalStars; i++)
             {
+                Debug.WriteLine("New Star");
                 StarSystem star = new StarSystem();
+                star.Radiation = ((RadiationLevel)Die.RollBetween(0,((int)RadiationLevel.Extreme)));
+                star.Classification = ((StarClassification)Die.RollBetween(0, (int)StarClassification.Blackhole));
+                star.Age = ((StarAge)Die.RollBetween(0, (int)StarAge.EndOfLife));
 
                 int totalBodies = Die.Roll(10);
                 for (int x = 0; x < totalBodies; x++)
@@ -125,16 +132,20 @@ namespace Frontier_The_Void_GMTools.ViewModel
             }
 
             // Roll the Main Generator
+            Debug.WriteLine("Generating the Planet from Inputs");
             CelestialObject generatedPlanet = GenerateCelestialBody(FTLTravelResult);
             generatedPlanet.CelestialType = CelestialBodyType.TerrestrialPlanet;
             tempStarSystem[0].CelestialBodies.Add(generatedPlanet);
 
             // Finally, update the collection
+            Debug.WriteLine("Finishied Generating System");
             GeneratedSystem = tempStarSystem;
         }
 
         public CelestialObject GenerateCelestialBody(FTLTravel ftlTravel)
         {
+            Debug.WriteLine("Generating Celestial Bodies: {0}", ftlTravel);
+
             CelestialObject celestialBody = new CelestialObject();
             celestialBody.CelestialType = CalculateCelestialType();
             celestialBody.TerraformingTier = CalculateTerraformingTier();
@@ -147,17 +158,109 @@ namespace Frontier_The_Void_GMTools.ViewModel
                 celestialBody.StageOfLife = LifeStage.None;
             }
 
-            if (celestialBody.StageOfLife == LifeStage.SentientLife)
+            if (celestialBody.StageOfLife == LifeStage.SentientLife) //|| ftlTravel == FTLTravel.AlreadyColonized)
             {
                 int numSpeciesRoll = Die.Roll(20);
                 int numSpecies = 1;
                 if (numSpeciesRoll < 15) numSpeciesRoll = 1;
-                else numSpeciesRoll = Die.Roll(5); 
+                else numSpeciesRoll = Die.Roll(5);
 
-
+                for (int i = 0; i < numSpecies; i++)
+                {
+                    celestialBody.Sentients.Add(GenerateSentientSpecies());
+                }
             }
 
             return celestialBody;
+        }
+
+        public SentientSpecies GenerateSentientSpecies()
+        {
+            Debug.WriteLine("Generating Sentient Species");
+            SentientSpecies sentientSpecies = new SentientSpecies();
+
+            // Calculate Tech Level
+            int techLevelRoll = Die.Roll(2,20);
+            if (techLevelRoll <= 6)         sentientSpecies.TechLevel = CivilizationTechLevel.Cavemen;
+            else if (techLevelRoll <= 12)   sentientSpecies.TechLevel = CivilizationTechLevel.StoneAge;
+            else if (techLevelRoll <= 16)   sentientSpecies.TechLevel = CivilizationTechLevel.BronzeAge;
+            else if (techLevelRoll <= 20)   sentientSpecies.TechLevel = CivilizationTechLevel.IronAge;
+            else if (techLevelRoll <= 24)   sentientSpecies.TechLevel = CivilizationTechLevel.IndustrialRevolution;
+            else if (techLevelRoll <= 28)   sentientSpecies.TechLevel = CivilizationTechLevel.AtomicAge;
+            else if (techLevelRoll <= 32)   sentientSpecies.TechLevel = CivilizationTechLevel.SpaceAge;
+            else if (techLevelRoll <= 36)   sentientSpecies.TechLevel = CivilizationTechLevel.DigitalAge;
+            else if (techLevelRoll <= 40)   sentientSpecies.TechLevel = CivilizationTechLevel.InterstellarAge;
+            else sentientSpecies.TechLevel = CivilizationTechLevel.StoneAge;
+
+            // Calculate Traits
+            while (true)
+            {
+                int civTraitsRoll = Die.Roll(1, 100);
+                CivilizationTraits trait;
+                if (civTraitsRoll <= 10) { trait = CivilizationTraits.Capitalist; }
+                else if (civTraitsRoll <= 20) { trait = CivilizationTraits.Communist; }
+                else if (civTraitsRoll <= 30) { trait = CivilizationTraits.Corporate; }
+                else if (civTraitsRoll <= 40) { trait = CivilizationTraits.Explorer; }
+                else if (civTraitsRoll <= 50) { trait = CivilizationTraits.Imperialist; }
+                else if (civTraitsRoll <= 60) { trait = CivilizationTraits.PeaceKeepers; }
+                else if (civTraitsRoll <= 70) { trait = CivilizationTraits.Philosophical; }
+                else if (civTraitsRoll <= 80) { trait = CivilizationTraits.Scientist; }
+                else if (civTraitsRoll <= 90) { trait = CivilizationTraits.Theocratic; }
+                else if (civTraitsRoll <= 100) { trait = CivilizationTraits.Warmonger; }
+                else trait = CivilizationTraits.Imperialist;
+
+                bool acceptableTrait = true;
+                if (sentientSpecies.Traits.Count == 0) { }
+                else
+                {
+                    foreach (var t in sentientSpecies.Traits)
+                    {
+                        if (trait == t) { acceptableTrait = false; break; }
+                        else if ((trait == CivilizationTraits.Imperialist && t == CivilizationTraits.PeaceKeepers) ||
+                                 (trait == CivilizationTraits.PeaceKeepers && t == CivilizationTraits.Imperialist)) { acceptableTrait = false; break; }
+
+                        else if ((trait == CivilizationTraits.Communist && t == CivilizationTraits.Capitalist) ||
+                                 (trait == CivilizationTraits.Capitalist && t == CivilizationTraits.Communist)) { acceptableTrait = false; break; }
+                    }
+                }
+
+                if (acceptableTrait)
+                    sentientSpecies.Traits.Add(trait);
+                if (sentientSpecies.Traits.Count >= 3)
+                    break;
+            }
+
+            // Calculate Physiology
+            while (true)
+            {
+                AnimalClassification classification;
+                int speciesPhysiologyRoll = Die.Roll(1, 100);
+                if (speciesPhysiologyRoll <= 10) classification = AnimalClassification.Amphibian;
+                if (speciesPhysiologyRoll <= 20) classification = AnimalClassification.Avian;
+                if (speciesPhysiologyRoll <= 30) classification = AnimalClassification.Aquatic;
+                if (speciesPhysiologyRoll <= 50) classification = AnimalClassification.Reptillian;
+                if (speciesPhysiologyRoll <= 75) classification = AnimalClassification.Mammal;
+                if (speciesPhysiologyRoll <= 85) classification = AnimalClassification.Rock;
+                if (speciesPhysiologyRoll <= 95) classification = AnimalClassification.Energy;
+                if (speciesPhysiologyRoll <= 97) classification = AnimalClassification.Exotic;
+                if (speciesPhysiologyRoll <= 100) classification = AnimalClassification.SpaceBased;
+                else classification = AnimalClassification.Mammal;
+
+                bool acceptableClassification = true;
+                foreach (var c in sentientSpecies.Classifications)
+                {
+                    if (classification == c) { acceptableClassification = false; break; }
+                }
+
+                if (acceptableClassification)
+                {
+                    sentientSpecies.Classifications.Add(classification);
+                    if (Die.Roll(20) < 10)
+                        break;
+                }
+            }
+
+            return sentientSpecies;
         }
 
         public FTLTravel FindFTLResult(bool isExplorer, int ftlRoll1, int ftlRoll2)
@@ -220,8 +323,8 @@ namespace Frontier_The_Void_GMTools.ViewModel
             else if (roll <= 6)     return LifeStage.OrganicCompounds;
             else if (roll <= 10)    return LifeStage.SingleCellular;
             else if (roll <= 15)    return LifeStage.MultiCellular;
-            else if (roll <= 20)    return LifeStage.SimpleLife;
-            else if (roll <= 32)    return LifeStage.ComplexLife;
+            else if (roll <= 22)    return LifeStage.SimpleLife;
+            else if (roll <= 37)    return LifeStage.ComplexLife;
             else if (roll <= 40)    return LifeStage.SentientLife;
 
             return LifeStage.None;

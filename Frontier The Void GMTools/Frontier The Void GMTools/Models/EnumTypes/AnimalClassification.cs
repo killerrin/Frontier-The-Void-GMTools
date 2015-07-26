@@ -14,9 +14,9 @@ namespace Frontier_The_Void_GMTools.Models.EnumTypes
         Reptillian,
         Aquatic,
 
-        Energy,
         Rock,
+        Energy,
+        Exotic,
         SpaceBased,
-        Exotic
     }
 }

@@ -52,3 +52,56 @@ C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTo
 C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\RollDicePage.baml
 C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\FTLPlanetGenerationPage.g.cs
 C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\FTLPlanetGenerationPage.baml
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\Frontier The Void GMTools.exe.config
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\Frontier The Void GMTools.exe
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\Frontier The Void GMTools.pdb
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\Frontier The Void GMTools.exe
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\Frontier The Void GMTools.pdb
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\GalaSoft.MvvmLight.dll
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\GalaSoft.MvvmLight.Extras.dll
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\GalaSoft.MvvmLight.Platform.dll
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\Newtonsoft.Json.dll
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\System.Windows.Interactivity.dll
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\Xceed.Wpf.AvalonDock.dll
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.dll
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\Xceed.Wpf.DataGrid.dll
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\Xceed.Wpf.Toolkit.dll
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\GalaSoft.MvvmLight.pdb
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\GalaSoft.MvvmLight.xml
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\GalaSoft.MvvmLight.Extras.pdb
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\GalaSoft.MvvmLight.Extras.xml
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\GalaSoft.MvvmLight.Platform.pdb
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\GalaSoft.MvvmLight.Platform.xml
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\Newtonsoft.Json.xml
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\de\Xceed.Wpf.AvalonDock.resources.dll
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\es\Xceed.Wpf.AvalonDock.resources.dll
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\fr\Xceed.Wpf.AvalonDock.resources.dll
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\hu\Xceed.Wpf.AvalonDock.resources.dll
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\it\Xceed.Wpf.AvalonDock.resources.dll
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\pt-BR\Xceed.Wpf.AvalonDock.resources.dll
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\ro\Xceed.Wpf.AvalonDock.resources.dll
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\Frontier The Void GMTools.csprojResolveAssemblyReference.cache
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\FTLPlanetGenerationPage.g.cs
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\MainPage.g.cs
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\MainWindow.g.cs
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\RollDicePage.g.cs
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\App.g.cs
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\Frontier The Void GMTools_MarkupCompile.cache
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\Frontier The Void GMTools_MarkupCompile.lref
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\App.baml
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\FTLPlanetGenerationPage.baml
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\MainPage.baml
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\MainWindow.baml
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\RollDicePage.baml
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\Frontier The Void GMTools.g.resources
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\Frontier_The_Void_GMTools.Properties.Resources.resources
+D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\Frontier The Void GMTools.csproj.GenerateResource.Cache
