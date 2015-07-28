@@ -106,3 +106,4 @@ D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier
 D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\Frontier The Void GMTools.csproj.GenerateResource.Cache
 C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\CombatPage.g.cs
 C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\CombatPage.baml
+C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\Frontier The Void GMTools.csprojResolveAssemblyReference.cache

@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Frontier_The_Void_GMTools"
+      xmlns:wpftoolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="800" Background="White"
       Title="Combat"
@@ -24,16 +25,16 @@
                 <ListBox ItemsSource="{Binding Path=RoundsOfCombat}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Top">
                                 <ListBox ItemsSource="{Binding Path=CombatForces}">
                                     <ListBox.ItemsPanel>
                                         <ItemsPanelTemplate>
-                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                            <StackPanel Orientation="Horizontal" MinWidth="300" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                                         </ItemsPanelTemplate>
                                     </ListBox.ItemsPanel>
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
-                                            <StackPanel Orientation="Vertical">
+                                            <StackPanel Orientation="Vertical" VerticalAlignment="Top">
                                                 <StackPanel Orientation="Horizontal">
                                                     <Button Content="X" Margin="0,0,0,0" Click="RemoveCombatForceButton_Clicked"/>
                                                     <TextBlock Text="{Binding Name}" Margin="20,0,0,0" />
@@ -50,8 +51,10 @@
                                                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                                                     <TextBlock Text="Attacking" />
                                                     <!---->
-                                                    <ComboBox ItemsSource="{Binding Round.CombatForceNames}" Width="260" Margin="20,0,0,0"
-                                                              SelectedValue="{Binding Attacking, Mode=TwoWay}" SelectionChanged="AttackingComboBox_SelectionChanged"/>
+                                                    <ComboBox ItemsSource="{Binding Round.CombatForceNames}" Width="200" Margin="20,0,0,0"
+                                                              SelectedValue="{Binding Attacking, Mode=TwoWay}"/>
+                                                    
+                                                    <CheckBox Content="Defending" Margin="20,5,0,0" IsChecked="{Binding IsDefending, Mode=TwoWay}"/>
                                                 </StackPanel>
 
                                                 <ListBox ItemsSource="{Binding Path=Units}" Margin="0,5,0,0">
@@ -84,6 +87,7 @@
                                                         </DataTemplate>
                                                     </ListBox.ItemTemplate>
                                                 </ListBox>
+                                                <Button Content="Remove All" Click="RemoveAllUnitsButton_Clicked" />
                                             </StackPanel>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
@@ -91,7 +95,7 @@
 
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Result"/>
-                                    <TextBox Text="{Binding Summary}"/>
+                                    <TextBox Text="{Binding Summary}" Margin="20,0,0,0" Width="600" Height="50"/>
                                 </StackPanel>
                             </StackPanel>
                         </DataTemplate>
@@ -99,5 +103,43 @@
                 </ListBox>
             </StackPanel>
         </DockPanel>
+        
+        <wpftoolkit:ChildWindow x:Name="addUnitChildWindow" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Preset" />
+                    <ComboBox x:Name="presetComboBox_childWindow" Width="200" Margin="20,0,0,0"
+                              ItemsSource="{Binding Path=UnitStats, Mode=OneWay}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name, Mode=OneWay}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <TextBlock Text="Name" />
+                    <TextBox x:Name="nameTextBox_childWindow" Width="170" Margin="43,0,0,0" 
+                             Text="{Binding Path=Name, Mode=OneWay}" 
+                             DataContext="{Binding ElementName=presetComboBox_childWindow, Path=SelectedItem, Mode=OneWay}"/>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                        <TextBlock Text="Health" />
+                        <TextBox x:Name="healthTextBox_childWindow" Width="40" Margin="40,0,0,0" 
+                                 Text="{Binding Health, Mode=OneWay}" 
+                                 DataContext="{Binding ElementName=presetComboBox_childWindow, Path=SelectedItem, Mode=OneWay}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="15,0,0,0">
+                        <TextBlock Text="Attack Value" />
+                        <TextBox x:Name="attackValueTextBox_childWindow" Width="40" Margin="10,0,0,0" 
+                                 Text="{Binding AttackPower, Mode=OneWay}" 
+                                 DataContext="{Binding ElementName=presetComboBox_childWindow, Path=SelectedItem, Mode=OneWay}"/>
+                    </StackPanel>
+                </StackPanel>
+                <Button Content="Submit" Margin="0,5,0,0" Click="SubmitUnitButton_Clicked"/>
+            </StackPanel>
+        </wpftoolkit:ChildWindow>
     </Grid>
 </Page>

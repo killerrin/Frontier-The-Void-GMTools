@@ -68,10 +68,9 @@ namespace Frontier_The_Void_GMTools.Models
             }
         }
 
-        public CombatForce Owner;
-        public Unit(CombatForce owner)
+        public CombatForce Owner { get; set; }
+        public Unit()
         {
-            Owner = owner;
         }
         public Unit(Unit otherUnit)
         {

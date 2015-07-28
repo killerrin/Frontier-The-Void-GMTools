@@ -24,6 +24,7 @@ namespace Frontier_The_Void_GMTools.ViewModel
     public class CombatViewModel : ViewModelBase
     {
         public const string RoundsOfCombatPropertyName = "RoundsOfCombat";
+        public const string UnitStatsPropertyName = "UnitStats";
 
         Dice dice = new Dice();
 
@@ -38,6 +39,20 @@ namespace Frontier_The_Void_GMTools.ViewModel
 
                 m_roundsOfCombat = value;
                 RaisePropertyChanged(RoundsOfCombatPropertyName);
+            }
+        }
+
+        private ObservableCollection<Unit> m_unitStats = new ObservableCollection<Unit>();
+        public ObservableCollection<Unit> UnitStats
+        {
+            get { return m_unitStats; }
+            set
+            {
+                if (m_unitStats == value)
+                    return;
+
+                m_unitStats = value;
+                RaisePropertyChanged(UnitStatsPropertyName);
             }
         }
 
@@ -58,7 +73,8 @@ namespace Frontier_The_Void_GMTools.ViewModel
 
                     for (int x = 0; x < 2; x++)
                     {
-                        Unit unit = new Unit(combatForce);
+                        Unit unit = new Unit();
+                        unit.Owner = combatForce;
                         unit.Name = "Unit " + x;
                         unit.TypeOfUnit = UnitType.Both;
                         unit.Health = 6.0;
@@ -73,6 +89,16 @@ namespace Frontier_The_Void_GMTools.ViewModel
             }   
 
             RoundsOfCombat.Add(round);
+
+            #region Setup Unit stats
+            Unit u1 = new Unit();
+            u1.Name = "Unit 1";
+            u1.Health = 6.0;
+            u1.AttackPower = 6.0;
+            u1.TypeOfUnit = UnitType.Both;
+            UnitStats.Add(u1);
+            #endregion
+
         }
 
         public void AddCombatForce(string text)

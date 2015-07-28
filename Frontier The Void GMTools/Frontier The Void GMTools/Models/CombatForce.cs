@@ -14,6 +14,7 @@ namespace Frontier_The_Void_GMTools.Models
         #region Properties
         public const string NamePropertyName = "Name";
         public const string AttackingPropertyName = "Attacking";
+        public const string IsDefendingPropertyName = "IsDefending";
         public const string UnitsPropertyName = "Units";
 
         private string _name = "";
@@ -37,8 +38,23 @@ namespace Frontier_The_Void_GMTools.Models
             {
                 if (_attacking == value) return;
 
+                Debug.WriteLine("Attacking Changed To " + value);
                 _attacking = value;
                 RaisePropertyChanged(NamePropertyName);
+            }
+        }
+
+        private bool _isDefending = false;
+        public bool IsDefending
+        {
+            get { return _isDefending; }
+            set
+            {
+                if (_isDefending == value) return;
+
+                Debug.WriteLine("IsDefending Changed to {0}", value);
+                _isDefending = value;
+                RaisePropertyChanged(IsDefendingPropertyName);
             }
         }
 
@@ -93,7 +109,8 @@ namespace Frontier_The_Void_GMTools.Models
 
             foreach (var unit in otherForce.Units)
             {
-                Unit u = new Unit(this);
+                Unit u = new Unit();
+                u.Owner = this;
                 u.Name = unit.Name;
                 u.TypeOfUnit = unit.TypeOfUnit;
                 u.Health = unit.Health;
@@ -104,6 +121,7 @@ namespace Frontier_The_Void_GMTools.Models
         public void AddUnit(Unit unit)
         {
             Debug.WriteLine("Adding Unit {0} to {1}", unit.ToString(), Name);
+            unit.Owner = this;
             Units.Add(unit);
         }
 
@@ -111,6 +129,12 @@ namespace Frontier_The_Void_GMTools.Models
         {
             Debug.WriteLine("Removing Unit {0} from {1}", unit.ToString(), Name);
             Units.Remove(unit);
+        }
+
+        public void RemoveAllUnits()
+        {
+            Debug.WriteLine("Removing All Units from " + Name);
+            Units.Clear();
         }
 
 

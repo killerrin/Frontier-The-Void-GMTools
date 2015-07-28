@@ -28,20 +28,6 @@
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" Margin="20,0,0,0">
-                        <TextBlock Text="Planetary Generation" HorizontalAlignment="Center"/>
-                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                            <TextBlock Text="Roll 1" Margin="0,0,5,0"/>
-                            <TextBox x:Name="planetaryGenerationRoll1TextBox" Width="40" PreviewTextInput="CheckNumbersOnly_PreviewTextInput" DataObject.Pasting="TextBoxPaste_CheckNumbers"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
-                            <TextBlock Text="Roll 2" Margin="0,0,5,0"/>
-                            <TextBox x:Name="planetaryGenerationRoll2TextBox" Width="40" PreviewTextInput="CheckNumbersOnly_PreviewTextInput" DataObject.Pasting="TextBoxPaste_CheckNumbers"/>
-                        </StackPanel>
-                        <TextBlock Text=" "  Margin="0,2,0,0"/>
-                        <Button Content="Roll" Width="50" Click="PlanetaryGenerationRoll" Margin="0,2,0,0"/>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Vertical" Margin="20,0,0,0">
                         <TextBlock Text="FTL" HorizontalAlignment="Center"/>
                         <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                             <TextBlock Text="Roll 1" Margin="0,0,5,0"/>
@@ -56,10 +42,24 @@
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" Margin="20,0,0,0">
+                        <TextBlock Text="Planetary Generation" HorizontalAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                            <TextBlock Text="Roll 1" Margin="0,0,5,0"/>
+                            <TextBox x:Name="planetaryGenerationRoll1TextBox" Width="40" PreviewTextInput="CheckNumbersOnly_PreviewTextInput" DataObject.Pasting="TextBoxPaste_CheckNumbers"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
+                            <TextBlock Text="Roll 2" Margin="0,0,5,0"/>
+                            <TextBox x:Name="planetaryGenerationRoll2TextBox" Width="40" PreviewTextInput="CheckNumbersOnly_PreviewTextInput" DataObject.Pasting="TextBoxPaste_CheckNumbers"/>
+                        </StackPanel>
+                        <TextBlock Text=" "  Margin="0,2,0,0"/>
+                        <Button Content="Roll" Width="50" Click="PlanetaryGenerationRoll" Margin="0,2,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" Margin="20,0,0,0">
                         <TextBlock Text="Generation Settings" HorizontalAlignment="Center"/>
                         <CheckBox x:Name="seedHexCheckBox" Content="Seed Hex" IsChecked="True"/>
-                        <CheckBox x:Name="seedPlanetaryGenerationCheckBox" Content="Seed Planetary Generation Roll" IsChecked="False"/>
                         <CheckBox x:Name="seedFTLCheckBox" Content="Seed FTL Roll" IsChecked="False"/>
+                        <CheckBox x:Name="seedPlanetaryGenerationCheckBox" Content="Seed Planetary Generation Roll" IsChecked="False"/>
                         <Button Width="100" Margin="0,5,0,0" Content="Generate" Click="GenerateButtonClicked"/>
                     </StackPanel>
                 </StackPanel>

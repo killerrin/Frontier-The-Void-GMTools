@@ -36,6 +36,7 @@ namespace Frontier_The_Void_GMTools
             ViewModel.SimulateCombat();
         }
 
+        #region Add/Remove Buttons
         private void AddCombatForceButton_Clicked(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("Add Combat Force Button Clicked");
@@ -57,7 +58,14 @@ namespace Frontier_The_Void_GMTools
         private void AddUnitButton_Clicked(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("Add Unit Button Clicked");
-            CombatForce combatForce = (CombatForce)((e.OriginalSource as Button)).DataContext;
+            addUnitChildWindow.Show();
+        }
+
+        private void SubmitUnitButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("Submit Unit Button Clicked");
+            //CombatForce combatForce = (CombatForce)((e.OriginalSource as Button)).DataContext;
+            addUnitChildWindow.Close();
         }
 
         private void RemoveUnitButton_Clicked(object sender, RoutedEventArgs e)
@@ -69,11 +77,14 @@ namespace Frontier_The_Void_GMTools
             unit.Owner.RemoveUnit(unit);
         }
 
-        private void AttackingComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void RemoveAllUnitsButton_Clicked(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine("Combat Force Changed Attacking Target");
-            CombatForce force = ((CombatForce)((ComboBox)e.OriginalSource).DataContext);
-            Debug.WriteLine(force.Attacking);
+            Debug.WriteLine("Remove All Units Button Clicked");
+
+            Button originalSource = e.OriginalSource as Button;
+            CombatForce combatForce = (CombatForce)originalSource.DataContext;
+            combatForce.RemoveAllUnits();
         }
+        #endregion
     }
 }

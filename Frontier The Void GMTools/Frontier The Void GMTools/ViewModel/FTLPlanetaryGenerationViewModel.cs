@@ -149,7 +149,7 @@ namespace Frontier_The_Void_GMTools.ViewModel
             CelestialObject celestialBody = new CelestialObject();
             celestialBody.CelestialType = CalculateCelestialType();
             celestialBody.TerraformingTier = CalculateTerraformingTier();
-            celestialBody.StageOfLife = CalculateStageOfLife();
+            celestialBody.StageOfLife = CalculateStageOfLife(celestialBody.CelestialType);
             celestialBody.ResourceValue = CalculateResourceValue(ftlTravel, celestialBody.TerraformingTier);
 
             if (celestialBody.CelestialType == CelestialBodyType.Wormhole ||
@@ -321,18 +321,39 @@ namespace Frontier_The_Void_GMTools.ViewModel
             else if (roll <= 40) return TerraformationTier.T5;
             return TerraformationTier.T3;
         }
-        public LifeStage CalculateStageOfLife()
+        public LifeStage CalculateStageOfLife(CelestialBodyType celestialType)
         {
+            LifeStage stageOfLife;
             int roll = Die.Roll(2, 20);
-            if (roll <= 3)          return LifeStage.None;
-            else if (roll <= 6)     return LifeStage.OrganicCompounds;
-            else if (roll <= 10)    return LifeStage.SingleCellular;
-            else if (roll <= 15)    return LifeStage.MultiCellular;
-            else if (roll <= 22)    return LifeStage.SimpleLife;
-            else if (roll <= 37)    return LifeStage.ComplexLife;
-            else if (roll <= 40)    return LifeStage.SentientLife;
+            if (roll <= 3)          stageOfLife = LifeStage.None;
+            else if (roll <= 6)     stageOfLife = LifeStage.OrganicCompounds;
+            else if (roll <= 10)    stageOfLife = LifeStage.SingleCellular;
+            else if (roll <= 15)    stageOfLife = LifeStage.MultiCellular;
+            else if (roll <= 22)    stageOfLife = LifeStage.SimpleLife;
+            else if (roll <= 37)    stageOfLife = LifeStage.ComplexLife;
+            else if (roll <= 40)    stageOfLife = LifeStage.SentientLife;
+            else stageOfLife = LifeStage.None;
 
-            return LifeStage.None;
+            if (celestialType == CelestialBodyType.Blackhole ||
+                celestialType == CelestialBodyType.Star ||
+                celestialType == CelestialBodyType.Wormhole)
+            {
+                stageOfLife = LifeStage.None;
+            }
+            else if (celestialType == CelestialBodyType.AsteroidBelt ||
+                     celestialType == CelestialBodyType.Comet ||
+                     celestialType == CelestialBodyType.GasPlanet ||
+                     celestialType == CelestialBodyType.Rings)
+            {
+                int detrimentalRoll = Die.Roll(1, 4) - 1;
+
+                int stageOfLifeInt = (int)stageOfLife - detrimentalRoll;
+                if (stageOfLifeInt <= 0) stageOfLifeInt = 0;
+
+                stageOfLife = (LifeStage)stageOfLifeInt;
+            }
+
+            return stageOfLife;
         }
         public int CalculateResourceValue(FTLTravel ftlTravelResult, TerraformationTier terraformationTier)
         {
