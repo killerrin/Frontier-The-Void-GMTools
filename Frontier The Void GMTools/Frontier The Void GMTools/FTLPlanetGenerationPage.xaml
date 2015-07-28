@@ -64,13 +64,21 @@
                     </StackPanel>
                 </StackPanel>
                 
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                     <TextBlock Text="FTL Result" Margin="0,0,5,0"/>
                     <TextBlock Text="{Binding Path=FTLTravelResult, Converter={StaticResource EnumSpaceConverter}}"/>
                 </StackPanel>
             </StackPanel>
 
             <ListBox x:Name="generatedPlanets" ItemsSource="{Binding Path=GeneratedSystem}">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Left"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">
@@ -89,10 +97,10 @@
                                     <DataTemplate>
                                         <StackPanel Orientation="Vertical">
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="{Binding CelestialType}"/>
-                                                <TextBlock Text="{Binding TerraformingTier}" Margin="20,0,0,0"/>
+                                                <TextBlock Text="{Binding CelestialType, Converter={StaticResource EnumSpaceConverter}}"/>
+                                                <TextBlock Text="{Binding TerraformingTier, Converter={StaticResource EnumSpaceConverter}}" Margin="20,0,0,0"/>
                                                 <TextBlock Text="{Binding ResourceValue}" Margin="20,0,0,0"/>
-                                                <TextBlock Text="{Binding StageOfLife}" Margin="20,0,0,0"/>
+                                                <TextBlock Text="{Binding StageOfLife, Converter={StaticResource EnumSpaceConverter}}" Margin="20,0,0,0"/>
                                             </StackPanel>
                                             
                                             <ListBox ItemsSource="{Binding Sentients}">
@@ -101,24 +109,28 @@
                                                         <StackPanel Orientation="Vertical">
                                                             <StackPanel Orientation="Horizontal">
                                                                 <TextBlock Text="{Binding TechLevel, Converter={StaticResource EnumSpaceConverter}}"/>
-                                                                
-                                                                <TextBlock Text="CivTraits " Margin="20,0,5,0" />
-                                                                <ListBox ItemsSource="{Binding Traits}">
-                                                                    <ListBox.ItemTemplate>
-                                                                        <DataTemplate>
-                                                                            <TextBlock Text="{Binding Converter={StaticResource EnumSpaceConverter}}" />
-                                                                        </DataTemplate>
-                                                                    </ListBox.ItemTemplate>
-                                                                </ListBox>
 
-                                                                <TextBlock Text="Race Classification " Margin="20,0,5,0" />
-                                                                <ListBox ItemsSource="{Binding Classifications}">
-                                                                    <ListBox.ItemTemplate>
-                                                                        <DataTemplate>
-                                                                            <TextBlock Text="{Binding Converter={StaticResource EnumSpaceConverter}}" />
-                                                                        </DataTemplate>
-                                                                    </ListBox.ItemTemplate>
-                                                                </ListBox>
+                                                                <StackPanel Orientation="Vertical" Margin="20,0,0,0">
+                                                                    <TextBlock Text="Civilization Traits" HorizontalAlignment="Center" Margin="0,0,5,0" />
+                                                                    <ListBox ItemsSource="{Binding Traits}">
+                                                                        <ListBox.ItemTemplate>
+                                                                            <DataTemplate>
+                                                                                <TextBlock Text="{Binding Converter={StaticResource EnumSpaceConverter}}" />
+                                                                            </DataTemplate>
+                                                                        </ListBox.ItemTemplate>
+                                                                    </ListBox>
+                                                                </StackPanel>
+
+                                                                <StackPanel Orientation="Vertical" Margin="20,0,0,0">
+                                                                    <TextBlock Text="Race Classification" HorizontalAlignment="Center" Margin="0,0,5,0" />
+                                                                    <ListBox ItemsSource="{Binding Classifications}">
+                                                                        <ListBox.ItemTemplate>
+                                                                            <DataTemplate>
+                                                                                <TextBlock Text="{Binding Converter={StaticResource EnumSpaceConverter}}" />
+                                                                            </DataTemplate>
+                                                                        </ListBox.ItemTemplate>
+                                                                    </ListBox>
+                                                                </StackPanel>
                                                             </StackPanel>
                                                         </StackPanel>
                                                     </DataTemplate>

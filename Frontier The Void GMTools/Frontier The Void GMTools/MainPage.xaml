@@ -13,8 +13,7 @@
         <StackPanel>
             <Button x:Name="rollDiceButton" Content="Roll Dice" Click="RollDiceButton_Click"/>
             <Button x:Name="ftlPlanetGenerationButton" Content="FTL and Planet Generation" Click="FTLPlanetGenerationButton_Click"/>
-            <Button x:Name="spaceCombatButton" Content="Space Combat" Click="SpaceCombatButton_Click"/>
-            <Button x:Name="groundCombatButton" Content="Ground Combat" Click="GroundCombatButton_Click"/>
+            <Button x:Name="combatButton" Content="Combat" Click="CombatButton_Click"/>
         </StackPanel>
     </Grid>
 </Page>

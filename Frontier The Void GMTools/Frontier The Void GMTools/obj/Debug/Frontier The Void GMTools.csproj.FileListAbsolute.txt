@@ -32,7 +32,6 @@ C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTo
 C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
-C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\Frontier The Void GMTools.csprojResolveAssemblyReference.cache
 C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\MainWindow.g.cs
 C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\App.g.cs
 C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\GeneratedInternalTypeHelper.g.cs
@@ -105,7 +104,5 @@ D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier
 D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\Frontier The Void GMTools.g.resources
 D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\Frontier_The_Void_GMTools.Properties.Resources.resources
 D:\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\Frontier The Void GMTools.csproj.GenerateResource.Cache
-C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\SpaceCombatPage.g.cs
-C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\SpaceCombatPage.baml
-C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\GroundCombatPage.g.cs
-C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\GroundCombatPage.baml
+C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\CombatPage.g.cs
+C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Debug\CombatPage.baml

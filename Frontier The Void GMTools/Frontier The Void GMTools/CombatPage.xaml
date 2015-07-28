@@ -1,0 +1,103 @@
+﻿<Page x:Class="Frontier_The_Void_GMTools.CombatPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Frontier_The_Void_GMTools"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800" Background="White"
+      Title="Combat"
+      DataContext="{Binding Source={StaticResource Locator}, Path=vm_CombatViewModel}">
+
+    <Grid>
+        <DockPanel>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" DockPanel.Dock="Top">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Group Name" Margin="0,0,0,0" />
+                    <TextBox x:Name="textBox_CombatGroupName" Width="250" Margin="5,0,0,0" />
+                    <Button Content="Add Combat Group" Margin="20,0,0,0" Click="AddCombatForceButton_Clicked"/>
+                </StackPanel>
+                <Button Content="Simulate Combat" HorizontalAlignment="Center" Width="200" Margin="0,10,0,0" Click="SimulateButton_Clicked"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+                <ListBox ItemsSource="{Binding Path=RoundsOfCombat}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <ListBox ItemsSource="{Binding Path=CombatForces}">
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Vertical">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Button Content="X" Margin="0,0,0,0" Click="RemoveCombatForceButton_Clicked"/>
+                                                    <TextBlock Text="{Binding Name}" Margin="20,0,0,0" />
+                                                    <TextBlock Margin="35,0,0,0">
+                                                        <Run Text="HP:"/>
+                                                        <Run Text="{Binding TotalHealth, Mode=OneWay}"/>
+                                                    </TextBlock>
+                                                    <TextBlock Margin="20,0,0,0">
+                                                        <Run Text="AV:"/>
+                                                        <Run Text="{Binding TotalAttack, Mode=OneWay}"/>
+                                                    </TextBlock>
+                                                    <Button Content="Add Unit" Margin="40,0,0,0" Click="AddUnitButton_Clicked"/>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                                    <TextBlock Text="Attacking" />
+                                                    <!---->
+                                                    <ComboBox ItemsSource="{Binding Round.CombatForceNames}" Width="260" Margin="20,0,0,0"
+                                                              SelectedValue="{Binding Attacking, Mode=TwoWay}" SelectionChanged="AttackingComboBox_SelectionChanged"/>
+                                                </StackPanel>
+
+                                                <ListBox ItemsSource="{Binding Path=Units}" Margin="0,5,0,0">
+                                                    <ListBox.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <StackPanel Orientation="Vertical">
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <Button Content="X" Click="RemoveUnitButton_Clicked"/>
+
+                                                                    <TextBlock Margin="15,0,0,0">
+                                                                        <Run Text="{Binding Path=Name}" />
+                                                                    </TextBlock>
+
+                                                                    <TextBlock Margin="15,0,0,0">
+                                                                        <Run Text="Type: "/>
+                                                                        <Run Text="{Binding Path=TypeOfUnit, Converter={StaticResource EnumSpaceConverter}}" />
+                                                                    </TextBlock>
+
+                                                                    <TextBlock Margin="15,0,0,0">
+                                                                        <Run Text="Health/PV: " />
+                                                                        <Run Text="{Binding Path=Health}" />
+                                                                    </TextBlock>
+
+                                                                    <TextBlock Margin="15,0,0,0">
+                                                                        <Run Text="Attack/AV: " />
+                                                                        <Run Text="{Binding Path=AttackPower}" />
+                                                                    </TextBlock>
+                                                                </StackPanel>
+                                                            </StackPanel>
+                                                        </DataTemplate>
+                                                    </ListBox.ItemTemplate>
+                                                </ListBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Result"/>
+                                    <TextBox Text="{Binding Summary}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+</Page>

@@ -35,14 +35,9 @@ namespace Frontier_The_Void_GMTools
             MainWindow.Instance.frame.Navigate(new Uri("FTLPlanetGenerationPage.xaml", UriKind.Relative));
         }
 
-        private void SpaceCombatButton_Click(object sender, RoutedEventArgs e)
+        private void CombatButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.Instance.frame.Navigate(new Uri("SpaceCombatPage.xaml", UriKind.Relative));
-        }
-
-        private void GroundCombatButton_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow.Instance.frame.Navigate(new Uri("GroundCombatPage.xaml", UriKind.Relative));
+            MainWindow.Instance.frame.Navigate(new Uri("CombatPage.xaml", UriKind.Relative));
         }
     }
 }

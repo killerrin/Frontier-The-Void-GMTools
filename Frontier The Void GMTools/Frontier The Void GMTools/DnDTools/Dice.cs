@@ -15,9 +15,15 @@ namespace Frontier_The_Void_GMTools.DnDTools
         public void ChangeSeed(int seed) { m_random = new Random(seed); }
 
 
-        public int Roll(int sidesOnDice) { return m_random.Next(1, sidesOnDice + 1); }
-        public int Roll(int numberOfDice, int sidesOnDice) { return Roll(sidesOnDice) + Roll(sidesOnDice); }
         public int RollBetween(int min, int max) { return m_random.Next(min, max); }
+        public int Roll(int sidesOnDice) { return m_random.Next(1, sidesOnDice + 1); }
+        public int Roll(int numberOfDice, int sidesOnDice)
+        {
+            int totalRoll = 0;
+            for (int i = 0; i < numberOfDice; i++)
+                totalRoll += Roll(sidesOnDice);
+            return totalRoll;
+        }
 
         public List<int> RollMultiple(int numberOfDice, int sidesOnDice)
         {

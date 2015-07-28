@@ -122,7 +122,7 @@ namespace Frontier_The_Void_GMTools.ViewModel
                 star.Classification = ((StarClassification)Die.RollBetween(0, (int)StarClassification.Blackhole) + 1);
                 star.Age = ((StarAge)Die.RollBetween(0, (int)StarAge.EndOfLife) + 1);
 
-                int totalBodies = Die.Roll(10);
+                int totalBodies = Die.Roll(6);
                 for (int x = 0; x < totalBodies; x++)
                 {
                     star.CelestialBodies.Add(GenerateCelestialBody(FTLTravel.NormalSystem));
@@ -192,6 +192,7 @@ namespace Frontier_The_Void_GMTools.ViewModel
             else sentientSpecies.TechLevel = CivilizationTechLevel.StoneAge;
 
             // Calculate Traits
+            Debug.WriteLine("Calculating Species Civilization Traits");
             while (true)
             {
                 int civTraitsRoll = Die.Roll(1, 100);
@@ -230,20 +231,22 @@ namespace Frontier_The_Void_GMTools.ViewModel
             }
 
             // Calculate Physiology
+            Debug.WriteLine("Calculating Species Physiology");
             while (true)
             {
                 AnimalClassification classification;
                 int speciesPhysiologyRoll = Die.Roll(1, 100);
                 if (speciesPhysiologyRoll <= 10) classification = AnimalClassification.Amphibian;
-                if (speciesPhysiologyRoll <= 20) classification = AnimalClassification.Avian;
-                if (speciesPhysiologyRoll <= 30) classification = AnimalClassification.Aquatic;
-                if (speciesPhysiologyRoll <= 50) classification = AnimalClassification.Reptillian;
-                if (speciesPhysiologyRoll <= 75) classification = AnimalClassification.Mammal;
-                if (speciesPhysiologyRoll <= 85) classification = AnimalClassification.Rock;
-                if (speciesPhysiologyRoll <= 95) classification = AnimalClassification.Energy;
-                if (speciesPhysiologyRoll <= 97) classification = AnimalClassification.Exotic;
-                if (speciesPhysiologyRoll <= 100) classification = AnimalClassification.SpaceBased;
+                else if (speciesPhysiologyRoll <= 20) classification = AnimalClassification.Avian;
+                else if (speciesPhysiologyRoll <= 30) classification = AnimalClassification.Aquatic;
+                else if (speciesPhysiologyRoll <= 50) classification = AnimalClassification.Reptillian;
+                else if (speciesPhysiologyRoll <= 75) classification = AnimalClassification.Mammal;
+                else if (speciesPhysiologyRoll <= 85) classification = AnimalClassification.Rock;
+                else if (speciesPhysiologyRoll <= 95) classification = AnimalClassification.Energy;
+                else if (speciesPhysiologyRoll <= 98) classification = AnimalClassification.Exotic;
+                else if (speciesPhysiologyRoll <= 100) classification = AnimalClassification.SpaceBased;
                 else classification = AnimalClassification.Mammal;
+                Debug.WriteLine("Rolling Species Physiology: {0}, {1}", speciesPhysiologyRoll, classification);
 
                 bool acceptableClassification = true;
                 foreach (var c in sentientSpecies.Classifications)
@@ -253,10 +256,13 @@ namespace Frontier_The_Void_GMTools.ViewModel
 
                 if (acceptableClassification)
                 {
+                    Debug.Write(" | Classification Accepted");
                     sentientSpecies.Classifications.Add(classification);
                     if (Die.Roll(20) < 10)
                         break;
                 }
+
+                if (sentientSpecies.Classifications.Count >= 4) break;
             }
 
             return sentientSpecies;
