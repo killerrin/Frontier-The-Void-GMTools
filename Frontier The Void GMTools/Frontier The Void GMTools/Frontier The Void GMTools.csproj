@@ -131,6 +131,7 @@
     <Compile Include="RollDicePage.xaml.cs">
       <DependentUpon>RollDicePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Settings\UnitSettings.cs" />
     <Compile Include="ViewModel\FTLPlanetaryGenerationViewModel.cs" />
     <Compile Include="ViewModel\CombatViewModel.cs" />
     <Compile Include="ViewModel\RollDiceViewModel.cs" />

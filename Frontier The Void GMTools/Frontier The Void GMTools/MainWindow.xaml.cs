@@ -26,7 +26,7 @@ namespace Frontier_The_Void_GMTools
         {
             Instance = this;
             InitializeComponent();
-        }
+        } 
 
         private void frame_Loaded(object sender, RoutedEventArgs e)
         {

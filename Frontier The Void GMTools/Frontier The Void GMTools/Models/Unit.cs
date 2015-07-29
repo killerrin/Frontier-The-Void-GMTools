@@ -16,6 +16,11 @@ namespace Frontier_The_Void_GMTools.Models
         public const string HealthPropertyName = "Health";
         public const string AttackPowerPropertyName = "AttackPower";
 
+        public const string CostPropertyName = "Cost";
+        public const string BuildRatePropertyName = "BuildRate";
+        public const string NumberBuildAtATimePropertyName = "NumberBuildAtATime";
+
+        #region Properties
         private UnitType _typeOfUnit = UnitType.Both;
         public UnitType TypeOfUnit
         {
@@ -68,16 +73,78 @@ namespace Frontier_The_Void_GMTools.Models
             }
         }
 
+        private int _cost = 0;
+        public int Cost
+        {
+            get { return _cost; }
+            set
+            {
+                if (_cost == value) return;
+
+                _cost = value;
+                RaisePropertyChanged(CostPropertyName);
+            }
+        }
+
+        private int _buildRate = 0;
+        public int BuildRate
+        {
+            get { return _buildRate; }
+            set
+            {
+                if (_buildRate == value) return;
+
+                _buildRate = value;
+                RaisePropertyChanged(BuildRatePropertyName);
+            }
+        }
+
+        private int _numberBuildAtATime = 0;
+        public int NumberBuildAtATime
+        {
+            get { return _numberBuildAtATime; }
+            set
+            {
+                if (_numberBuildAtATime == value) return;
+
+                _numberBuildAtATime = value;
+                RaisePropertyChanged(NumberBuildAtATimePropertyName);
+            }
+        }
+        #endregion
+
+        #region Helper Properties
+        public bool HasAttack { get { return AttackPower != 0.0; } }
         public CombatForce Owner { get; set; }
+        #endregion
+
         public Unit()
         {
         }
+
+        public Unit(UnitType typeOfUnit, string name, double health, double attackPower, int cost, int buildRate, int numberBuildAtATime)
+        {
+            TypeOfUnit = typeOfUnit;
+            Name = name;
+            Health = health;
+            AttackPower = attackPower;
+
+            Cost = cost;
+            BuildRate = buildRate;
+            NumberBuildAtATime = numberBuildAtATime;
+        }
+
         public Unit(Unit otherUnit)
         {
             TypeOfUnit = otherUnit.TypeOfUnit;
             Name = otherUnit.Name;
             Health = otherUnit.Health;
             AttackPower = otherUnit.AttackPower;
+
+            Cost = otherUnit.Cost;
+            BuildRate = otherUnit.BuildRate;
+            NumberBuildAtATime = otherUnit.NumberBuildAtATime;
+
             Owner = otherUnit.Owner;
         }
 

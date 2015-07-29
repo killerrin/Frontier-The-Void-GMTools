@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Frontier_The_Void_GMTools.Settings;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,11 @@ namespace Frontier_The_Void_GMTools
     /// </summary>
     public partial class App : Application
     {
+        public static UnitSettings UnitStatisticsSettings;
+
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            UnitStatisticsSettings = UnitSettings.Load();
+        }
     }
 }
