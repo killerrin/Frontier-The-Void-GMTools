@@ -16,5 +16,6 @@
         <!-- Converters -->
         <converters:EnumSpaceConverter x:Key="EnumSpaceConverter"/>
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <converters:OppositeBoolean x:Key="OppositeBooleanConverter"/>
     </Application.Resources>
 </Application>

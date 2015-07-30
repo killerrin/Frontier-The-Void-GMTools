@@ -1,4 +1,5 @@
-﻿using Frontier_The_Void_GMTools.Models;
+﻿using Frontier_The_Void_GMTools.DnDTools;
+using Frontier_The_Void_GMTools.Models;
 using Frontier_The_Void_GMTools.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -55,16 +56,53 @@ namespace Frontier_The_Void_GMTools
             ViewModel.RemoveCombatForce(combatForce);
         }
 
+        private CombatForce addUnitCombatForce;
         private void AddUnitButton_Clicked(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("Add Unit Button Clicked");
+            addUnitCombatForce = (CombatForce)((e.OriginalSource as Button)).DataContext;
             addUnitChildWindow.Show();
         }
 
         private void SubmitUnitButton_Clicked(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("Submit Unit Button Clicked");
-            //CombatForce combatForce = (CombatForce)((e.OriginalSource as Button)).DataContext;
+            if (string.IsNullOrWhiteSpace(nameTextBox_childWindow.Text) ||
+                string.IsNullOrWhiteSpace(healthTextBox_childWindow.Text) ||
+                string.IsNullOrWhiteSpace(attackValueTextBox_childWindow.Text))
+            {
+                return;
+            }
+
+            // Parse the Data out of the UI Elements
+            string name = nameTextBox_childWindow.Text;
+
+            double health = 0.0;
+            if (!double.TryParse(healthTextBox_childWindow.Text, out health))
+                return;
+
+            double attackPower = 0.0;
+            if (!double.TryParse(attackValueTextBox_childWindow.Text, out attackPower))
+                return;
+
+            int quantityOfUnits = 1;
+            if (!int.TryParse(quantityOfUnits_childWindow.Text, out quantityOfUnits))
+                quantityOfUnits = 1;
+            quantityOfUnits_childWindow.Text = "1";
+
+            // Populate the CombatForce
+            for (int i = 0; i < quantityOfUnits; i++)
+            {
+                Unit unit = new Unit();
+                unit.Name = name;
+                unit.Health = health;
+                unit.AttackPower = attackPower;
+                addUnitCombatForce.AddUnit(unit);
+            }
+
+            // Reset and Close
+            presetComboBox_childWindow.SelectedIndex = 0;
+            addUnitCombatForce = null;
             addUnitChildWindow.Close();
         }
 
@@ -74,7 +112,7 @@ namespace Frontier_The_Void_GMTools
 
             Button originalSource = e.OriginalSource as Button;
             Unit unit = (Unit)originalSource.DataContext;
-            unit.Owner.RemoveUnit(unit);
+            unit.CombatForce.RemoveUnit(unit);
         }
 
         private void RemoveAllUnitsButton_Clicked(object sender, RoutedEventArgs e)
@@ -86,5 +124,26 @@ namespace Frontier_The_Void_GMTools
             combatForce.RemoveAllUnits();
         }
         #endregion
+
+        private void CheckNumbersOnly_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !StringHelpers.IsTextAllowed(e.Text);
+        }
+
+        private void TextBoxPaste_CheckNumbers(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(typeof(String)))
+            {
+                String text = (String)e.DataObject.GetData(typeof(String));
+                if (!StringHelpers.IsTextAllowed(text))
+                {
+                    e.CancelCommand();
+                }
+            }
+            else
+            {
+                e.CancelCommand();
+            }
+        }
     }
 }

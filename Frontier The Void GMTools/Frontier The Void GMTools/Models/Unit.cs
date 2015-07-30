@@ -115,7 +115,7 @@ namespace Frontier_The_Void_GMTools.Models
 
         #region Helper Properties
         public bool HasAttack { get { return AttackPower != 0.0; } }
-        public CombatForce Owner { get; set; }
+        public CombatForce CombatForce { get; set; }
         #endregion
 
         public Unit()
@@ -145,7 +145,7 @@ namespace Frontier_The_Void_GMTools.Models
             BuildRate = otherUnit.BuildRate;
             NumberBuildAtATime = otherUnit.NumberBuildAtATime;
 
-            Owner = otherUnit.Owner;
+            CombatForce = otherUnit.CombatForce;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

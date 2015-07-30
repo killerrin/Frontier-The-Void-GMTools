@@ -107,6 +107,7 @@
     <Compile Include="CombatPage.xaml.cs">
       <DependentUpon>CombatPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\OppositeBoolean.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\EnumSpaceConverter.cs" />
     <Compile Include="DnDTools\HexCoordinate.cs" />

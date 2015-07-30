@@ -13,6 +13,7 @@ namespace Frontier_The_Void_GMTools.Models
     {
         public const string RoundLockedPropertyName = "RoundLocked";
         public const string SummaryPropertyName = "Summary";
+        public const string RoundNumberPropertyName = "RoundNumber";
         public const string CombatForcesPropertyName = "CombatForces";
         public const string CombatForceNamesPropertyName = "CombatForceNames";
 
@@ -27,6 +28,19 @@ namespace Frontier_The_Void_GMTools.Models
 
                 m_roundLocked = value;
                 RaisePropertyChanged(RoundLockedPropertyName);
+            }
+        }
+
+        private int m_roundNumber = 0;
+        public int RoundNumber
+        {
+            get { return m_roundNumber; }
+            set
+            {
+                if (m_roundNumber == value) return;
+
+                m_roundNumber = value;
+                RaisePropertyChanged(RoundNumberPropertyName);
             }
         }
 
@@ -76,10 +90,15 @@ namespace Frontier_The_Void_GMTools.Models
 
         public CombatForce AddCombatForce(string name)
         {
-            Debug.WriteLine("Adding CombatForce: {0}", name);
             CombatForce combatForce = new CombatForce();
-            combatForce.Round = this;
             combatForce.Name = name;
+            return AddCombatForce(combatForce);
+        }
+
+        public CombatForce AddCombatForce(CombatForce combatForce)
+        {
+            Debug.WriteLine("Adding CombatForce: {0}", combatForce);
+            combatForce.Round = this;
             CombatForces.Add(combatForce);
 
             RecompileNames();

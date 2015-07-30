@@ -22,23 +22,31 @@
             </StackPanel>
 
             <StackPanel Orientation="Vertical" Margin="0,10,0,0">
-                <ListBox ItemsSource="{Binding Path=RoundsOfCombat}">
+                <ListBox ItemsSource="{Binding Path=RoundsOfCombat}" Height="530">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Vertical" VerticalAlignment="Top">
-                                <ListBox ItemsSource="{Binding Path=CombatForces}">
+                                <TextBlock>
+                                    <Run Text="Round: " />
+                                    <Run Text="{Binding RoundNumber}" />
+                                </TextBlock>
+                                <ListBox ItemsSource="{Binding Path=CombatForces}" Height="250" Margin="0,10,0,0" VerticalContentAlignment="Top">
                                     <ListBox.ItemsPanel>
                                         <ItemsPanelTemplate>
-                                            <StackPanel Orientation="Horizontal" MinWidth="300" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                            <StackPanel Orientation="Horizontal" MinWidth="300"/>
                                         </ItemsPanelTemplate>
                                     </ListBox.ItemsPanel>
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
-                                            <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                                            <StackPanel Orientation="Vertical">
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Button Content="X" Margin="0,0,0,0" Click="RemoveCombatForceButton_Clicked"/>
-                                                    <TextBlock Text="{Binding Name}" Margin="20,0,0,0" />
-                                                    <TextBlock Margin="35,0,0,0">
+                                                    <Button Content="X" IsEnabled="{Binding Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}}" Margin="0,0,0,0" Click="RemoveCombatForceButton_Clicked"/>
+                                                    <TextBlock Text="{Binding Name}" Margin="20,0,15,0" />
+                                                    <TextBlock Margin="20,0,0,0">
+                                                        <Run Text="Total Units:"/>
+                                                        <Run Text="{Binding TotalUnits, Mode=OneWay}"/>
+                                                    </TextBlock>
+                                                    <TextBlock Margin="20,0,0,0">
                                                         <Run Text="HP:"/>
                                                         <Run Text="{Binding TotalHealth, Mode=OneWay}"/>
                                                     </TextBlock>
@@ -46,15 +54,16 @@
                                                         <Run Text="AV:"/>
                                                         <Run Text="{Binding TotalAttack, Mode=OneWay}"/>
                                                     </TextBlock>
-                                                    <Button Content="Add Unit" Margin="40,0,0,0" Click="AddUnitButton_Clicked"/>
+                                                    <Button Content="Add Unit" IsEnabled="{Binding Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}}" Margin="35,0,0,0" Click="AddUnitButton_Clicked"/>
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                                                     <TextBlock Text="Attacking" />
-                                                    <!---->
-                                                    <ComboBox ItemsSource="{Binding Round.CombatForceNames}" Width="200" Margin="20,0,0,0"
-                                                              SelectedValue="{Binding Attacking, Mode=TwoWay}"/>
                                                     
-                                                    <CheckBox Content="Defending" Margin="20,5,0,0" IsChecked="{Binding IsDefending, Mode=TwoWay}"/>
+                                                    <ComboBox ItemsSource="{Binding Round.CombatForceNames}" Width="200" Margin="20,0,0,0"
+                                                              IsEnabled="{Binding Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}}" 
+                                                              SelectedValue="{Binding Attacking, Mode=TwoWay}"/>
+
+                                                    <CheckBox Content="Defending" IsEnabled="{Binding Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}}" Margin="20,5,0,0" IsChecked="{Binding IsDefending, Mode=TwoWay}"/>
                                                 </StackPanel>
 
                                                 <ListBox ItemsSource="{Binding Path=Units}" Margin="0,5,0,0">
@@ -62,7 +71,7 @@
                                                         <DataTemplate>
                                                             <StackPanel Orientation="Vertical">
                                                                 <StackPanel Orientation="Horizontal">
-                                                                    <Button Content="X" Click="RemoveUnitButton_Clicked"/>
+                                                                    <Button Content="X" IsEnabled="{Binding CombatForce.Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}}" Click="RemoveUnitButton_Clicked"/>
 
                                                                     <TextBlock Margin="15,0,0,0">
                                                                         <Run Text="{Binding Path=Name}" />
@@ -87,7 +96,7 @@
                                                         </DataTemplate>
                                                     </ListBox.ItemTemplate>
                                                 </ListBox>
-                                                <Button Content="Remove All" Click="RemoveAllUnitsButton_Clicked" />
+                                                <Button Content="Remove All" IsEnabled="{Binding Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}}" Click="RemoveAllUnitsButton_Clicked" />
                                             </StackPanel>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
@@ -95,7 +104,8 @@
 
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Result"/>
-                                    <TextBox Text="{Binding Summary}" Margin="20,0,0,0" Width="600" Height="50"/>
+                                    <TextBox Text="{Binding Summary}" TextWrapping="Wrap" IsReadOnly="True"
+                                             Margin="20,0,0,0" Width="600" Height="40"/>
                                 </StackPanel>
                             </StackPanel>
                         </DataTemplate>
@@ -128,15 +138,21 @@
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
                         <TextBlock Text="Health" />
                         <TextBox x:Name="healthTextBox_childWindow" Width="40" Margin="40,0,0,0" 
-                                 Text="{Binding Health, Mode=OneWay}" 
+                                 Text="{Binding Health, Mode=OneWay}" PreviewTextInput="CheckNumbersOnly_PreviewTextInput" DataObject.Pasting="TextBoxPaste_CheckNumbers"
                                  DataContext="{Binding ElementName=presetComboBox_childWindow, Path=SelectedItem, Mode=OneWay}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="15,0,0,0">
                         <TextBlock Text="Attack Value" />
                         <TextBox x:Name="attackValueTextBox_childWindow" Width="40" Margin="10,0,0,0" 
-                                 Text="{Binding AttackPower, Mode=OneWay}" 
+                                 Text="{Binding AttackPower, Mode=OneWay}" PreviewTextInput="CheckNumbersOnly_PreviewTextInput" DataObject.Pasting="TextBoxPaste_CheckNumbers"
                                  DataContext="{Binding ElementName=presetComboBox_childWindow, Path=SelectedItem, Mode=OneWay}"/>
                     </StackPanel>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                    <TextBlock Text="Quantity"/>
+                    <TextBox x:Name="quantityOfUnits_childWindow" Text="1" Width="40" Margin="20,0,0,0"
+                             PreviewTextInput="CheckNumbersOnly_PreviewTextInput" DataObject.Pasting="TextBoxPaste_CheckNumbers"/>
                 </StackPanel>
                 <Button Content="Submit" Margin="0,5,0,0" Click="SubmitUnitButton_Clicked"/>
             </StackPanel>

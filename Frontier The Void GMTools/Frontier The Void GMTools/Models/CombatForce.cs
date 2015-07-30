@@ -17,6 +17,10 @@ namespace Frontier_The_Void_GMTools.Models
         public const string IsDefendingPropertyName = "IsDefending";
         public const string UnitsPropertyName = "Units";
 
+        public const string TotalUnitsPropertyName =  "TotalUnits";
+        public const string TotalHealthPropertyName = "TotalHealth";
+        public const string TotalAttackPropertyName = "TotalAttack";
+
         private string _name = "";
         public string Name
         {
@@ -75,6 +79,7 @@ namespace Frontier_The_Void_GMTools.Models
         #endregion
 
         #region Helper Properties
+        public int TotalUnits { get { return Units.Count; } }
         public double TotalHealth
         {
             get
@@ -97,6 +102,13 @@ namespace Frontier_The_Void_GMTools.Models
                 return attack;
             }
         }
+
+        private void RaiseHPAPQuantityChanged()
+        {
+            RaisePropertyChanged(TotalUnitsPropertyName);
+            RaisePropertyChanged(TotalHealthPropertyName);
+            RaisePropertyChanged(TotalAttackPropertyName);
+        }
         #endregion
 
         public CombatForce()
@@ -106,37 +118,36 @@ namespace Frontier_The_Void_GMTools.Models
         {
             Name = otherForce.Name;
             Attacking = otherForce.Name;
+            IsDefending = otherForce.IsDefending;
+            Round = otherForce.Round;
 
             foreach (var unit in otherForce.Units)
             {
-                Unit u = new Unit();
-                u.Owner = this;
-                u.Name = unit.Name;
-                u.TypeOfUnit = unit.TypeOfUnit;
-                u.Health = unit.Health;
-                u.AttackPower = unit.AttackPower;
+                AddUnit(new Unit(unit));
             }
         }
 
         public void AddUnit(Unit unit)
         {
             Debug.WriteLine("Adding Unit {0} to {1}", unit.ToString(), Name);
-            unit.Owner = this;
+            unit.CombatForce = this;
             Units.Add(unit);
+            RaiseHPAPQuantityChanged();
         }
 
         public void RemoveUnit(Unit unit)
         {
             Debug.WriteLine("Removing Unit {0} from {1}", unit.ToString(), Name);
             Units.Remove(unit);
+            RaiseHPAPQuantityChanged();
         }
 
         public void RemoveAllUnits()
         {
             Debug.WriteLine("Removing All Units from " + Name);
             Units.Clear();
+            RaiseHPAPQuantityChanged();
         }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void RaisePropertyChanged(string property = "")
