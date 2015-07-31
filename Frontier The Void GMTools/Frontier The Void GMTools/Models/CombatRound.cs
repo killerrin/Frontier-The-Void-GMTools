@@ -112,6 +112,11 @@ namespace Frontier_The_Void_GMTools.Models
             RecompileNames();
         }
 
+        public void LogToSummary(string message)
+        {
+            Summary += message + "&#x0a;";
+        }
+
         private void RecompileNames()
         {
             ObservableCollection<string> names = new ObservableCollection<string>();

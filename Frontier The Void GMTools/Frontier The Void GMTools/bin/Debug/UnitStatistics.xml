@@ -47,6 +47,15 @@
       <NumberBuildAtATime>1</NumberBuildAtATime>
     </Unit>
     <Unit>
+      <TypeOfUnit>Both</TypeOfUnit>
+      <Name />
+      <Health>0</Health>
+      <AttackPower>0</AttackPower>
+      <Cost>0</Cost>
+      <BuildRate>0</BuildRate>
+      <NumberBuildAtATime>0</NumberBuildAtATime>
+    </Unit>
+    <Unit>
       <TypeOfUnit>Space</TypeOfUnit>
       <Name>Fleet Carrier</Name>
       <Health>19.5</Health>
@@ -83,6 +92,15 @@
       <NumberBuildAtATime>1</NumberBuildAtATime>
     </Unit>
     <Unit>
+      <TypeOfUnit>Both</TypeOfUnit>
+      <Name />
+      <Health>0</Health>
+      <AttackPower>0</AttackPower>
+      <Cost>0</Cost>
+      <BuildRate>0</BuildRate>
+      <NumberBuildAtATime>0</NumberBuildAtATime>
+    </Unit>
+    <Unit>
       <TypeOfUnit>Space</TypeOfUnit>
       <Name>Cruiser</Name>
       <Health>7</Health>
@@ -108,6 +126,15 @@
       <Cost>17</Cost>
       <BuildRate>10</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+    </Unit>
+    <Unit>
+      <TypeOfUnit>Both</TypeOfUnit>
+      <Name />
+      <Health>0</Health>
+      <AttackPower>0</AttackPower>
+      <Cost>0</Cost>
+      <BuildRate>0</BuildRate>
+      <NumberBuildAtATime>0</NumberBuildAtATime>
     </Unit>
     <Unit>
       <TypeOfUnit>Space</TypeOfUnit>
@@ -146,6 +173,15 @@
       <NumberBuildAtATime>1</NumberBuildAtATime>
     </Unit>
     <Unit>
+      <TypeOfUnit>Both</TypeOfUnit>
+      <Name />
+      <Health>0</Health>
+      <AttackPower>0</AttackPower>
+      <Cost>0</Cost>
+      <BuildRate>0</BuildRate>
+      <NumberBuildAtATime>0</NumberBuildAtATime>
+    </Unit>
+    <Unit>
       <TypeOfUnit>Space</TypeOfUnit>
       <Name>Corvette</Name>
       <Health>1</Health>
@@ -171,6 +207,51 @@
       <Cost>8</Cost>
       <BuildRate>20</BuildRate>
       <NumberBuildAtATime>5</NumberBuildAtATime>
+    </Unit>
+    <Unit>
+      <TypeOfUnit>Both</TypeOfUnit>
+      <Name />
+      <Health>0</Health>
+      <AttackPower>0</AttackPower>
+      <Cost>0</Cost>
+      <BuildRate>0</BuildRate>
+      <NumberBuildAtATime>0</NumberBuildAtATime>
+    </Unit>
+    <Unit>
+      <TypeOfUnit>Space</TypeOfUnit>
+      <Name>Fighter Squadron</Name>
+      <Health>15</Health>
+      <AttackPower>0</AttackPower>
+      <Cost>5</Cost>
+      <BuildRate>50</BuildRate>
+      <NumberBuildAtATime>1</NumberBuildAtATime>
+    </Unit>
+    <Unit>
+      <TypeOfUnit>Space</TypeOfUnit>
+      <Name>Strike Fighter Squadron</Name>
+      <Health>10</Health>
+      <AttackPower>10</AttackPower>
+      <Cost>5</Cost>
+      <BuildRate>50</BuildRate>
+      <NumberBuildAtATime>1</NumberBuildAtATime>
+    </Unit>
+    <Unit>
+      <TypeOfUnit>Ground</TypeOfUnit>
+      <Name>Gun Ship Squadron</Name>
+      <Health>15</Health>
+      <AttackPower>15</AttackPower>
+      <Cost>5</Cost>
+      <BuildRate>50</BuildRate>
+      <NumberBuildAtATime>1</NumberBuildAtATime>
+    </Unit>
+    <Unit>
+      <TypeOfUnit>Both</TypeOfUnit>
+      <Name />
+      <Health>0</Health>
+      <AttackPower>0</AttackPower>
+      <Cost>0</Cost>
+      <BuildRate>0</BuildRate>
+      <NumberBuildAtATime>0</NumberBuildAtATime>
     </Unit>
     <Unit>
       <TypeOfUnit>Space</TypeOfUnit>
@@ -207,6 +288,15 @@
       <Cost>2</Cost>
       <BuildRate>20</BuildRate>
       <NumberBuildAtATime>10</NumberBuildAtATime>
+    </Unit>
+    <Unit>
+      <TypeOfUnit>Both</TypeOfUnit>
+      <Name />
+      <Health>0</Health>
+      <AttackPower>0</AttackPower>
+      <Cost>0</Cost>
+      <BuildRate>0</BuildRate>
+      <NumberBuildAtATime>0</NumberBuildAtATime>
     </Unit>
     <Unit>
       <TypeOfUnit>Both</TypeOfUnit>

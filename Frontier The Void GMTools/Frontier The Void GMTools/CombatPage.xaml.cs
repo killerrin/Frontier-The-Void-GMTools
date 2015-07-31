@@ -1,5 +1,6 @@
 ﻿using Frontier_The_Void_GMTools.DnDTools;
 using Frontier_The_Void_GMTools.Models;
+using Frontier_The_Void_GMTools.Models.EnumTypes;
 using Frontier_The_Void_GMTools.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -34,10 +35,11 @@ namespace Frontier_The_Void_GMTools
         private void SimulateButton_Clicked(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("Simulate Combat Button Clicked");
-            ViewModel.SimulateCombat();
+            ViewModel.SimulateCombat((SimulatedCombatMode)simulatedCombatModeComboBox.SelectedIndex);
         }
 
         #region Add/Remove Buttons
+        #region Combat Force
         private void AddCombatForceButton_Clicked(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("Add Combat Force Button Clicked");
@@ -55,7 +57,9 @@ namespace Frontier_The_Void_GMTools
             CombatForce combatForce = (CombatForce)originalSource.DataContext;
             ViewModel.RemoveCombatForce(combatForce);
         }
+        #endregion
 
+        #region Units
         private CombatForce addUnitCombatForce;
         private void AddUnitButton_Clicked(object sender, RoutedEventArgs e)
         {
@@ -67,41 +71,57 @@ namespace Frontier_The_Void_GMTools
         private void SubmitUnitButton_Clicked(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("Submit Unit Button Clicked");
-            if (string.IsNullOrWhiteSpace(nameTextBox_childWindow.Text) ||
-                string.IsNullOrWhiteSpace(healthTextBox_childWindow.Text) ||
-                string.IsNullOrWhiteSpace(attackValueTextBox_childWindow.Text))
+            if (string.IsNullOrWhiteSpace(nameTextBox_addUnit_childWindow.Text) ||
+                string.IsNullOrWhiteSpace(healthTextBox_addUnit_childWindow.Text) ||
+                string.IsNullOrWhiteSpace(attackValueTextBox_addUnit_childWindow.Text))
             {
                 return;
             }
 
             // Parse the Data out of the UI Elements
-            string name = nameTextBox_childWindow.Text;
+            string name = nameTextBox_addUnit_childWindow.Text;
 
             double health = 0.0;
-            if (!double.TryParse(healthTextBox_childWindow.Text, out health))
+            if (!double.TryParse(healthTextBox_addUnit_childWindow.Text, out health))
                 return;
 
             double attackPower = 0.0;
-            if (!double.TryParse(attackValueTextBox_childWindow.Text, out attackPower))
+            if (!double.TryParse(attackValueTextBox_addUnit_childWindow.Text, out attackPower))
                 return;
 
             int quantityOfUnits = 1;
-            if (!int.TryParse(quantityOfUnits_childWindow.Text, out quantityOfUnits))
+            if (!int.TryParse(quantityOfUnits_addUnit_childWindow.Text, out quantityOfUnits))
                 quantityOfUnits = 1;
-            quantityOfUnits_childWindow.Text = "1";
+            quantityOfUnits_addUnit_childWindow.Text = "1";
 
             // Populate the CombatForce
+            Unit comboBoxSelectedUnit = presetComboBox_addUnit_childWindow.SelectedItem as Unit;
             for (int i = 0; i < quantityOfUnits; i++)
             {
                 Unit unit = new Unit();
                 unit.Name = name;
                 unit.Health = health;
                 unit.AttackPower = attackPower;
+
+                if (commandAndControlCheckBox_addUnit_childWindow.IsChecked.HasValue)
+                    unit.IsCommandAndControl = commandAndControlCheckBox_addUnit_childWindow.IsChecked.Value;
+                else unit.IsCommandAndControl = false;
+
+                try
+                {
+                    if (typeOfUnitComboBox_addUnit_childWindow.SelectedIndex < 0 ||
+                        typeOfUnitComboBox_addUnit_childWindow.SelectedIndex > 2)
+                        unit.TypeOfUnit = UnitType.Both;
+                    else
+                        unit.TypeOfUnit = (UnitType)typeOfUnitComboBox_addUnit_childWindow.SelectedIndex;
+                }
+                catch (Exception) { unit.TypeOfUnit = UnitType.Both; }
+
                 addUnitCombatForce.AddUnit(unit);
             }
 
             // Reset and Close
-            presetComboBox_childWindow.SelectedIndex = 0;
+            presetComboBox_addUnit_childWindow.SelectedIndex = 0;
             addUnitCombatForce = null;
             addUnitChildWindow.Close();
         }
@@ -125,6 +145,14 @@ namespace Frontier_The_Void_GMTools
         }
         #endregion
 
+        private void clearSimulation_Clicked(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("Clear Simulation Button Clicked");
+            ViewModel.ClearSimulation();
+        }
+        #endregion
+
+        #region Input Restriction Events
         private void CheckNumbersOnly_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !StringHelpers.IsTextAllowed(e.Text);
@@ -145,5 +173,6 @@ namespace Frontier_The_Void_GMTools
                 e.CancelCommand();
             }
         }
+        #endregion
     }
 }

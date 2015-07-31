@@ -107,6 +107,8 @@
     <Compile Include="CombatPage.xaml.cs">
       <DependentUpon>CombatPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\EnumStringConverter.cs" />
+    <Compile Include="Converters\EnumTypeOfUnitIntConverter.cs" />
     <Compile Include="Converters\OppositeBoolean.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\EnumSpaceConverter.cs" />
@@ -123,6 +125,7 @@
     <Compile Include="Models\CombatForce.cs" />
     <Compile Include="Models\CombatRound.cs" />
     <Compile Include="Models\EnumTypes\RadiationLevel.cs" />
+    <Compile Include="Models\EnumTypes\SimulatedCombatMode.cs" />
     <Compile Include="Models\EnumTypes\StarAge.cs" />
     <Compile Include="Models\EnumTypes\StarClassification.cs" />
     <Compile Include="Models\EnumTypes\UnitType.cs" />

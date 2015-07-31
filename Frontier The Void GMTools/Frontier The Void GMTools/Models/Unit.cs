@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,9 +17,14 @@ namespace Frontier_The_Void_GMTools.Models
         public const string HealthPropertyName = "Health";
         public const string AttackPowerPropertyName = "AttackPower";
 
+        public const string IsCommandAndControlPropertyName = "IsCommandAndControl";
+
         public const string CostPropertyName = "Cost";
         public const string BuildRatePropertyName = "BuildRate";
         public const string NumberBuildAtATimePropertyName = "NumberBuildAtATime";
+
+        public const string SubUnitsPropertyName = "SubUnits";
+        public const string HasSubUnitsPropertyName = "HasSubUnits";
 
         #region Properties
         private UnitType _typeOfUnit = UnitType.Both;
@@ -73,6 +79,22 @@ namespace Frontier_The_Void_GMTools.Models
             }
         }
 
+        private bool _isCommandAndControl = false;
+        public bool IsCommandAndControl
+        {
+            get { return _isCommandAndControl; }
+            set
+            {
+                if (_isCommandAndControl == value) return;
+
+                Debug.WriteLine("IsCommandAndControl Changed to {0}", value);
+                _isCommandAndControl = value;
+
+                RaisePropertyChanged(IsCommandAndControlPropertyName);
+                if (CombatForce != null) CombatForce.RaiseHPAPQuantityChanged();
+            }
+        }
+
         private int _cost = 0;
         public int Cost
         {
@@ -121,7 +143,6 @@ namespace Frontier_The_Void_GMTools.Models
         public Unit()
         {
         }
-
         public Unit(UnitType typeOfUnit, string name, double health, double attackPower, int cost, int buildRate, int numberBuildAtATime)
         {
             TypeOfUnit = typeOfUnit;
@@ -133,13 +154,14 @@ namespace Frontier_The_Void_GMTools.Models
             BuildRate = buildRate;
             NumberBuildAtATime = numberBuildAtATime;
         }
-
         public Unit(Unit otherUnit)
         {
             TypeOfUnit = otherUnit.TypeOfUnit;
             Name = otherUnit.Name;
             Health = otherUnit.Health;
             AttackPower = otherUnit.AttackPower;
+
+            IsCommandAndControl = otherUnit.IsCommandAndControl;
 
             Cost = otherUnit.Cost;
             BuildRate = otherUnit.BuildRate;
@@ -157,7 +179,7 @@ namespace Frontier_The_Void_GMTools.Models
 
         public override string ToString()
         {
-            return string.Format("{0}, UnitType: {1}, Health: {2}, Attack: {3}", Name, TypeOfUnit.ToString(), Health, AttackPower);
+            return string.Format("{0}, Is Command and Control: {1}, UnitType: {2}, Health: {3}, Attack: {4}", Name, IsCommandAndControl, TypeOfUnit.ToString(), Health, AttackPower);
         }
     }
 }

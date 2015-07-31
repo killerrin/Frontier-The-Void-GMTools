@@ -13,6 +13,10 @@ namespace Frontier_The_Void_GMTools.Models
     {
         #region Properties
         public const string NamePropertyName = "Name";
+
+        public const string AdmiralScorePropertyName = "AdmiralScore";
+        public const string AttemptHackPropertyName = "AttemptHack";
+
         public const string AttackingPropertyName = "Attacking";
         public const string IsDefendingPropertyName = "IsDefending";
         public const string UnitsPropertyName = "Units";
@@ -34,6 +38,34 @@ namespace Frontier_The_Void_GMTools.Models
             }
         }
 
+        private int _admiralScore = 0;
+        public int AdmiralScore
+        {
+            get { return _admiralScore; }
+            set
+            {
+                if (_admiralScore == value) return;
+
+                //Debug.WriteLine("AdmiralScore Changed to {0}", value);
+                _admiralScore = value;
+                RaisePropertyChanged(AdmiralScorePropertyName);
+            }
+        }
+
+        private bool _attemptHack = false;
+        public bool AttemptHack
+        {
+            get { return _attemptHack; }
+            set
+            {
+                if (_attemptHack == value) return;
+
+                //Debug.WriteLine("AttemptHack Changed to {0}", value);
+                _attemptHack = value;
+                RaisePropertyChanged(AttemptHackPropertyName);
+            }
+        }
+
         private string _attacking = "";
         public string Attacking
         {
@@ -42,7 +74,7 @@ namespace Frontier_The_Void_GMTools.Models
             {
                 if (_attacking == value) return;
 
-                Debug.WriteLine("Attacking Changed To " + value);
+                //Debug.WriteLine("Attacking Changed To " + value);
                 _attacking = value;
                 RaisePropertyChanged(NamePropertyName);
             }
@@ -56,7 +88,7 @@ namespace Frontier_The_Void_GMTools.Models
             {
                 if (_isDefending == value) return;
 
-                Debug.WriteLine("IsDefending Changed to {0}", value);
+                //Debug.WriteLine("IsDefending Changed to {0}", value);
                 _isDefending = value;
                 RaisePropertyChanged(IsDefendingPropertyName);
             }
@@ -79,6 +111,8 @@ namespace Frontier_The_Void_GMTools.Models
         #endregion
 
         #region Helper Properties
+        public double DamageDealt = 0.0;
+
         public int TotalUnits { get { return Units.Count; } }
         public double TotalHealth
         {
@@ -97,13 +131,17 @@ namespace Frontier_The_Void_GMTools.Models
             {
                 double attack = 0.0;
                 for (int i = 0; i < Units.Count; i++)
+                {
                     attack += Units[i].AttackPower;
+                    if (Units[i].IsCommandAndControl)
+                        attack += 2;
+                }
 
                 return attack;
             }
         }
 
-        private void RaiseHPAPQuantityChanged()
+        public void RaiseHPAPQuantityChanged()
         {
             RaisePropertyChanged(TotalUnitsPropertyName);
             RaisePropertyChanged(TotalHealthPropertyName);
@@ -117,8 +155,14 @@ namespace Frontier_The_Void_GMTools.Models
         public CombatForce(CombatForce otherForce)
         {
             Name = otherForce.Name;
-            Attacking = otherForce.Name;
+
+            AdmiralScore = otherForce.AdmiralScore;
+            AttemptHack = otherForce.AttemptHack;
+
+            Attacking = otherForce.Attacking;
             IsDefending = otherForce.IsDefending;
+
+
             Round = otherForce.Round;
 
             foreach (var unit in otherForce.Units)

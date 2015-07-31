@@ -25,37 +25,40 @@ namespace Frontier_The_Void_GMTools.Settings
             Units = new List<Unit>();
 
             #region Space Units
-            Units.Add(new Unit());
-
-            // Unique Ships
+            Units.Add(new Unit()); // Unique Ships
             Unit superCarrier           = new Unit(UnitType.Space, "Super-Carrier", 40.0, 40.0, 35, 5, 1); Units.Add(superCarrier);
             Unit battleCarrier          = new Unit(UnitType.Space, "Battle Carrier", 50.0, 50.0, 30, 5, 1); Units.Add(battleCarrier);
             Unit superDreadnought       = new Unit(UnitType.Space, "Super-Dreadnought", 55.0, 55.0, 35, 5, 1); Units.Add(superDreadnought);
             Unit uniqueShip             = new Unit(UnitType.Space, "Unique Ship", 0.0, 0.0, 0, 5, 1); Units.Add(uniqueShip);
 
-            // First Rates
+            Units.Add(new Unit()); // First Rates
             Unit fleetCarrier           = new Unit(UnitType.Space, "Fleet Carrier", 19.5, 19.5, 20, 5, 1); Units.Add(fleetCarrier);
             Unit battleCruiser          = new Unit(UnitType.Space, "Battle Cruiser", 22.0, 22.0, 21, 5, 1); Units.Add(battleCruiser);
             Unit battleShip             = new Unit(UnitType.Space, "Battleship", 25.0, 25.0, 23, 5, 1); Units.Add(battleShip);
             Unit dreadnought            = new Unit(UnitType.Space, "Dreadnought", 32.0, 32.0, 25, 5, 1); Units.Add(dreadnought);
 
-            // Second Rates
+            Units.Add(new Unit()); // Second Rates
             Unit cruiser                = new Unit(UnitType.Space, "Cruiser", 7.0, 7.0, 15, 10, 1); Units.Add(cruiser);
             Unit heavyCruiser           = new Unit(UnitType.Space, "Heavy Cruiser", 10.0, 10.0, 16, 10, 1); Units.Add(heavyCruiser);
             Unit carrier                = new Unit(UnitType.Space, "Carrier", 10.0, 10.0, 17, 10, 1); Units.Add(carrier);
 
-            // Third Rates
+            Units.Add(new Unit()); // Third Rates
             Unit destroyer              = new Unit(UnitType.Space, "Destroyer", 5.0, 5.0, 10, 15, 3); Units.Add(destroyer);
-            Unit areaDefenceDestroyer   = new Unit(UnitType.Space, "Area Defence Destroyer", 5.0, 5.0, 10, 15, 2); Units.Add(areaDefenceDestroyer);
+            Unit areaDefenceDestroyer   = new Unit(UnitType.Space, "Area Defence Destroyer", 5.0, 0.0, 10, 15, 2); Units.Add(areaDefenceDestroyer);
             Unit lightCruiser           = new Unit(UnitType.Space, "Light Cruiser", 6.0, 6.0, 12, 15, 2); Units.Add(lightCruiser);
             Unit lightCarrier           = new Unit(UnitType.Space, "Light Carrier", 7.5, 7.5, 13, 15, 1); Units.Add(lightCarrier);
 
-            // Fourth Rates
+            Units.Add(new Unit()); // Fourth Rates
             Unit corvette               = new Unit(UnitType.Space, "Corvette", 1.0, 1.0, 5, 20, 10); Units.Add(corvette);
             Unit frigate                = new Unit(UnitType.Space, "Frigate", 2.0, 2.0, 7, 20, 5); Units.Add(frigate);
             Unit heavyFrigate           = new Unit(UnitType.Space, "Heavy Frigate", 3.0, 3.0, 8, 20, 5); Units.Add(heavyFrigate);
 
-            // Support Ships
+            Units.Add(new Unit()); // Fighters/Super-Light Weight Ships
+            Unit fighter                = new Unit(UnitType.Space, "Fighter Squadron", 15.0, 0.0, 5, 50, 1); Units.Add(fighter);
+            Unit strikeFighter          = new Unit(UnitType.Space, "Strike Fighter Squadron", 10.0, 10.0, 5, 50, 1); Units.Add(strikeFighter);
+            Unit gunShip                = new Unit(UnitType.Ground, "Gun Ship Squadron", 15.0, 15.0, 5, 50, 1); Units.Add(gunShip);
+
+            Units.Add(new Unit()); // Support Ships
             Unit supplyShip             = new Unit(UnitType.Space, "Supply Ship", 4.0, 0.0, 10, 20, 2); Units.Add(supplyShip);
             Unit assaultShip            = new Unit(UnitType.Space, "Assault Ship", 1.0, 1.0, 5, 20, 5); Units.Add(assaultShip);
             Unit commandoCarrier        = new Unit(UnitType.Space, "Commando Carrier", lightCarrier.Health, lightCarrier.AttackPower, lightCarrier.Cost, lightCarrier.BuildRate, lightCarrier.NumberBuildAtATime); Units.Add(commandoCarrier);
@@ -63,6 +66,7 @@ namespace Frontier_The_Void_GMTools.Settings
             #endregion
 
             #region Ground Units
+            Units.Add(new Unit());
             Units.Add(new Unit());
 
             // Militia Battalions

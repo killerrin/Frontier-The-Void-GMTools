@@ -13,11 +13,22 @@ namespace Frontier_The_Void_GMTools.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string b = ((string)value);
-            if (b == "true" || b == "True" || b == "TRUE")
-                return Visibility.Visible;
-            else if (b == "false" || b == "False" || b == "FALSE")
-                return Visibility.Collapsed;
+            if (value is string)
+            {
+                string b = ((string)value);
+                if (b == "true" || b == "True" || b == "TRUE")
+                    return Visibility.Visible;
+                else if (b == "false" || b == "False" || b == "FALSE")
+                    return Visibility.Collapsed;
+            }
+            else if (value is bool)
+            {
+                bool b = ((bool)value);
+                if (b)
+                    return Visibility.Visible;
+                else
+                    return Visibility.Collapsed;
+            }
 
             return Visibility.Visible;
         }
