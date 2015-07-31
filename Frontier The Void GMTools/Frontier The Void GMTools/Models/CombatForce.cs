@@ -15,10 +15,12 @@ namespace Frontier_The_Void_GMTools.Models
         public const string NamePropertyName = "Name";
 
         public const string AdmiralScorePropertyName = "AdmiralScore";
-        public const string AttemptHackPropertyName = "AttemptHack";
+        public const string AttemptElectronicWarfarePropertyName = "AttemptElectronicWarfare";
 
         public const string AttackingPropertyName = "Attacking";
         public const string IsDefendingPropertyName = "IsDefending";
+        public const string IsInvulnerablePropertyName = "IsInvulnerable";
+        public const string SkipAttackPropertyName = "SkipAttack";
         public const string UnitsPropertyName = "Units";
 
         public const string TotalUnitsPropertyName =  "TotalUnits";
@@ -52,17 +54,17 @@ namespace Frontier_The_Void_GMTools.Models
             }
         }
 
-        private bool _attemptHack = false;
-        public bool AttemptHack
+        private bool _attemptElectronicWarfare = false;
+        public bool AttemptElectronicWarfare
         {
-            get { return _attemptHack; }
+            get { return _attemptElectronicWarfare; }
             set
             {
-                if (_attemptHack == value) return;
+                if (_attemptElectronicWarfare == value) return;
 
                 //Debug.WriteLine("AttemptHack Changed to {0}", value);
-                _attemptHack = value;
-                RaisePropertyChanged(AttemptHackPropertyName);
+                _attemptElectronicWarfare = value;
+                RaisePropertyChanged(AttemptElectronicWarfarePropertyName);
             }
         }
 
@@ -94,6 +96,34 @@ namespace Frontier_The_Void_GMTools.Models
             }
         }
 
+        private bool _isInvulnerable = false;
+        public bool IsInvulnerable
+        {
+            get { return _isInvulnerable; }
+            set
+            {
+                if (_isInvulnerable == value) return;
+
+                //Debug.WriteLine("IsInvulnerable Changed to {0}", value);
+                _isInvulnerable = value;
+                RaisePropertyChanged(IsInvulnerablePropertyName);
+            }
+        }
+
+        private bool _skipAttack = false;
+        public bool SkipAttack
+        {
+            get { return _skipAttack; }
+            set
+            {
+                if (_skipAttack == value) return;
+
+                //Debug.WriteLine("SkipAttack Changed to {0}", value);
+                _skipAttack = value;
+                RaisePropertyChanged(SkipAttackPropertyName);
+            }
+        }
+
         private ObservableCollection<Unit> _units = new ObservableCollection<Unit>();
         public ObservableCollection<Unit> Units
         {
@@ -112,6 +142,7 @@ namespace Frontier_The_Void_GMTools.Models
 
         #region Helper Properties
         public double DamageDealt = 0.0;
+        public bool ElectronicWarfareSuccessful = false;
 
         public int TotalUnits { get { return Units.Count; } }
         public double TotalHealth
@@ -157,11 +188,12 @@ namespace Frontier_The_Void_GMTools.Models
             Name = otherForce.Name;
 
             AdmiralScore = otherForce.AdmiralScore;
-            AttemptHack = otherForce.AttemptHack;
+            AttemptElectronicWarfare = otherForce.ElectronicWarfareSuccessful;
 
             Attacking = otherForce.Attacking;
             IsDefending = otherForce.IsDefending;
-
+            IsInvulnerable = otherForce.IsInvulnerable;
+            SkipAttack = otherForce.SkipAttack;
 
             Round = otherForce.Round;
 

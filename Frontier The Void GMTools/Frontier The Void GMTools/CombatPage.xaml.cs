@@ -39,6 +39,22 @@ namespace Frontier_The_Void_GMTools
         }
 
         #region Add/Remove Buttons
+        #region Rounds
+        private void RemoveRoundButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("Remove Round Button Clicked");
+            Button button = (Button)e.OriginalSource;
+            CombatRound round = (CombatRound)button.DataContext;
+            ViewModel.RemoveRound(round);
+        }
+
+        private void clearSimulation_Clicked(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("Clear Simulation Button Clicked");
+            ViewModel.ClearSimulation();
+        }
+        #endregion
+
         #region Combat Force
         private void AddCombatForceButton_Clicked(object sender, RoutedEventArgs e)
         {
@@ -144,12 +160,6 @@ namespace Frontier_The_Void_GMTools
             combatForce.RemoveAllUnits();
         }
         #endregion
-
-        private void clearSimulation_Clicked(object sender, RoutedEventArgs e)
-        {
-            Debug.WriteLine("Clear Simulation Button Clicked");
-            ViewModel.ClearSimulation();
-        }
         #endregion
 
         #region Input Restriction Events

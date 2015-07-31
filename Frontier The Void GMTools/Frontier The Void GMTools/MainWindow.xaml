@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Frontier_The_Void_GMTools"
         mc:Ignorable="d"
-        Title="Frontier: The Void - GMTools" Height="600" Width="800">
+        Title="Frontier: The Void - GMTools" Height="700" Width="1000">
     
     <Grid>
         <DockPanel>

@@ -120,10 +120,55 @@ namespace Frontier_The_Void_GMTools.ViewModel
 
             Debug.WriteLine("Combat Forces Count {0}", ClonedCombatForces.Count);
 
+            #region Check Electronic Warfare
+            foreach (var attacker in ClonedCombatForces)
+            {
+                foreach (var defender in ClonedCombatForces)
+                {
+                    //Debug.WriteLine("Attacker: {0}, Defender {1}", attacker.Name, defender.Name);
+                    if (attacker.Attacking.Equals(defender.Name))
+                    {
+                        int hackRoll = Die.Roll(1, 100);
+                        newRound.LogToSummary(string.Format("[spoiler=Hack Roll "+attacker.Name+"]"));
+                        newRound.LogToSummary("Attempting to Hack: " + defender.Name);
+                        newRound.LogToSummary(string.Format("Rolled 1d100 : {0} total {0}", hackRoll));
+
+                        if (hackRoll < 25)
+                            newRound.LogToSummary("Failed");
+                        else if (hackRoll < 50)
+                        {
+                            newRound.LogToSummary("Moderate Success");
+                            int hackEffectiveness = Die.RollBetween(0, 25);
+                            int totalEffectedShips = (int)(defender.TotalUnits * (hackRoll / 100));
+                        }
+                        else if (hackRoll < 75)
+                        {
+                            newRound.LogToSummary("Success");
+                            int hackEffectiveness = Die.RollBetween(25, 75);
+                            int totalEffectedShips = (int)(defender.TotalUnits * (hackRoll / 100));
+                        }
+                        else if (hackRoll <= 100)
+                        {
+                            newRound.LogToSummary("Great Success");
+                            int hackEffectiveness = Die.RollBetween(75, 100);
+                            int totalEffectedShips = (int)(defender.TotalUnits * (hackRoll / 100));
+                        }
+                        else newRound.LogToSummary("Failed");
+
+                        newRound.LogToSummary("[/spoiler]");
+                        Debug.WriteLine("{0} Hacked {1}", attacker.Name, defender.Name);
+                        break;
+                    }
+                }
+            }
+            #endregion
+
             #region Calculate Raw Damage
             Debug.WriteLine("Calculating Raw Damage");
             foreach (var attacker in ClonedCombatForces)
             {
+                if (attacker.SkipAttack) continue;
+
                 foreach (var defender in ClonedCombatForces)
                 {
                     //Debug.WriteLine("Attacker: {0}, Defender {1}", attacker.Name, defender.Name);
@@ -218,6 +263,8 @@ namespace Frontier_The_Void_GMTools.ViewModel
 
                     if (force.Units.Count <= 0) break;
                 }
+
+                force.DamageDealt = 0;
             }
             #endregion
 
@@ -233,6 +280,12 @@ namespace Frontier_The_Void_GMTools.ViewModel
         {
             RoundsOfCombat = new ObservableCollection<CombatRound>();
             RoundsOfCombat.Add(new CombatRound());
+        }
+
+        public void RemoveRound(CombatRound round)
+        {
+            RoundsOfCombat.Remove(round);
+            if (RoundsOfCombat.Count == 0) ClearSimulation();
         }
 
         public void AddCombatForce(string text)
