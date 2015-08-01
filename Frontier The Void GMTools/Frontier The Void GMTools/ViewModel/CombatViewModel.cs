@@ -233,8 +233,15 @@ namespace Frontier_The_Void_GMTools.ViewModel
                         newRound.LogToSummary("[spoiler=Attack Roll " + attacker.Name + "]", false);
                         newRound.LogToSummary("Target: " + defender.Name);
 
-                        int damageDealt = 0;
+                        if (defender.IsInvulnerable)
+                        {
+                            newRound.LogToSummary(defender.Name + " Is Invulnerable");
+                            defender.DamageDealt = 0.0;
+                            break;
+                        }
 
+                        int damageDealt = 0;
+                        
                         // Raw Damage
                         int damageRoll = Die.Roll(1, (int)attacker.TotalAttack);
                         damageDealt += damageRoll;
@@ -394,6 +401,14 @@ namespace Frontier_The_Void_GMTools.ViewModel
             }
             #endregion
 
+            // Reset Values on the Forces
+            foreach (var force in LastRound.CombatForces)
+            {
+                force.IsInvulnerable = false;
+                force.AttemptElectronicWarfare = false;
+                force.SkipAttack = false;
+            }
+
             // Lastly, Lock the Last Round, finish the Summary then add the new Round
             LastRound.RoundLocked = true;
             newRound.LogToSummary(string.Format("[/spoiler]"));
@@ -409,7 +424,11 @@ namespace Frontier_The_Void_GMTools.ViewModel
         public void RemoveRound(CombatRound round)
         {
             RoundsOfCombat.Remove(round);
-            if (RoundsOfCombat.Count == 0) ClearSimulation();
+            if (RoundsOfCombat.Count == 0) { ClearSimulation(); return; }
+
+            LastRound.RoundLocked = false;
+            if (LastRound.RoundNumber == 0)
+                LastRound.Summary = "";
         }
 
         public void AddCombatForce(string text)

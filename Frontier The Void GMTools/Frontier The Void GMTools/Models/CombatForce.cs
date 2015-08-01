@@ -19,7 +19,6 @@ namespace Frontier_The_Void_GMTools.Models
         public const string AttemptElectronicWarfarePropertyName = "AttemptElectronicWarfare";
 
         public const string AttackingPropertyName = "Attacking";
-        public const string IsDefendingPropertyName = "IsDefending";
         public const string IsInvulnerablePropertyName = "IsInvulnerable";
         public const string SkipAttackPropertyName = "SkipAttack";
         public const string UnitsPropertyName = "Units";
@@ -81,20 +80,6 @@ namespace Frontier_The_Void_GMTools.Models
                 //Debug.WriteLine("Attacking Changed To " + value);
                 _attacking = value;
                 RaisePropertyChanged(NamePropertyName);
-            }
-        }
-
-        private bool _isDefending = false;
-        public bool IsDefending
-        {
-            get { return _isDefending; }
-            set
-            {
-                if (_isDefending == value) return;
-
-                //Debug.WriteLine("IsDefending Changed to {0}", value);
-                _isDefending = value;
-                RaisePropertyChanged(IsDefendingPropertyName);
             }
         }
 
@@ -212,7 +197,6 @@ namespace Frontier_The_Void_GMTools.Models
             AttemptElectronicWarfare = otherForce.AttemptElectronicWarfare;
 
             Attacking = otherForce.Attacking;
-            IsDefending = otherForce.IsDefending;
             IsInvulnerable = otherForce.IsInvulnerable;
             SkipAttack = otherForce.SkipAttack;
 

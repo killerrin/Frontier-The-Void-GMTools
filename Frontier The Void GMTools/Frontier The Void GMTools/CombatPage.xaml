@@ -89,9 +89,6 @@
                                                     <ComboBox ItemsSource="{Binding Round.CombatForceNames, Mode=OneWay}" Width="200" Margin="20,0,0,0"
                                                               IsEnabled="{Binding Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}}" 
                                                               SelectedValue="{Binding Attacking, Mode=TwoWay}"/>
-
-                                                    <CheckBox Content="Defending" Margin="20,5,0,0" IsChecked="{Binding IsDefending, Mode=TwoWay}"
-                                                              IsEnabled="{Binding Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}}"/>
                                                 </StackPanel>
 
                                                 <ListBox ItemsSource="{Binding Path=Units, Mode=OneWay}" Margin="0,5,0,0">
