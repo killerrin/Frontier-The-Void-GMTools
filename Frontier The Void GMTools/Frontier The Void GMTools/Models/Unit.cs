@@ -136,6 +136,7 @@ namespace Frontier_The_Void_GMTools.Models
         #endregion
 
         #region Helper Properties
+        public ElectronicWarfareResult HackResult = ElectronicWarfareResult.None;
         public bool HasAttack { get { return AttackPower != 0.0; } }
         public CombatForce CombatForce { get; set; }
         #endregion
@@ -179,7 +180,12 @@ namespace Frontier_The_Void_GMTools.Models
 
         public override string ToString()
         {
-            return string.Format("{0}, Is Command and Control: {1}, UnitType: {2}, Health: {3}, Attack: {4}", Name, IsCommandAndControl, TypeOfUnit.ToString(), Health, AttackPower);
+            string nameOverride = "";
+            if (IsCommandAndControl)
+                nameOverride += "C&C ";
+            nameOverride += Name;
+            
+            return string.Format("{0}: Health: {1}, Attack: {2}", nameOverride, Health, AttackPower);
         }
     }
 }

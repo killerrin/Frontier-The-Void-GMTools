@@ -124,6 +124,7 @@
     <Compile Include="Models\CelestialObject.cs" />
     <Compile Include="Models\CombatForce.cs" />
     <Compile Include="Models\CombatRound.cs" />
+    <Compile Include="Models\EnumTypes\ElectronicWarfareResult.cs" />
     <Compile Include="Models\EnumTypes\RadiationLevel.cs" />
     <Compile Include="Models\EnumTypes\SimulatedCombatMode.cs" />
     <Compile Include="Models\EnumTypes\StarAge.cs" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Frontier_The_Void_GMTools.Models.EnumTypes;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -22,6 +23,7 @@ namespace Frontier_The_Void_GMTools.Models
         public const string IsInvulnerablePropertyName = "IsInvulnerable";
         public const string SkipAttackPropertyName = "SkipAttack";
         public const string UnitsPropertyName = "Units";
+        public const string DestroyedUnitsPropertyName = "DestroyedUnits";
 
         public const string TotalUnitsPropertyName =  "TotalUnits";
         public const string TotalHealthPropertyName = "TotalHealth";
@@ -137,12 +139,24 @@ namespace Frontier_The_Void_GMTools.Models
             }
         }
 
+        private ObservableCollection<Unit> _destroyedUnits = new ObservableCollection<Unit>();
+        public ObservableCollection<Unit> DestroyedUnits
+        {
+            get { return _destroyedUnits; }
+            set
+            {
+                if (_destroyedUnits == value) return;
+
+                _destroyedUnits = value;
+                RaisePropertyChanged(DestroyedUnitsPropertyName);
+            }
+        }
+
         public CombatRound Round { get; set; }
         #endregion
 
         #region Helper Properties
         public double DamageDealt = 0.0;
-        public bool ElectronicWarfareSuccessful = false;
 
         public int TotalUnits { get { return Units.Count; } }
         public double TotalHealth
@@ -161,13 +175,20 @@ namespace Frontier_The_Void_GMTools.Models
             get
             {
                 double attack = 0.0;
-                for (int i = 0; i < Units.Count; i++)
+                foreach (var unit in Units)
                 {
-                    attack += Units[i].AttackPower;
-                    if (Units[i].IsCommandAndControl)
-                        attack += 2;
-                }
+                    if (unit.HackResult == ElectronicWarfareResult.DealNoDamage) { }
+                    else
+                    {
+                        if (unit.HackResult == ElectronicWarfareResult.None || unit.HackResult == ElectronicWarfareResult.TakeDamage)
+                            attack += unit.AttackPower;
+                        else if (unit.HackResult == ElectronicWarfareResult.DealHalfDamage)
+                            attack += (unit.AttackPower / 2);
 
+                        if (unit.IsCommandAndControl)
+                            attack += 2;
+                    }
+                }
                 return attack;
             }
         }
@@ -188,7 +209,7 @@ namespace Frontier_The_Void_GMTools.Models
             Name = otherForce.Name;
 
             AdmiralScore = otherForce.AdmiralScore;
-            AttemptElectronicWarfare = otherForce.ElectronicWarfareSuccessful;
+            AttemptElectronicWarfare = otherForce.AttemptElectronicWarfare;
 
             Attacking = otherForce.Attacking;
             IsDefending = otherForce.IsDefending;
@@ -201,6 +222,13 @@ namespace Frontier_The_Void_GMTools.Models
             {
                 AddUnit(new Unit(unit));
             }
+            foreach (var unit in otherForce.DestroyedUnits)
+            {
+                unit.CombatForce = this;
+                DestroyedUnits.Add(unit);
+            }
+
+            RaiseHPAPQuantityChanged();
         }
 
         public void AddUnit(Unit unit)

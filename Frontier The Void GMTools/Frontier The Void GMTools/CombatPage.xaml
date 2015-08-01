@@ -29,7 +29,7 @@
             </StackPanel>
 
             <StackPanel Orientation="Vertical" Margin="0,10,0,0">
-                <ListBox ItemsSource="{Binding Path=RoundsOfCombat}" Height="460">
+                <ListBox ItemsSource="{Binding Path=RoundsOfCombat}" Height="560">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Vertical" VerticalAlignment="Top">
@@ -115,14 +115,14 @@
                                                                     </TextBlock>
                                                                     <TextBox Margin="2,0,0,0" Width="35"  PreviewTextInput="CheckNumbersOnly_PreviewTextInput" DataObject.Pasting="TextBoxPaste_CheckNumbers"
                                                                              Text="{Binding Health, Mode=TwoWay}"
-                                                                             IsEnabled="{Binding Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}, Mode=OneWay}"/>
+                                                                             IsEnabled="{Binding CombatForce.Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}, Mode=OneWay}"/>
 
                                                                     <TextBlock Margin="10,0,0,0">
                                                                         <Run Text="Attack" />
                                                                     </TextBlock>
                                                                     <TextBox Margin="2,0,0,0" Width="35"  PreviewTextInput="CheckNumbersOnly_PreviewTextInput" DataObject.Pasting="TextBoxPaste_CheckNumbers"
                                                                              Text="{Binding AttackPower, Mode=TwoWay}"
-                                                                             IsEnabled="{Binding Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}, Mode=OneWay}"/>
+                                                                             IsEnabled="{Binding CombatForce.Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}, Mode=OneWay}"/>
 
 
                                                                     <CheckBox Content="Command &amp; Control" Margin="10,0,0,0"

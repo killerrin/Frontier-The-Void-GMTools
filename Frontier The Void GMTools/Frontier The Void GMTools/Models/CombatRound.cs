@@ -112,9 +112,10 @@ namespace Frontier_The_Void_GMTools.Models
             RecompileNames();
         }
 
-        public void LogToSummary(string message = "")
+        public void LogToSummary(string message = "", bool addNewLine = true)
         {
-            Summary += message + "&#x0a;";
+            Summary += message;
+            if (addNewLine) Summary += "[br]";
         }
 
         private void RecompileNames()
