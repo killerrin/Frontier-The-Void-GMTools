@@ -236,6 +236,7 @@ namespace Frontier_The_Void_GMTools.ViewModel
                         if (defender.IsInvulnerable)
                         {
                             newRound.LogToSummary(defender.Name + " Is Invulnerable");
+                            newRound.LogToSummary("[/spoiler]", false);
                             defender.DamageDealt = 0.0;
                             break;
                         }
