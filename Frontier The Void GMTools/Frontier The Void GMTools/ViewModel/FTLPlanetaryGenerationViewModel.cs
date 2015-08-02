@@ -24,9 +24,6 @@ namespace Frontier_The_Void_GMTools.ViewModel
     /// </summary>
     public class FTLPlanetaryGenerationViewModel : ViewModelBase
     {
-        public const string GeneratedSystemPropertyName = "GeneratedSystem";
-        public const string FTLTravelResultPropertyName = "FTLTravelResult";
-
         public Dice Die = new Dice();
 
         private ObservableCollection<StarSystem> m_generatedSystem = new ObservableCollection<StarSystem>();
@@ -39,7 +36,7 @@ namespace Frontier_The_Void_GMTools.ViewModel
                     return;
 
                 m_generatedSystem = value;
-                RaisePropertyChanged(GeneratedSystemPropertyName);
+                RaisePropertyChanged(nameof(GeneratedSystem));
             }
         }
 
@@ -53,7 +50,7 @@ namespace Frontier_The_Void_GMTools.ViewModel
                     return;
 
                 m_FTLTravelResult = value;
-                RaisePropertyChanged(FTLTravelResultPropertyName);
+                RaisePropertyChanged(nameof(FTLTravelResult));
             }
         }
 
@@ -73,7 +70,7 @@ namespace Frontier_The_Void_GMTools.ViewModel
             ////}   
         }
 
-        public void GenerateSystem(HexCoordinate hexCoordinate, int planetaryGenerationRoll1, int planetaryGenerationRoll2, int ftlRoll1, int ftlRoll2, bool isExplorer, bool seedHex, bool seedPlanetaryGeneration, bool seedFTL)
+        public void GenerateSystem(HexCoordinate hexCoordinate, int planetaryGenerationRoll1, int planetaryGenerationRoll2, int ftlRoll1, int ftlRoll2, bool isExplorer, bool forceSentientSpecies, bool seedHex, bool seedPlanetaryGeneration, bool seedFTL)
         {
             Debug.WriteLine("Generating System : Hex:{0}, PG1:{1}, PG2:{2}, FTL1:{3}, FTL2:{4}, IsExplorer:{5}, SeedHex:{6}, SeedPG:{7}, SeedFTL:{8}", hexCoordinate, planetaryGenerationRoll1, planetaryGenerationRoll2, ftlRoll1, ftlRoll2, isExplorer, seedHex, seedPlanetaryGeneration, seedFTL);
 
@@ -133,7 +130,7 @@ namespace Frontier_The_Void_GMTools.ViewModel
 
             // Roll the Main Generator
             Debug.WriteLine("Generating the Planet from Inputs");
-            CelestialObject generatedPlanet = GenerateCelestialBody(FTLTravelResult);
+            CelestialObject generatedPlanet = GenerateCelestialBody(FTLTravelResult, forceSentientSpecies);
             generatedPlanet.CelestialType = CelestialBodyType.TerrestrialPlanet;
             tempStarSystem[0].CelestialBodies.Add(generatedPlanet);
 
@@ -142,7 +139,7 @@ namespace Frontier_The_Void_GMTools.ViewModel
             GeneratedSystem = tempStarSystem;
         }
 
-        public CelestialObject GenerateCelestialBody(FTLTravel ftlTravel)
+        public CelestialObject GenerateCelestialBody(FTLTravel ftlTravel, bool forceSentientSpecies = false)
         {
             Debug.WriteLine("Generating Celestial Bodies: {0}", ftlTravel);
 
@@ -158,7 +155,7 @@ namespace Frontier_The_Void_GMTools.ViewModel
                 celestialBody.StageOfLife = LifeStage.None;
             }
 
-            if (celestialBody.StageOfLife == LifeStage.SentientLife) //|| ftlTravel == FTLTravel.AlreadyColonized)
+            if (celestialBody.StageOfLife == LifeStage.SentientLife || forceSentientSpecies) //|| ftlTravel == FTLTravel.AlreadyColonized)
             {
                 int numSpeciesRoll = Die.Roll(20);
                 int numSpecies = 1;

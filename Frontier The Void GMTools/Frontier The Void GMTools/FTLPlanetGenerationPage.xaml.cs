@@ -86,7 +86,7 @@ namespace Frontier_The_Void_GMTools
 
             try
             {
-                ViewModel.GenerateSystem(hexCoordinate, planetGenerationRoll1, planetGenerationRoll2, ftlRoll1, ftlRoll2, ftlExplorerCheckbox.IsChecked.Value, seedHexCheckBox.IsChecked.Value, seedPlanetaryGenerationCheckBox.IsChecked.Value, seedFTLCheckBox.IsChecked.Value);
+                ViewModel.GenerateSystem(hexCoordinate, planetGenerationRoll1, planetGenerationRoll2, ftlRoll1, ftlRoll2, ftlExplorerCheckbox.IsChecked.Value, forceSentientSpeciesCheckBox.IsChecked.Value, seedHexCheckBox.IsChecked.Value, seedPlanetaryGenerationCheckBox.IsChecked.Value, seedFTLCheckBox.IsChecked.Value);
             }
             catch (Exception) { }
         }

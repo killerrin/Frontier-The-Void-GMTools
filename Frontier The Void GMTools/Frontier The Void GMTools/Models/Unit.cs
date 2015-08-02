@@ -12,20 +12,6 @@ namespace Frontier_The_Void_GMTools.Models
 {
     public class Unit : INotifyPropertyChanged
     {
-        public const string TypeOfUnitPropertyName = "TypeOfUnit";
-        public const string NamePropertyName = "Name";
-        public const string HealthPropertyName = "Health";
-        public const string AttackPowerPropertyName = "AttackPower";
-
-        public const string IsCommandAndControlPropertyName = "IsCommandAndControl";
-
-        public const string CostPropertyName = "Cost";
-        public const string BuildRatePropertyName = "BuildRate";
-        public const string NumberBuildAtATimePropertyName = "NumberBuildAtATime";
-
-        public const string SubUnitsPropertyName = "SubUnits";
-        public const string HasSubUnitsPropertyName = "HasSubUnits";
-
         #region Properties
         private UnitType _typeOfUnit = UnitType.Both;
         public UnitType TypeOfUnit
@@ -36,7 +22,7 @@ namespace Frontier_The_Void_GMTools.Models
                 if (_typeOfUnit == value) return;
 
                 _typeOfUnit = value;
-                RaisePropertyChanged(TypeOfUnitPropertyName);
+                RaisePropertyChanged(nameof(TypeOfUnit));
             }
         }
 
@@ -49,7 +35,7 @@ namespace Frontier_The_Void_GMTools.Models
                 if (_name == value) return;
 
                 _name = value;
-                RaisePropertyChanged(NamePropertyName);
+                RaisePropertyChanged(nameof(Name));
             }
         }
 
@@ -62,7 +48,7 @@ namespace Frontier_The_Void_GMTools.Models
                 if (_health == value) return;
 
                 _health = value;
-                RaisePropertyChanged(HealthPropertyName);
+                RaisePropertyChanged(nameof(Health));
             }
         }
 
@@ -75,7 +61,7 @@ namespace Frontier_The_Void_GMTools.Models
                 if (_attackPower == value) return;
 
                 _attackPower = value;
-                RaisePropertyChanged(AttackPowerPropertyName);
+                RaisePropertyChanged(nameof(AttackPower));
             }
         }
 
@@ -90,7 +76,7 @@ namespace Frontier_The_Void_GMTools.Models
                 Debug.WriteLine("IsCommandAndControl Changed to {0}", value);
                 _isCommandAndControl = value;
 
-                RaisePropertyChanged(IsCommandAndControlPropertyName);
+                RaisePropertyChanged(nameof(IsCommandAndControl));
                 if (CombatForce != null) CombatForce.RaiseHPAPQuantityChanged();
             }
         }
@@ -104,7 +90,7 @@ namespace Frontier_The_Void_GMTools.Models
                 if (_cost == value) return;
 
                 _cost = value;
-                RaisePropertyChanged(CostPropertyName);
+                RaisePropertyChanged(nameof(Cost));
             }
         }
 
@@ -117,7 +103,7 @@ namespace Frontier_The_Void_GMTools.Models
                 if (_buildRate == value) return;
 
                 _buildRate = value;
-                RaisePropertyChanged(BuildRatePropertyName);
+                RaisePropertyChanged(nameof(BuildRate));
             }
         }
 
@@ -130,7 +116,7 @@ namespace Frontier_The_Void_GMTools.Models
                 if (_numberBuildAtATime == value) return;
 
                 _numberBuildAtATime = value;
-                RaisePropertyChanged(NumberBuildAtATimePropertyName);
+                RaisePropertyChanged(nameof(NumberBuildAtATime));
             }
         }
         #endregion

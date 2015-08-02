@@ -24,9 +24,6 @@ namespace Frontier_The_Void_GMTools.ViewModel
     /// </summary>
     public class CombatViewModel : ViewModelBase
     {
-        public const string RoundsOfCombatPropertyName = "RoundsOfCombat";
-        public const string UnitStatsPropertyName = "UnitStats";
-
         Dice Die = new Dice();
 
         private ObservableCollection<CombatRound> m_roundsOfCombat = new ObservableCollection<CombatRound>();
@@ -39,7 +36,7 @@ namespace Frontier_The_Void_GMTools.ViewModel
                     return;
 
                 m_roundsOfCombat = value;
-                RaisePropertyChanged(RoundsOfCombatPropertyName);
+                RaisePropertyChanged(nameof(RoundsOfCombat));
             }
         }
 
@@ -53,7 +50,7 @@ namespace Frontier_The_Void_GMTools.ViewModel
                     return;
 
                 m_unitStats = value;
-                RaisePropertyChanged(UnitStatsPropertyName);
+                RaisePropertyChanged(nameof(UnitStats));
             }
         }
 
@@ -332,6 +329,8 @@ namespace Frontier_The_Void_GMTools.ViewModel
                 newRound.LogToSummary(string.Format("Total Damage Dealt: {0}", force.DamageDealt));
                 while (force.DamageDealt > 0)
                 {
+                    if (force.Units.Count <= 0) break;
+
                     if (simulatedCombatMode == SimulatedCombatMode.RandomizedTargets)
                     {
                         Unit unit = force.Units[Die.Roll(1, force.Units.Count) - 1];
@@ -349,8 +348,6 @@ namespace Frontier_The_Void_GMTools.ViewModel
 
                         force.DamageDealt--;
                     }
-
-                    if (force.Units.Count <= 0) break;
                 }
 
                 newRound.LogToSummary("[br][b]Remaining Units[/b]");

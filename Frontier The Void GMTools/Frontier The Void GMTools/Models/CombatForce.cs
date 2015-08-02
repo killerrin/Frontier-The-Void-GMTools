@@ -13,21 +13,6 @@ namespace Frontier_The_Void_GMTools.Models
     public class CombatForce : INotifyPropertyChanged
     {
         #region Properties
-        public const string NamePropertyName = "Name";
-
-        public const string AdmiralScorePropertyName = "AdmiralScore";
-        public const string AttemptElectronicWarfarePropertyName = "AttemptElectronicWarfare";
-
-        public const string AttackingPropertyName = "Attacking";
-        public const string IsInvulnerablePropertyName = "IsInvulnerable";
-        public const string SkipAttackPropertyName = "SkipAttack";
-        public const string UnitsPropertyName = "Units";
-        public const string DestroyedUnitsPropertyName = "DestroyedUnits";
-
-        public const string TotalUnitsPropertyName =  "TotalUnits";
-        public const string TotalHealthPropertyName = "TotalHealth";
-        public const string TotalAttackPropertyName = "TotalAttack";
-
         private string _name = "";
         public string Name
         {
@@ -37,7 +22,7 @@ namespace Frontier_The_Void_GMTools.Models
                 if (_name == value) return;
 
                 _name = value;
-                RaisePropertyChanged(NamePropertyName);
+                RaisePropertyChanged(nameof(Name));
             }
         }
 
@@ -51,7 +36,7 @@ namespace Frontier_The_Void_GMTools.Models
 
                 //Debug.WriteLine("AdmiralScore Changed to {0}", value);
                 _admiralScore = value;
-                RaisePropertyChanged(AdmiralScorePropertyName);
+                RaisePropertyChanged(nameof(AdmiralScore));
             }
         }
 
@@ -65,7 +50,7 @@ namespace Frontier_The_Void_GMTools.Models
 
                 //Debug.WriteLine("AttemptHack Changed to {0}", value);
                 _attemptElectronicWarfare = value;
-                RaisePropertyChanged(AttemptElectronicWarfarePropertyName);
+                RaisePropertyChanged(nameof(AttemptElectronicWarfare));
             }
         }
 
@@ -79,7 +64,7 @@ namespace Frontier_The_Void_GMTools.Models
 
                 //Debug.WriteLine("Attacking Changed To " + value);
                 _attacking = value;
-                RaisePropertyChanged(NamePropertyName);
+                RaisePropertyChanged(nameof(Attacking));
             }
         }
 
@@ -93,7 +78,7 @@ namespace Frontier_The_Void_GMTools.Models
 
                 //Debug.WriteLine("IsInvulnerable Changed to {0}", value);
                 _isInvulnerable = value;
-                RaisePropertyChanged(IsInvulnerablePropertyName);
+                RaisePropertyChanged(nameof(IsInvulnerable));
             }
         }
 
@@ -107,7 +92,7 @@ namespace Frontier_The_Void_GMTools.Models
 
                 //Debug.WriteLine("SkipAttack Changed to {0}", value);
                 _skipAttack = value;
-                RaisePropertyChanged(SkipAttackPropertyName);
+                RaisePropertyChanged(nameof(SkipAttack));
             }
         }
 
@@ -120,7 +105,7 @@ namespace Frontier_The_Void_GMTools.Models
                 if (_units == value) return;
 
                 _units = value;
-                RaisePropertyChanged(UnitsPropertyName);
+                RaisePropertyChanged(nameof(Units));
             }
         }
 
@@ -133,7 +118,7 @@ namespace Frontier_The_Void_GMTools.Models
                 if (_destroyedUnits == value) return;
 
                 _destroyedUnits = value;
-                RaisePropertyChanged(DestroyedUnitsPropertyName);
+                RaisePropertyChanged(nameof(DestroyedUnits));
             }
         }
 
@@ -180,9 +165,9 @@ namespace Frontier_The_Void_GMTools.Models
 
         public void RaiseHPAPQuantityChanged()
         {
-            RaisePropertyChanged(TotalUnitsPropertyName);
-            RaisePropertyChanged(TotalHealthPropertyName);
-            RaisePropertyChanged(TotalAttackPropertyName);
+            RaisePropertyChanged(nameof(TotalUnits));
+            RaisePropertyChanged(nameof(TotalHealth));
+            RaisePropertyChanged(nameof(TotalAttack));
         }
         #endregion
 

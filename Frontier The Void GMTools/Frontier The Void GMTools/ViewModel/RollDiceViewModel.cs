@@ -19,8 +19,6 @@ namespace Frontier_The_Void_GMTools.ViewModel
     /// </summary>
     public class RollDiceViewModel : ViewModelBase
     {
-        public const string DiceRollsPropertyName = "DiceRolls";
-
         Dice dice = new Dice();
 
         private ObservableCollection<int> m_diceRolls = new ObservableCollection<int>();
@@ -33,7 +31,7 @@ namespace Frontier_The_Void_GMTools.ViewModel
                     return;
 
                 m_diceRolls = value;
-                RaisePropertyChanged(DiceRollsPropertyName);
+                RaisePropertyChanged(nameof(DiceRolls));
             }
         }
 

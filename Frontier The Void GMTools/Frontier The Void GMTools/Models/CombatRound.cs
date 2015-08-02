@@ -11,12 +11,6 @@ namespace Frontier_The_Void_GMTools.Models
 {
     public class CombatRound : INotifyPropertyChanged
     {
-        public const string RoundLockedPropertyName = "RoundLocked";
-        public const string SummaryPropertyName = "Summary";
-        public const string RoundNumberPropertyName = "RoundNumber";
-        public const string CombatForcesPropertyName = "CombatForces";
-        public const string CombatForceNamesPropertyName = "CombatForceNames";
-
         #region properties
         private bool m_roundLocked = false;
         public bool RoundLocked
@@ -27,7 +21,7 @@ namespace Frontier_The_Void_GMTools.Models
                 if (m_roundLocked == value) return;
 
                 m_roundLocked = value;
-                RaisePropertyChanged(RoundLockedPropertyName);
+                RaisePropertyChanged(nameof(RoundLocked));
             }
         }
 
@@ -40,7 +34,7 @@ namespace Frontier_The_Void_GMTools.Models
                 if (m_roundNumber == value) return;
 
                 m_roundNumber = value;
-                RaisePropertyChanged(RoundNumberPropertyName);
+                RaisePropertyChanged(nameof(RoundNumber));
             }
         }
 
@@ -53,7 +47,7 @@ namespace Frontier_The_Void_GMTools.Models
                 if (m_summary == value) return;
 
                 m_summary = value;
-                RaisePropertyChanged(SummaryPropertyName);
+                RaisePropertyChanged(nameof(Summary));
             }
         }
 
@@ -66,7 +60,7 @@ namespace Frontier_The_Void_GMTools.Models
                 if (m_combatForces == value) return;
 
                 m_combatForces = value;
-                RaisePropertyChanged(CombatForcesPropertyName);
+                RaisePropertyChanged(nameof(CombatForces));
             }
         }
 
@@ -79,7 +73,7 @@ namespace Frontier_The_Void_GMTools.Models
                 if (m_combatForceNames == value) return;
 
                 m_combatForceNames = value;
-                RaisePropertyChanged(CombatForceNamesPropertyName);
+                RaisePropertyChanged(nameof(CombatForceNames));
             }
         }
         #endregion
