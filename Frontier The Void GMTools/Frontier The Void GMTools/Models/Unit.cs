@@ -119,6 +119,32 @@ namespace Frontier_The_Void_GMTools.Models
                 RaisePropertyChanged(nameof(NumberBuildAtATime));
             }
         }
+
+        private bool m_skipAccount = false;
+        public bool SkipAttack
+        {
+            get { return m_skipAccount; }
+            set
+            {
+                if (m_skipAccount == value) return;
+
+                m_skipAccount = value;
+                RaisePropertyChanged(nameof(SkipAttack));
+            }
+        }
+
+        private bool m_invulnerable = false;
+        public bool Invulnerable
+        {
+            get { return m_invulnerable; }
+            set
+            {
+                if (m_invulnerable == value) return;
+
+                m_invulnerable = value;
+                RaisePropertyChanged(nameof(Invulnerable));
+            }
+        }
         #endregion
 
         #region Helper Properties
@@ -153,6 +179,9 @@ namespace Frontier_The_Void_GMTools.Models
             Cost = otherUnit.Cost;
             BuildRate = otherUnit.BuildRate;
             NumberBuildAtATime = otherUnit.NumberBuildAtATime;
+
+            SkipAttack = otherUnit.SkipAttack;
+            Invulnerable = otherUnit.Invulnerable;
 
             CombatForce = otherUnit.CombatForce;
         }

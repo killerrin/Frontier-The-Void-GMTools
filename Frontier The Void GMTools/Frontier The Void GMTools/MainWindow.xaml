@@ -4,17 +4,69 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Frontier_The_Void_GMTools"
+        xmlns:wpftoolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="Frontier: The Void - GMTools" Height="700" Width="1000">
+        Title="Frontier: The Void - GMTools" Height="700" Width="1000"
+        DataContext="{Binding Source={StaticResource Locator}, Path=vm_MainWindowViewModel}">
     
     <Grid>
         <DockPanel>
             <Menu x:Name="menu" DockPanel.Dock="Top">
                 <MenuItem Header="File" />
+                <MenuItem Header="Settings">
+                    <MenuItem Header="Unit Statistics" Click="UnitStatistics_Click"/>
+                </MenuItem>
             </Menu>
 
             <Frame x:Name="frame" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                    Loaded="frame_Loaded" />
-        </DockPanel>    
+        </DockPanel>
+
+        <wpftoolkit:ChildWindow x:Name="unitStatisticsChildWindow" Width="600" Height="400">
+            <DockPanel>
+                <StackPanel Orientation="Vertical" DockPanel.Dock="Left">
+                    <ListBox x:Name="unitStatisticsChildWindow_unitListbox" ItemsSource="{Binding UnitStatistics.Units}" Height="370" Width="200">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical">
+                                    <Button Content="Add Above" Margin="20,5,0,0" Width="70" HorizontalAlignment="Left" Click="unitStatisticsChildWindow_unitListbox_AddAbove_Click" />
+
+                                    <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
+                                        <Button Content="X" Margin="5,0,0,0" Click="unitStatisticsChildWindow_unitListbox_X_Click" />
+                                        <TextBlock Text="{Binding Name}" Margin="15,0,0,0"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" DockPanel.Dock="Right">
+                    <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+                        <Button Content="Make Default" Margin="0,0,0,0" Click="unitStatisticsChildWindow_MakeDefault_Click"/>
+                        <Button Content="Save" Width="40" Margin="10,0,0,0" Click="unitStatisticsChildWindow_Save_Click"/>
+                        <Button Content="Load" Width="40" Margin="10,0,0,0" Click="unitStatisticsChildWindow_Load_Click"/>
+
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" Margin="20,20,0,0" DataContext="{Binding ElementName=unitStatisticsChildWindow_unitListbox, Path=SelectedItem}">
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Name" />
+                            <TextBox x:Name="unitNameTextBox" Text="{Binding Name}" Width="200" Margin="5,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Health" />
+                            <TextBox x:Name="unitHealthTextBox" Text="{Binding Health}" Width="200" Margin="5,0,0,0"  PreviewTextInput="CheckNumbersOnly_PreviewTextInput" DataObject.Pasting="TextBoxPaste_CheckNumbers"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Attack" />
+                            <TextBox x:Name="unitAttackTextBox" Text="{Binding AttackPower}" Width="200" Margin="5,0,0,0"  PreviewTextInput="CheckNumbersOnly_PreviewTextInput" DataObject.Pasting="TextBoxPaste_CheckNumbers"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </DockPanel>
+        </wpftoolkit:ChildWindow>
+
     </Grid>
 </Window>

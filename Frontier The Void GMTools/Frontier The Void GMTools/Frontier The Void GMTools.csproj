@@ -121,6 +121,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\AttackerDefenderPair.cs" />
     <Compile Include="Models\CelestialObject.cs" />
     <Compile Include="Models\CombatForce.cs" />
     <Compile Include="Models\CombatRound.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="Settings\UnitSettings.cs" />
     <Compile Include="ViewModel\FTLPlanetaryGenerationViewModel.cs" />
     <Compile Include="ViewModel\CombatViewModel.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\RollDiceViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />

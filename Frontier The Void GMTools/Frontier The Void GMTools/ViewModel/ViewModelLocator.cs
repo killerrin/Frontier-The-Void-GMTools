@@ -42,10 +42,19 @@ namespace Frontier_The_Void_GMTools.ViewModel
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
 
+            SimpleIoc.Default.Register<MainWindowViewModel>();
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<RollDiceViewModel>();
             SimpleIoc.Default.Register<FTLPlanetaryGenerationViewModel>();
             SimpleIoc.Default.Register<CombatViewModel>();
+        }
+
+        public MainWindowViewModel vm_MainWindowViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<MainWindowViewModel>();
+            }
         }
 
         public MainViewModel vm_MainViewModel

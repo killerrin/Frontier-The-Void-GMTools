@@ -54,8 +54,8 @@ namespace Frontier_The_Void_GMTools.Models
             }
         }
 
-        private string _attacking = "";
-        public string Attacking
+        private ObservableCollection<CombatForce> _attacking = new ObservableCollection<CombatForce>();
+        public ObservableCollection<CombatForce> Attacking
         {
             get { return _attacking; }
             set
@@ -126,6 +126,7 @@ namespace Frontier_The_Void_GMTools.Models
         #endregion
 
         #region Helper Properties
+        public CombatForce UI_ATTACKING { get; set; }
         public double DamageDealt = 0.0;
 
         public int TotalUnits { get { return Units.Count; } }
@@ -147,6 +148,7 @@ namespace Frontier_The_Void_GMTools.Models
                 double attack = 0.0;
                 foreach (var unit in Units)
                 {
+                    if (unit.SkipAttack) continue;
                     if (unit.HackResult == ElectronicWarfareResult.DealNoDamage) { }
                     else
                     {
@@ -176,16 +178,19 @@ namespace Frontier_The_Void_GMTools.Models
         }
         public CombatForce(CombatForce otherForce)
         {
+            Round = otherForce.Round;
             Name = otherForce.Name;
 
             AdmiralScore = otherForce.AdmiralScore;
             AttemptElectronicWarfare = otherForce.AttemptElectronicWarfare;
 
-            Attacking = otherForce.Attacking;
+            //foreach (var attacking in otherForce.Attacking)
+            //{
+            //    Attacking.Add(attacking);
+            //}
+
             IsInvulnerable = otherForce.IsInvulnerable;
             SkipAttack = otherForce.SkipAttack;
-
-            Round = otherForce.Round;
 
             foreach (var unit in otherForce.Units)
             {
@@ -220,6 +225,26 @@ namespace Frontier_The_Void_GMTools.Models
             Debug.WriteLine("Removing All Units from " + Name);
             Units.Clear();
             RaiseHPAPQuantityChanged();
+        }
+
+        public void AddAttacking ()
+        {
+            if (UI_ATTACKING == null) return;
+            if (UI_ATTACKING.Name == Name) return;
+
+            foreach (var s in Attacking)
+            {
+                if (s == UI_ATTACKING)
+                    return;
+            }
+
+            Attacking.Add(UI_ATTACKING);
+        }
+        public void RemoveAttacking()
+        {
+            if (UI_ATTACKING == null) return;
+
+            Attacking.Remove(UI_ATTACKING);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

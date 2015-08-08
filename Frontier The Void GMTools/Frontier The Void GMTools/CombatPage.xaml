@@ -12,140 +12,169 @@
 
     <Grid>
         <DockPanel>
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" DockPanel.Dock="Top">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Group Name" Margin="0,0,0,0" />
-                    <TextBox x:Name="textBox_CombatGroupName" Width="250" Margin="5,0,0,0" />
-                    <Button Content="Add Battle Group" Margin="20,0,0,0" Click="AddCombatForceButton_Clicked"/>
-                </StackPanel>
-
+            <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                    <Button Content="Clear Simulation" Width="100" Click="clearSimulation_Clicked"/>
-                    <ComboBox x:Name="simulatedCombatModeComboBox" Margin="10,0,0,0"  Width="240" SelectedIndex="0">
-                        <Run Text="Randomized Targets" />
-                    </ComboBox>
-                    <Button Content="Simulate Combat" Width="200" Margin="10,0,0,0" HorizontalAlignment="Center" Click="SimulateButton_Clicked"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Group Name" Margin="0,0,0,0" />
+                        <TextBox x:Name="textBox_CombatGroupName" Width="250" Margin="5,0,0,0" />
+                        <Button Content="Add Battle Group" Margin="5,0,0,0" Click="AddCombatForceButton_Clicked"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="100,0,0,0">
+                        <Button Content="Clear Simulation" Width="100" Click="clearSimulation_Clicked"/>
+                        <ComboBox x:Name="simulatedCombatModeComboBox" Margin="5,0,0,0"  Width="240" SelectedIndex="0">
+                            <Run Text="Randomized Targets" />
+                        </ComboBox>
+                        <Button Content="Simulate Combat" Width="100" Margin="5,0,0,0" HorizontalAlignment="Center" Click="SimulateButton_Clicked"/>
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
 
-            <StackPanel Orientation="Vertical" Margin="0,10,0,0">
-                <ListBox ItemsSource="{Binding Path=RoundsOfCombat}" Height="560">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Vertical" VerticalAlignment="Top">
-                                <StackPanel Orientation="Horizontal">
-                                    <Button Content="X" Margin="0,0,0,0" Click="RemoveRoundButton_Clicked"/>
+            <ListBox ItemsSource="{Binding Path=RoundsOfCombat}" Margin="0,5,0,0" VerticalAlignment="Stretch">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="X" Margin="0,0,0,0" Click="RemoveRoundButton_Clicked"/>
 
-                                    <TextBlock Margin="10,0,0,0">
+                                <TextBlock Margin="10,0,0,0">
                                         <Run Text="Round: " />
                                         <Run Text="{Binding RoundNumber}" />
-                                    </TextBlock>
-                                </StackPanel>
-                                <ListBox ItemsSource="{Binding Path=CombatForces}" Height="250" Margin="0,10,0,0" VerticalContentAlignment="Top">
-                                    <ListBox.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <StackPanel Orientation="Horizontal" MinWidth="350"/>
-                                        </ItemsPanelTemplate>
-                                    </ListBox.ItemsPanel>
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Vertical">
-                                                <StackPanel Orientation="Horizontal">
-                                                    <Button Content="X" IsEnabled="{Binding Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}}" Margin="0,0,0,0" Click="RemoveCombatForceButton_Clicked"/>
-                                                    <TextBlock Text="{Binding Name}" Margin="5,0,15,0" />
-                                                    <TextBlock Margin="10,0,0,0">
+                                </TextBlock>
+                            </StackPanel>
+                            <ListBox ItemsSource="{Binding Path=CombatForces}" Height="300" Margin="0,10,0,0" VerticalContentAlignment="Top">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" MinWidth="350"/>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Vertical">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button Content="X" IsEnabled="{Binding Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}}" Margin="0,0,0,0" Click="RemoveCombatForceButton_Clicked"/>
+                                                <TextBlock Text="{Binding Name}" Margin="5,0,15,0" />
+                                                <TextBlock Margin="10,0,0,0">
                                                         <Run Text="Total Units:"/>
                                                         <Run Text="{Binding TotalUnits, Mode=OneWay}"/>
-                                                    </TextBlock>
-                                                    <TextBlock Margin="10,0,0,0">
+                                                </TextBlock>
+                                                <TextBlock Margin="10,0,0,0">
                                                         <Run Text="HP:"/>
                                                         <Run Text="{Binding TotalHealth, Mode=OneWay}"/>
-                                                    </TextBlock>
-                                                    <TextBlock Margin="10,0,0,0">
+                                                </TextBlock>
+                                                <TextBlock Margin="10,0,0,0">
                                                         <Run Text="AV:"/>
                                                         <Run Text="{Binding TotalAttack, Mode=OneWay}"/>
-                                                    </TextBlock>
-                                                    <CheckBox Content="Invulnerable" Margin="10,2,0,0" IsChecked="{Binding IsInvulnerable, Mode=TwoWay}"
+                                                </TextBlock>
+                                                <CheckBox Content="Invulnerable" Margin="10,2,0,0" IsChecked="{Binding IsInvulnerable, Mode=TwoWay}"
                                                               IsEnabled="{Binding Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}}"/>
 
-                                                    <Button Content="Add Unit" Margin="10,0,0,0" Width="55"
+                                                <Button Content="Add Unit" Margin="10,0,0,0" Width="55"
                                                             IsEnabled="{Binding Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}}" Click="AddUnitButton_Clicked"/>
-                                                </StackPanel>
-                                                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                                                    <TextBlock Text="Admiral Score"/>
-                                                    <TextBox Margin="5,0,0,0" Width="20"  PreviewTextInput="CheckNumbersOnly_PreviewTextInput" DataObject.Pasting="TextBoxPaste_CheckNumbers"
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                                <TextBlock Text="Admiral Score"/>
+                                                <TextBox Margin="5,0,0,0" Width="20"  PreviewTextInput="CheckNumbersOnly_PreviewTextInput" DataObject.Pasting="TextBoxPaste_CheckNumbers"
                                                              Text="{Binding AdmiralScore, Mode=TwoWay}"
                                                              IsEnabled="{Binding Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}, Mode=OneWay}"/>
-                                                    
-                                                    <CheckBox Content="Attempt Electronic Warfare" Margin="10,0,0,0" IsChecked="{Binding AttemptElectronicWarfare, Mode=TwoWay}"
+
+                                                <CheckBox Content="Attempt Electronic Warfare" Margin="10,0,0,0" IsChecked="{Binding AttemptElectronicWarfare, Mode=TwoWay}"
                                                               IsEnabled="{Binding Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}}"/>
 
-                                                    <CheckBox Content="Skip Attack" Margin="10,0,0,0" IsChecked="{Binding SkipAttack, Mode=TwoWay}"
+                                                <CheckBox Content="Skip Attack" Margin="10,0,0,0" IsChecked="{Binding SkipAttack, Mode=TwoWay}"
                                                               IsEnabled="{Binding Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}}"/>
-                                                </StackPanel>
-                                                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Vertical" Margin="0,5,0,0">
+                                                <StackPanel Orientation="Horizontal">
                                                     <TextBlock Text="Attacking" />
 
-                                                    <ComboBox ItemsSource="{Binding Round.CombatForceNames, Mode=OneWay}" Width="200" Margin="20,0,0,0"
-                                                              IsEnabled="{Binding Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}}" 
-                                                              SelectedValue="{Binding Attacking, Mode=TwoWay}"/>
+                                                    <ComboBox x:Name="attackingSelector" ItemsSource="{Binding Round.CombatForces, Mode=OneWay}" Width="200" Margin="20,0,0,0"
+                                                              IsEnabled="{Binding Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}}"
+                                                              SelectedItem="{Binding UI_ATTACKING, Mode=TwoWay}">
+                                                        <ComboBox.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding Name}" />
+                                                            </DataTemplate>
+                                                        </ComboBox.ItemTemplate>
+                                                    </ComboBox>
+                                                    <Button x:Name="addAttackingButton" Content="Add" Margin="5,0,0,0" Click="AddAttackingButton_Clicked"/>
+                                                    <Button x:Name="removeAttackingButton" Content="Remove" Margin="5,0,0,0" Click="RemoveAttackingButton_Clicked"/>
                                                 </StackPanel>
 
-                                                <ListBox ItemsSource="{Binding Path=Units, Mode=OneWay}" Margin="0,5,0,0">
+                                                <ListBox ItemsSource="{Binding Attacking}">
                                                     <ListBox.ItemTemplate>
                                                         <DataTemplate>
-                                                            <StackPanel Orientation="Vertical">
-                                                                <StackPanel Orientation="Horizontal">
-                                                                    <Button Content="X" IsEnabled="{Binding CombatForce.Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}}" Click="RemoveUnitButton_Clicked"/>
-
-                                                                    <TextBlock Margin="5,0,0,0">
-                                                                        <Run Text="{Binding Path=Name}" />
-                                                                    </TextBlock>
-
-                                                                    <TextBlock Margin="10,0,0,0">
-                                                                        <Run Text="Type"/>
-                                                                        <Run Text="{Binding Path=TypeOfUnit, Converter={StaticResource EnumSpaceConverter}}" />
-                                                                    </TextBlock>
-
-                                                                    <TextBlock Margin="10,0,0,0">
-                                                                        <Run Text="Health" />
-                                                                    </TextBlock>
-                                                                    <TextBox Margin="2,0,0,0" Width="35"  PreviewTextInput="CheckNumbersOnly_PreviewTextInput" DataObject.Pasting="TextBoxPaste_CheckNumbers"
-                                                                             Text="{Binding Health, Mode=TwoWay}"
-                                                                             IsEnabled="{Binding CombatForce.Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}, Mode=OneWay}"/>
-
-                                                                    <TextBlock Margin="10,0,0,0">
-                                                                        <Run Text="Attack" />
-                                                                    </TextBlock>
-                                                                    <TextBox Margin="2,0,0,0" Width="35"  PreviewTextInput="CheckNumbersOnly_PreviewTextInput" DataObject.Pasting="TextBoxPaste_CheckNumbers"
-                                                                             Text="{Binding AttackPower, Mode=TwoWay}"
-                                                                             IsEnabled="{Binding CombatForce.Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}, Mode=OneWay}"/>
-
-
-                                                                    <CheckBox Content="Command &amp; Control" Margin="10,0,0,0"
-                                                                              IsChecked="{Binding IsCommandAndControl, Mode=TwoWay}"
-                                                                              IsEnabled="{Binding CombatForce.Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}, Mode=OneWay}"/>
-                                                                </StackPanel>
-                                                            </StackPanel>
+                                                            <Grid>
+                                                                <TextBlock Text="{Binding Name}"/>
+                                                            </Grid>
                                                         </DataTemplate>
                                                     </ListBox.ItemTemplate>
                                                 </ListBox>
-                                                <Button Content="Remove All" IsEnabled="{Binding Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}, Mode=OneWay}" Click="RemoveAllUnitsButton_Clicked" />
                                             </StackPanel>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
 
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Result"/>
-                                    <TextBox Text="{Binding Summary, Mode=OneWay}" TextWrapping="Wrap" IsReadOnly="True"
+                                            <ListBox ItemsSource="{Binding Path=Units, Mode=OneWay}" Margin="0,5,0,0">
+                                                <ListBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation="Vertical">
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <Button Content="X" IsEnabled="{Binding CombatForce.Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}}" Click="RemoveUnitButton_Clicked"/>
+
+                                                                <TextBlock Margin="5,0,0,0">
+                                                                        <Run Text="{Binding Path=Name}" />
+                                                                </TextBlock>
+
+                                                                <TextBlock Margin="10,0,0,0">
+                                                                        <Run Text="Type"/>
+                                                                        <Run Text="{Binding Path=TypeOfUnit, Converter={StaticResource EnumSpaceConverter}}" />
+                                                                </TextBlock>
+
+                                                                <TextBlock Margin="10,0,0,0">
+                                                                        <Run Text="Health" />
+                                                                </TextBlock>
+                                                                <TextBox Margin="2,0,0,0" Width="35"  PreviewTextInput="CheckNumbersOnly_PreviewTextInput" DataObject.Pasting="TextBoxPaste_CheckNumbers"
+                                                                             Text="{Binding Health, Mode=TwoWay}"
+                                                                             IsEnabled="{Binding CombatForce.Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}, Mode=OneWay}"/>
+
+                                                                <TextBlock Margin="10,0,0,0">
+                                                                        <Run Text="Attack" />
+                                                                </TextBlock>
+                                                                <TextBox Margin="2,0,0,0" Width="35"  PreviewTextInput="CheckNumbersOnly_PreviewTextInput" DataObject.Pasting="TextBoxPaste_CheckNumbers"
+                                                                             Text="{Binding AttackPower, Mode=TwoWay}"
+                                                                             IsEnabled="{Binding CombatForce.Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}, Mode=OneWay}"/>
+
+                                                                <CheckBox Content="Command &amp; Control" Margin="10,0,0,0"
+                                                                              IsChecked="{Binding IsCommandAndControl, Mode=TwoWay}"
+                                                                              IsEnabled="{Binding CombatForce.Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}, Mode=OneWay}"/>
+
+                                                            </StackPanel>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <CheckBox Content="Skip Attack" Margin="20,0,0,0"
+                                                                              IsChecked="{Binding SkipAttack, Mode=TwoWay}"
+                                                                              IsEnabled="{Binding CombatForce.Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}, Mode=OneWay}"/>
+                                                                <CheckBox Content="Invulnerable" Margin="10,0,0,0"
+                                                                              IsChecked="{Binding Invulnerable, Mode=TwoWay}"
+                                                                              IsEnabled="{Binding CombatForce.Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}, Mode=OneWay}"/>
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </ListBox.ItemTemplate>
+                                            </ListBox>
+                                            <Button Content="Remove All" IsEnabled="{Binding Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}, Mode=OneWay}" Click="RemoveAllUnitsButton_Clicked" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Result"/>
+                                <TextBox Text="{Binding Summary, Mode=OneWay}" TextWrapping="Wrap" IsReadOnly="True"
                                              Margin="20,0,0,0" Width="600" Height="40"/>
-                                </StackPanel>
                             </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </DockPanel>
 
         <wpftoolkit:ChildWindow x:Name="addUnitChildWindow" HorizontalAlignment="Center" VerticalAlignment="Center">

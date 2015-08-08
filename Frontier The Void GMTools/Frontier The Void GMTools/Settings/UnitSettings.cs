@@ -2,6 +2,8 @@
 using Frontier_The_Void_GMTools.Models.EnumTypes;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -10,19 +12,30 @@ using System.Threading.Tasks;
 
 namespace Frontier_The_Void_GMTools.Settings
 {
-    public class UnitSettings
+    public class UnitSettings : INotifyPropertyChanged
     {
-        public List<Unit> Units { get; set; }
-
-        public UnitSettings()
+        ObservableCollection<Unit> m_units = new ObservableCollection<Unit>();
+        public ObservableCollection<Unit> Units
         {
-            Units = new List<Unit>();
+            get { return m_units; }
+            set
+            {
+                if (m_units == value) return;
+                m_units = value;
+                RaisePropertyChanged(nameof(Units));
+            }
+        }
+
+        public UnitSettings() { }
+        public UnitSettings(ObservableCollection<Unit> units)
+        {
+            Units = units;
         }
 
         public void SetToDefault()
         {
             Debug.WriteLine("Setting Default UnitSettings");
-            Units = new List<Unit>();
+            Units = new ObservableCollection<Unit>();
 
             #region Space Units
             Units.Add(new Unit()); // Unique Ships
@@ -94,6 +107,13 @@ namespace Frontier_The_Void_GMTools.Settings
             Unit eliteBattalionMechanized = new Unit(UnitType.Ground, "Elite Battalion (Mechanized)", 8.0, 10.0, 7, 45, 1); Units.Add(eliteBattalionMechanized);
             Unit eliteBattalionArmoured   = new Unit(UnitType.Ground, "Elite Battalion (Armoured)", 9.5, 11, 8, 45, 1); Units.Add(eliteBattalionArmoured);
             #endregion
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void RaisePropertyChanged(string property = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
 
         public static UnitSettings Load()

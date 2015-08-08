@@ -86,25 +86,35 @@ namespace Frontier_The_Void_GMTools.ViewModel
             else
             {
                 // Code runs "for real"
-                foreach (var unit in App.UnitStatisticsSettings.Units)
-                {
-                    UnitStats.Add(unit);
-                }
+                ReloadUnitStats();
             }   
 
             RoundsOfCombat.Add(round);
+        }
+
+        public void ReloadUnitStats()
+        {
+            UnitStats = new ObservableCollection<Unit>();
+            foreach (var unit in App.UnitStatisticsSettings.Units)
+            {
+                UnitStats.Add(unit);
+            }
         }
 
         public void SimulateCombat(SimulatedCombatMode simulatedCombatMode)
         {
             Debug.WriteLine("Simulating Combat");
             if (LastRound.CombatForces.Count <= 1) return;
-            foreach (var item in LastRound.CombatForces)
-            {
-                if (string.IsNullOrWhiteSpace(item.Attacking))
-                    return;
-            }
 
+            #region Preset Attacks to Skip
+            foreach (var forces in LastRound.CombatForces)
+            {
+                if (forces.Attacking.Count == 0)
+                    forces.SkipAttack = false;
+            }
+            #endregion
+
+            #region Write the Combat Summary if its the first thing we do
             if (RoundsOfCombat.Count == 1)
             {
                 if (LastRound.RoundNumber == 0)
@@ -116,16 +126,22 @@ namespace Frontier_The_Void_GMTools.ViewModel
                         {
                             LastRound.LogToSummary(unit.ToString());
                         }
+
+                        LastRound.LogToSummary();
+                        LastRound.LogToSummary("Total Units: " + force.TotalUnits);
+                        LastRound.LogToSummary("Total Health: " + force.TotalHealth);
+                        LastRound.LogToSummary("Total Attack: " + force.TotalAttack);
                         LastRound.LogToSummary("[/spoiler]");
                     }
                 }
             }
+            #endregion
 
             CombatRound newRound = new CombatRound();
             newRound.RoundNumber = LastRound.RoundNumber + 1;
             newRound.LogToSummary(string.Format("[spoiler=Round {0}]", newRound.RoundNumber));
 
-            // Clone the Last Round's CombatForces and add them to our new Round
+            #region Clone the Last Round's CombatForces and add them to our new Round
             List<CombatForce> ClonedCombatForces = new List<CombatForce>();
             foreach (var cF in LastRound.CombatForces)
             {
@@ -135,6 +151,54 @@ namespace Frontier_The_Void_GMTools.ViewModel
                 newRound.AddCombatForce(combatForce);
             }
 
+            foreach (var clonedForce in ClonedCombatForces)
+            {
+                foreach (var cF in ClonedCombatForces)
+                {
+                    // If they are the same, we skip
+                    if (clonedForce.Name == cF.Name) continue;
+
+                    // If they are not, we go into the last round and begin cloning its Attacking
+                    foreach (var oldForce in LastRound.CombatForces)
+                    {
+                        // We only want to clone if the Old Forces Name is equal to our cloned force
+                        if (oldForce.Name == clonedForce.Name)
+                        {
+                            // If it is, we get all the Attackings set for the old force
+                            foreach (var oldForceAttacking in oldForce.Attacking)
+                            {
+                                // And if the second loop through matches the attacking name, we add it
+                                if (oldForceAttacking.Name == cF.Name)
+                                {
+                                    clonedForce.Attacking.Add(cF);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            #endregion
+
+            #region Sort Forces into Easily accessible collections
+            Dictionary<CombatForce, List<CombatForce>> attackerDefenderDictionary = new Dictionary<CombatForce, List<CombatForce>>();
+
+            foreach (var defender in ClonedCombatForces)
+            {
+                List<CombatForce> attackers = new List<CombatForce>();
+                foreach (var attacker in ClonedCombatForces)
+                {
+                    if (defender == attacker) continue;
+
+                    foreach (var n in attacker.Attacking)
+                    {
+                        if (n.Name == defender.Name)
+                            attackers.Add(attacker);
+                    }
+                }
+                attackerDefenderDictionary.Add(defender, attackers);
+            }
+            #endregion
 
             Debug.WriteLine("Combat Forces Count {0}", ClonedCombatForces.Count);
 
@@ -222,101 +286,121 @@ namespace Frontier_The_Void_GMTools.ViewModel
             {
                 if (attacker.SkipAttack) continue;
 
-                foreach (var defender in ClonedCombatForces)
+                List<CombatForce> defenderList = attackerDefenderDictionary[attacker];
+                if (defenderList.Count > 0)
                 {
-                    //Debug.WriteLine("Attacker: {0}, Defender {1}", attacker.Name, defender.Name);
-                    if (attacker.Attacking.Equals(defender.Name))
+                    newRound.LogToSummary("[spoiler=Attack Roll " + attacker.Name + "]", false);
+
+                    List<Unit> combinedDefenderUnits = new List<Unit>();
+                    foreach (var defender in defenderList)
                     {
-                        newRound.LogToSummary("[spoiler=Attack Roll " + attacker.Name + "]", false);
                         newRound.LogToSummary("Target: " + defender.Name);
 
                         if (defender.IsInvulnerable)
-                        {
                             newRound.LogToSummary(defender.Name + " Is Invulnerable");
-                            newRound.LogToSummary("[/spoiler]", false);
-                            defender.DamageDealt = 0.0;
-                            break;
-                        }
 
-                        int damageDealt = 0;
-                        
-                        // Raw Damage
-                        int damageRoll = Die.Roll(1, (int)attacker.TotalAttack);
-                        damageDealt += damageRoll;
-                        newRound.LogToSummary(string.Format("Rolled 1d{0} : {1}, total {1}", (int)attacker.TotalAttack, damageRoll));
-
-                        // Apply Admiral Command Scores
-                        damageDealt += attacker.AdmiralScore;
-                        newRound.LogToSummary(string.Format("+{0} Admiral/Command Score ({1})", attacker.AdmiralScore, attacker.Name));
-
-                        int totalFighterNegations = 0;
                         foreach (var unit in defender.Units)
                         {
-                            // Take off 1d4 of damage for each Area Defence Destroyer
-                            if (unit.Name == "Area Defence Destroyer")
-                            {
-                                Debug.WriteLine("Activating Area Defence Destroyers");
-
-                                int damageNegated = 0;
-                                damageNegated = Die.Roll(1, 5);
-                                newRound.LogToSummary(string.Format("-{0} Area Defence Destroyer ({1}) : Rolled 1d5 : {0}, total {0}", damageNegated, unit.CombatForce.Name));
-
-                                damageDealt -= damageNegated;
-                                Debug.WriteLine("{0} Area Defence Destroyers Negated {1} Points of Damage", defender.Name, damageNegated);
-                            }
-
-                            // Take Damage if Electronic Warfare
-                            if (unit.HackResult == ElectronicWarfareResult.TakeDamage)
-                            {
-                                int hackDamage = Die.Roll(1, (int)unit.Health);
-                                unit.Health -= hackDamage;
-                                newRound.LogToSummary(string.Format("+{1} Hack Damage: {0} took {1} points of Damage: Rolled 1d{2} : {1}, total {1}", unit.Name, hackDamage, (int)unit.Health));
-                            }
-
-                            if (unit.Name == "Fighter Squadron")
-                            {
-                                totalFighterNegations += (int)unit.Health;
-                                Debug.WriteLine("{0} Fighter Squadrons can Negate {1} points of Fighter Squadron Damage");
-                            }
-
+                            combinedDefenderUnits.Add(unit);
                         }
-
-                        if (totalFighterNegations > 0)
-                        {
-                            Debug.WriteLine("Negating Fighter Damage");
-                            newRound.LogToSummary("[br][b]Fighter Result[/b]");
-                            foreach (var attackingUnit in attacker.Units)
-                            {
-                                if (totalFighterNegations <= 0) break;
-
-                                if (attackingUnit.Name == "Fighter Squadron")
-                                {
-                                    newRound.LogToSummary(string.Format("Fighter Squadron ({0} Units, {1}) negated Fighter Squadron ({2} Units, {3})", totalFighterNegations, defender.Name, (int)attackingUnit.Health, attacker.Name));
-                                    totalFighterNegations -= (int)attackingUnit.Health;
-                                }
-                                else if (attackingUnit.Name == "Strike Fighter Squadron")
-                                {
-                                    int damageNegated = 0;
-                                    for (int i = (int)attackingUnit.Health; i > 0 ; i--)
-                                    {
-                                        if (totalFighterNegations <= 0) break;
-                                        damageNegated++;
-                                        totalFighterNegations--;
-                                    }
-
-                                    newRound.LogToSummary(string.Format("Fighter Squadron ({0} Units, {1}) negated Strike Fighter Squadron ({2} Units, {3}) for {4} points of Damage", totalFighterNegations, defender.Name, (int)attackingUnit.Health, attacker.Name, damageNegated));
-                                    damageDealt -= damageNegated;
-                                }
-                            }
-                        }
-
-                        defender.DamageDealt = damageDealt;
-                        newRound.LogToSummary("[br][b]Result[/b]");
-                        newRound.LogToSummary(string.Format("Total Damage Dealt: {0}", defender.DamageDealt));
-                        newRound.LogToSummary("[/spoiler]", false);
-                        Debug.WriteLine("{0} took {1} Raw Damage", defender.Name, defender.DamageDealt);
-                        break;
                     }
+
+                    // Damage Tracker
+                    int damageDealt = 0;
+
+                    // Raw Damage
+                    int damageRoll = Die.Roll(1, (int)attacker.TotalAttack);
+                    if ((int)attacker.TotalAttack == 0)
+                        damageRoll = 0;
+
+                    damageDealt += damageRoll;
+                    newRound.LogToSummary(string.Format("Rolled 1d{0} : {1}, total {1}", (int)attacker.TotalAttack, damageRoll));
+
+                    // Apply Admiral Command Scores
+                    damageDealt += attacker.AdmiralScore;
+                    newRound.LogToSummary(string.Format("+{0} Admiral/Command Score ({1})", attacker.AdmiralScore, attacker.Name));
+
+                    // Combine Units and check Negations
+                    int totalFighterNegations = 0;
+                    foreach (var unit in combinedDefenderUnits)
+                    {
+                        #region Take off 1d4 of damage for each Area Defence Destroyer
+                        if (unit.Name == "Area Defence Destroyer")
+                        {
+                            Debug.WriteLine("Activating Area Defence Destroyers");
+
+                            int damageNegated = 0;
+                            damageNegated = Die.Roll(1, 5);
+                            damageDealt -= damageNegated;
+                            newRound.LogToSummary(string.Format("-{0} Area Defence Destroyer ({1}) : Rolled 1d5 : {0}, total {0}", damageNegated, unit.CombatForce.Name), true, true);
+                        }
+                        #endregion
+
+                        #region Take Damage if Electronic Warfare
+                        if (unit.HackResult == ElectronicWarfareResult.TakeDamage)
+                        {
+                            int hackDamage = Die.Roll(1, (int)unit.Health);
+                            unit.Health -= hackDamage;
+                            newRound.LogToSummary(string.Format("+{1} Hack Damage: {0} took {1} points of Damage: Rolled 1d{2} : {1}, total {1}", unit.Name, hackDamage, (int)unit.Health));
+                        }
+                        #endregion
+
+                        #region Total up Fighter Squadron Negations
+                        if (unit.Name == "Fighter Squadron")
+                        {
+                            totalFighterNegations += (int)unit.Health;
+                        }
+                        #endregion
+                    }
+
+                    if (totalFighterNegations > 0)
+                    {
+                        Debug.WriteLine("Negating Fighter Damage");
+                        newRound.LogToSummary("[br][b]Fighter Result[/b]");
+
+                        foreach (var attackingUnit in attacker.Units)
+                        {
+                            if (totalFighterNegations <= 0) break;
+
+                            if (attackingUnit.Name == "Fighter Squadron")
+                            {
+                                newRound.LogToSummary(string.Format("Fighter Squadron ({0} Units, {1}) was negated by Defenders Fighter Squadron ({2} Units)", (int)attackingUnit.Health, attackingUnit.CombatForce.Name, totalFighterNegations));
+                                totalFighterNegations -= (int)attackingUnit.Health;
+                            }
+                            else if (attackingUnit.Name == "Strike Fighter Squadron")
+                            {
+                                int damageNegated = 0;
+                                for (int i = (int)attackingUnit.Health; i > 0; i--)
+                                {
+                                    if (totalFighterNegations <= 0) break;
+                                    damageNegated++;
+                                    totalFighterNegations--;
+                                }
+
+                                newRound.LogToSummary(string.Format("Strike Fighter Squadron ({0} Units, {1}) was negated by Defenders Fighter Squadron ({2} Units) for {3} points of Damage", (int)attackingUnit.Health, attackingUnit.CombatForce.Name, totalFighterNegations, damageNegated));
+                                damageDealt -= damageNegated;
+                            }
+                        }
+                    }
+
+                    newRound.LogToSummary("[br][b]Result[/b]");
+                    int tempDamageDealt = damageDealt;
+                    while (tempDamageDealt > 0 )
+                    {
+                        CombatForce force = defenderList[Die.Roll(1, defenderList.Count) - 1];
+                        force.DamageDealt += 1.0;
+                        tempDamageDealt -= 1;
+                    }
+                    foreach (var force in defenderList)
+                    {
+                        double damageSummaryInput = 0;
+                        if (defenderList.Count > 1)
+                            damageSummaryInput = force.DamageDealt;
+                        else damageSummaryInput = damageDealt;
+
+                        newRound.LogToSummary(string.Format("{0}, Total Damage Dealt: {1}", force.Name, damageSummaryInput), true, true);
+                    }
+                    newRound.LogToSummary("[/spoiler]", false);
                 }
             }
             #endregion
@@ -333,20 +417,28 @@ namespace Frontier_The_Void_GMTools.ViewModel
 
                     if (simulatedCombatMode == SimulatedCombatMode.RandomizedTargets)
                     {
+                        double pointsOfDamage = 1.0;
                         Unit unit = force.Units[Die.Roll(1, force.Units.Count) - 1];
-                        unit.Health -= 1.0;
-                        if (unit.Health <= 0)
+
+                        if (unit.Invulnerable)
                         {
-                            force.RemoveUnit(unit);
-                            force.DestroyedUnits.Add(unit);
-                            newRound.LogToSummary(string.Format("[red]{0} took {1} points of Damage and was Destroyed[/red]", unit.Name, 1.0));
+                            newRound.LogToSummary(string.Format("{0} is Invulnerable and shook off {1} points of Damage", unit.Name, pointsOfDamage));
                         }
                         else
                         {
-                            newRound.LogToSummary(string.Format("[green]{0} took {1} points of Damage and has {2} HP Left[/green]", unit.Name, 1.0, unit.Health));
+                            unit.Health -= 1.0;
+                            if (unit.Health <= 0)
+                            {
+                                force.RemoveUnit(unit);
+                                force.DestroyedUnits.Add(unit);
+                                newRound.LogToSummary(string.Format("[red]{0} took {1} points of Damage and was Destroyed[/red]", unit.Name, pointsOfDamage));
+                            }
+                            else
+                            {
+                                newRound.LogToSummary(string.Format("[green]{0} took {1} points of Damage and has {2} HP Left[/green]", unit.Name, pointsOfDamage, unit.Health));
+                            }
                         }
-
-                        force.DamageDealt--;
+                        force.DamageDealt -= pointsOfDamage;
                     }
                 }
 
@@ -357,8 +449,11 @@ namespace Frontier_The_Void_GMTools.ViewModel
                     newRound.LogToSummary(unit.ToString());
                 }
 
+                newRound.LogToSummary();
+                newRound.LogToSummary("Total Units: " + force.TotalUnits);
+                newRound.LogToSummary("Total Health: " + force.TotalHealth);
+                newRound.LogToSummary("Total Attack: " + force.TotalAttack);
                 newRound.LogToSummary("[/spoiler]", false);
-                force.DamageDealt = 0;
             }
             #endregion
 
@@ -400,8 +495,9 @@ namespace Frontier_The_Void_GMTools.ViewModel
             #endregion
 
             // Reset Values on the Forces
-            foreach (var force in LastRound.CombatForces)
+            foreach (var force in newRound.CombatForces)
             {
+                force.DamageDealt = 0.0;
                 force.IsInvulnerable = false;
                 force.AttemptElectronicWarfare = false;
                 force.SkipAttack = false;
@@ -429,9 +525,14 @@ namespace Frontier_The_Void_GMTools.ViewModel
                 LastRound.Summary = "";
         }
 
-        public void AddCombatForce(string text)
+        public void AddCombatForce(string name)
         {
-            LastRound.AddCombatForce(text);
+            foreach (var force in LastRound.CombatForces)
+            {
+                if (force.Name == name) return;
+            }
+
+            LastRound.AddCombatForce(name);
         }
 
         public void RemoveCombatForce(CombatForce combatForce)

@@ -63,19 +63,6 @@ namespace Frontier_The_Void_GMTools.Models
                 RaisePropertyChanged(nameof(CombatForces));
             }
         }
-
-        private ObservableCollection<string> m_combatForceNames = new ObservableCollection<string>();
-        public ObservableCollection<string> CombatForceNames
-        {
-            get { return m_combatForceNames; }
-            set
-            {
-                if (m_combatForceNames == value) return;
-
-                m_combatForceNames = value;
-                RaisePropertyChanged(nameof(CombatForceNames));
-            }
-        }
         #endregion
 
         public CombatRound()
@@ -94,8 +81,6 @@ namespace Frontier_The_Void_GMTools.Models
             Debug.WriteLine("Adding CombatForce: {0}", combatForce);
             combatForce.Round = this;
             CombatForces.Add(combatForce);
-
-            RecompileNames();
             return combatForce;
         }
 
@@ -103,22 +88,15 @@ namespace Frontier_The_Void_GMTools.Models
         {
             Debug.WriteLine("Removing CombatForce: " + combatForce.ToString());
             CombatForces.Remove(combatForce);
-            RecompileNames();
         }
 
-        public void LogToSummary(string message = "", bool addNewLine = true)
+        public void LogToSummary(string message = "", bool addNewLine = true, bool debugString = false)
         {
             Summary += message;
             if (addNewLine) Summary += "[br]";
-        }
 
-        private void RecompileNames()
-        {
-            ObservableCollection<string> names = new ObservableCollection<string>();
-            names.Add("");
-            for (int i = 0; i < CombatForces.Count; i++)
-                names.Add(CombatForces[i].Name);
-            CombatForceNames = names;
+            if (debugString)
+                Debug.WriteLine(message);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

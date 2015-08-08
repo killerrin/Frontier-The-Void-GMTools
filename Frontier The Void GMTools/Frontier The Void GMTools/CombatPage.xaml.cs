@@ -73,6 +73,24 @@ namespace Frontier_The_Void_GMTools
             CombatForce combatForce = (CombatForce)originalSource.DataContext;
             ViewModel.RemoveCombatForce(combatForce);
         }
+
+        private void AddAttackingButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("Add Attacking Button Clicked");
+            
+            Button originalSource = e.OriginalSource as Button;
+            CombatForce combatForce = (CombatForce)originalSource.DataContext;
+            combatForce.AddAttacking();
+
+        }
+        private void RemoveAttackingButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("Remove Attacking Button Clicked");
+
+            Button originalSource = e.OriginalSource as Button;
+            CombatForce combatForce = (CombatForce)originalSource.DataContext;
+            combatForce.RemoveAttacking();
+        }
         #endregion
 
         #region Units
@@ -80,6 +98,8 @@ namespace Frontier_The_Void_GMTools
         private void AddUnitButton_Clicked(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("Add Unit Button Clicked");
+            ViewModel.ReloadUnitStats();
+
             addUnitCombatForce = (CombatForce)((e.OriginalSource as Button)).DataContext;
             addUnitChildWindow.Show();
         }
