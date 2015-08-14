@@ -112,5 +112,10 @@ namespace Frontier_The_Void_GMTools
                 e.CancelCommand();
             }
         }
+
+        private void ClearButtonClicked(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Clear();
+        }
     }
 }

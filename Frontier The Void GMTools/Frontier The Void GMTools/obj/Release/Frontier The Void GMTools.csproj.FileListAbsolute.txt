@@ -53,3 +53,4 @@ C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTo
 C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Release\Frontier The Void GMTools.csproj.GenerateResource.Cache
 C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Release\Frontier The Void GMTools.exe
 C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Release\Frontier The Void GMTools.pdb
+C:\Users\andre\Documents\GitHub\Frontier-The-Void-GMTools\Frontier The Void GMTools\Frontier The Void GMTools\obj\Release\Frontier The Void GMTools.csprojResolveAssemblyReference.cache

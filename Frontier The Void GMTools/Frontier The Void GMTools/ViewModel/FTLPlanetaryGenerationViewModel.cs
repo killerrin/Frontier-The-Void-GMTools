@@ -70,6 +70,13 @@ namespace Frontier_The_Void_GMTools.ViewModel
             ////}   
         }
 
+        public void Clear()
+        {
+            Die = new Dice();
+            GeneratedSystem = new ObservableCollection<StarSystem>();
+            FTLTravelResult = FTLTravel.None;
+        }
+
         public void GenerateSystem(HexCoordinate hexCoordinate, int planetaryGenerationRoll1, int planetaryGenerationRoll2, int ftlRoll1, int ftlRoll2, bool isExplorer, bool forceSentientSpecies, bool seedHex, bool seedPlanetaryGeneration, bool seedFTL)
         {
             Debug.WriteLine("Generating System : Hex:{0}, PG1:{1}, PG2:{2}, FTL1:{3}, FTL2:{4}, IsExplorer:{5}, SeedHex:{6}, SeedPG:{7}, SeedFTL:{8}", hexCoordinate, planetaryGenerationRoll1, planetaryGenerationRoll2, ftlRoll1, ftlRoll2, isExplorer, seedHex, seedPlanetaryGeneration, seedFTL);
