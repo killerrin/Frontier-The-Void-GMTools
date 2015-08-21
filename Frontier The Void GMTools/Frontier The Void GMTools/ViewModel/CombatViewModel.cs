@@ -208,75 +208,79 @@ namespace Frontier_The_Void_GMTools.ViewModel
                 if (!attacker.AttemptElectronicWarfare)
                     continue;
 
-                foreach (var defender in ClonedCombatForces)
+                Debug.WriteLine(attacker.Name + " Is Hacking");
+                newRound.LogToSummary(string.Format("[spoiler=Hack Roll "+attacker.Name+"]", false));
+
+                List<CombatForce> defenders = attackerDefenderDictionary[attacker];
+                List<Unit> combinedUnits = new List<Unit>();
+
+                foreach (var defender in defenders)
                 {
-                    //Debug.WriteLine("Attacker: {0}, Defender {1}", attacker.Name, defender.Name);
-                    if (attacker.Attacking.Equals(defender.Name))
+                    Debug.WriteLine("{0} Attempting Hack on {1}", attacker.Name, defender.Name);
+                    newRound.LogToSummary("Attempting to Hack: " + defender.Name);
+                    foreach (var unit in defender.Units)
                     {
-                        Debug.WriteLine("{0} Attempting Hack on {1}", attacker.Name, defender.Name);
-                        int hackRoll = Die.Roll(1, 100);
-                        double totalEffectedShips = (defender.TotalUnits * hackRoll) / 100;
-
-                        newRound.LogToSummary(string.Format("[spoiler=Hack Roll "+attacker.Name+"]", false));
-                        newRound.LogToSummary("Attempting to Hack: " + defender.Name);
-                        newRound.LogToSummary(string.Format("Rolled 1d100 : {0}, total {0}", hackRoll));
-
-                        if (hackRoll < 25)
-                        {
-                            totalEffectedShips = 0.0;
-                            newRound.LogToSummary("Failed");
-                        }
-                        else if (hackRoll < 50)
-                        {
-                            newRound.LogToSummary("Moderate Success");
-                            Debug.WriteLine("Moderate Success, Hack Roll {0}, Total Units Effected {1}, Total Units {2}", hackRoll, totalEffectedShips, defender.TotalUnits);
-                        }
-                        else if (hackRoll < 75)
-                        {
-                            newRound.LogToSummary("Success");
-                            Debug.WriteLine("Success, Hack Roll {0}, Total Units Effected {1}, Total Units {2}", hackRoll, totalEffectedShips, defender.TotalUnits);
-                        }
-                        else if (hackRoll <= 100)
-                        {
-                            newRound.LogToSummary("Great Success");
-                            Debug.WriteLine("Great Success, Hack Roll {0}, Total Units Effected {1}, Total Units {2}", hackRoll, totalEffectedShips, defender.TotalUnits);
-                        }
-                        else
-                        {
-                            totalEffectedShips = 0.0;
-                            newRound.LogToSummary("Failed");
-                        }
-
-                        if (totalEffectedShips > 0)
-                            newRound.LogToSummary(string.Format("{0} of Ships Effected by Electronic Warfare", totalEffectedShips));
-
-                        newRound.LogToSummary("[br][b]Hack Result[/b]");
-                        while (true)
-                        {
-                            if (totalEffectedShips <= 0.0) break;
-
-                            Unit unit = defender.Units[Die.Roll(1, defender.Units.Count) - 1];
-                            if (unit.HackResult == ElectronicWarfareResult.None)
-                            {
-                                unit.HackResult = (ElectronicWarfareResult)(Die.Roll(1, (int)ElectronicWarfareResult.TakeDamage - 1));
-                                totalEffectedShips -= 1.0;
-
-                                newRound.LogToSummary(string.Format("{0} Was Hacked. Result is {1}", unit.Name, StringHelpers.AddSpacesToSentence(unit.HackResult.ToString(), true)));
-                            }
-
-                            // To keep from an infinite loop, double check there is no more left to set
-                            bool escapeCheck = false;
-                            foreach (var u in defender.Units)
-                            {
-                                if (u.HackResult == ElectronicWarfareResult.None) { escapeCheck = true; break; }
-                            }
-                            if (!escapeCheck) break;
-                        }
-
-                        newRound.LogToSummary("[/spoiler]", false);
-                        break;
+                        combinedUnits.Add(unit);
                     }
                 }
+
+                int hackRoll = Die.Roll(1, 100);
+                double totalEffectedShips = (combinedUnits.Count * hackRoll) / 100;
+                newRound.LogToSummary(string.Format("Rolled 1d100 : {0}, total {0}", hackRoll));
+
+                if (hackRoll < 25)
+                {
+                    totalEffectedShips = 0.0;
+                    newRound.LogToSummary("Failed");
+                }
+                else if (hackRoll < 50)
+                {
+                    newRound.LogToSummary("Moderate Success");
+                    Debug.WriteLine("Moderate Success, Hack Roll {0}, Total Units Effected {1}, Total Units {2}", hackRoll, totalEffectedShips, combinedUnits.Count);
+                }
+                else if (hackRoll < 75)
+                {
+                    newRound.LogToSummary("Success");
+                    Debug.WriteLine("Success, Hack Roll {0}, Total Units Effected {1}, Total Units {2}", hackRoll, totalEffectedShips, combinedUnits.Count);
+                }
+                else if (hackRoll <= 100)
+                {
+                    newRound.LogToSummary("Great Success");
+                    Debug.WriteLine("Great Success, Hack Roll {0}, Total Units Effected {1}, Total Units {2}", hackRoll, totalEffectedShips, combinedUnits.Count);
+                }
+                else
+                {
+                    totalEffectedShips = 0.0;
+                    newRound.LogToSummary("Failed");
+                }
+
+                if (totalEffectedShips > 0)
+                    newRound.LogToSummary(string.Format("{0} of Ships Effected by Electronic Warfare", totalEffectedShips));
+
+                newRound.LogToSummary("[br][b]Hack Result[/b]");
+                while (true)
+                {
+                    if (totalEffectedShips <= 0.0) break;
+
+                    Unit unit = combinedUnits[Die.Roll(1, combinedUnits.Count) - 1];
+                    if (unit.HackResult == ElectronicWarfareResult.None)
+                    {
+                        unit.HackResult = (ElectronicWarfareResult)(Die.Roll(1, (int)ElectronicWarfareResult.TakeDamage - 1));
+                        totalEffectedShips -= 1.0;
+
+                        newRound.LogToSummary(string.Format("{0}: {1} Was Hacked. Result is {2}", unit.CombatForce.Name, unit.Name, StringHelpers.AddSpacesToSentence(unit.HackResult.ToString(), true)));
+                    }
+
+                    // To keep from an infinite loop, double check there is no more left to set
+                    bool escapeCheck = false;
+                    foreach (var u in combinedUnits)
+                    {
+                        if (u.HackResult == ElectronicWarfareResult.None) { escapeCheck = true; break; }
+                    }
+                    if (!escapeCheck) break;
+                }
+
+                newRound.LogToSummary("[/spoiler]", false);
             }
             #endregion
 
@@ -498,9 +502,9 @@ namespace Frontier_The_Void_GMTools.ViewModel
             foreach (var force in newRound.CombatForces)
             {
                 force.DamageDealt = 0.0;
-                force.IsInvulnerable = false;
-                force.AttemptElectronicWarfare = false;
-                force.SkipAttack = false;
+                //force.IsInvulnerable = false;
+                //force.AttemptElectronicWarfare = false;
+                //force.SkipAttack = false;
             }
 
             // Lastly, Lock the Last Round, finish the Summary then add the new Round
