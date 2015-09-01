@@ -24,7 +24,9 @@ namespace Frontier_The_Void_GMTools
     public partial class MainWindow : Window
     {
         public static MainWindow Instance;
+
         public MainWindowViewModel ViewModel { get { return (MainWindowViewModel)DataContext; } }
+        public PageName CurrentPage = PageName.None;
 
         public MainWindow()
         {
@@ -35,6 +37,7 @@ namespace Frontier_The_Void_GMTools
         private void frame_Loaded(object sender, RoutedEventArgs e)
         {
             frame.Navigate(new Uri("MainPage.xaml", UriKind.Relative));
+            CurrentPage = PageName.MainPage;
         }
 
         #region Numbers Only Events
@@ -68,7 +71,7 @@ namespace Frontier_The_Void_GMTools
 
         private void unitStatisticsChildWindow_MakeDefault_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.MakeDefault();
+            ViewModel.UnitStatisticsMakeDefault();
         }
 
         private void unitStatisticsChildWindow_unitListbox_AddAbove_Click(object sender, RoutedEventArgs e)
@@ -86,6 +89,14 @@ namespace Frontier_The_Void_GMTools
             else
                 newUnit.AttackPower = Convert.ToInt32(unitAttackTextBox.Text);
 
+            if (unitDetectedCheckBox.IsChecked.HasValue)
+                newUnit.Detected = unitDetectedCheckBox.IsChecked.Value;
+            else newUnit.Detected = false;
+
+            if (unitIsCommandAndControlCheckBox.IsChecked.HasValue)
+                newUnit.IsCommandAndControl = unitIsCommandAndControlCheckBox.IsChecked.Value;
+            else newUnit.IsCommandAndControl = false;
+
             Button originalSource = (Button)e.OriginalSource;
             ViewModel.AddAbove((Unit)originalSource.DataContext, newUnit);
         }
@@ -99,12 +110,12 @@ namespace Frontier_The_Void_GMTools
 
         private void unitStatisticsChildWindow_Load_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.Load();
+            ViewModel.UnitStatisticsLoad();
         }
 
         private void unitStatisticsChildWindow_Save_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.Save();
+            ViewModel.UnitStatisticsSave();
         }
     }
 }

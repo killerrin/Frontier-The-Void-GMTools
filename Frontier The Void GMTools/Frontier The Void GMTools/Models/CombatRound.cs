@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Frontier_The_Void_GMTools.Models
 {
-    public class CombatRound : INotifyPropertyChanged
+    public class CombatRound : ModelBase
     {
         #region properties
         private bool m_roundLocked = false;
@@ -97,13 +97,6 @@ namespace Frontier_The_Void_GMTools.Models
 
             if (debugString)
                 Debug.WriteLine(message);
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void RaisePropertyChanged(string property = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
     }
 }

@@ -21,8 +21,8 @@ namespace Frontier_The_Void_GMTools.ViewModel
     {
         Dice dice = new Dice();
 
-        private ObservableCollection<int> m_diceRolls = new ObservableCollection<int>();
-        public ObservableCollection<int> DiceRolls
+        private ObservableCollection<string> m_diceRolls = new ObservableCollection<string>();
+        public ObservableCollection<string> DiceRolls
         {
             get { return m_diceRolls; }
             set
@@ -53,13 +53,20 @@ namespace Frontier_The_Void_GMTools.ViewModel
         
         public void RollDice(int numberOfDice, int sidesOnDice)
         {
-            ObservableCollection<int> temp = new ObservableCollection<int>();
-            var rolls = dice.RollMultiple(numberOfDice, sidesOnDice);
-            foreach (var roll in rolls)
-            {
-                temp.Add(roll);
-            }
+            ObservableCollection<string> temp = new ObservableCollection<string>();
 
+            if (numberOfDice == 1)
+            {
+                temp.Add(string.Format("Rolled {0}d{1} : {2}, total {2}", numberOfDice, sidesOnDice, dice.Roll(numberOfDice, sidesOnDice)));
+            }
+            else
+            {
+                var rolls = dice.RollMultiple(numberOfDice, sidesOnDice);
+                foreach (var roll in rolls)
+                {
+                    temp.Add(string.Format("Rolled {0}d{1} : {2}, total {2}", numberOfDice, sidesOnDice, roll));
+                }
+            }
             DiceRolls = temp;
         }
     }

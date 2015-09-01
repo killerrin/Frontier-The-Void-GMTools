@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Frontier_The_Void_GMTools.Models
 {
-    public class AttackerDefenderPair
+    public class AttackerDefenderPair : ModelBase
     {
         public CombatForce Attacker { get; set; }
         public CombatForce Defender { get; set; }

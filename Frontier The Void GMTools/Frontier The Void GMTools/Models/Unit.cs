@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Frontier_The_Void_GMTools.Models
 {
-    public class Unit : INotifyPropertyChanged
+    public class Unit : ModelBase
     {
         #region Properties
         private UnitType _typeOfUnit = UnitType.Both;
@@ -133,6 +133,19 @@ namespace Frontier_The_Void_GMTools.Models
             }
         }
 
+        private bool m_detected = true;
+        public bool Detected
+        {
+            get { return m_detected; }
+            set
+            {
+                if (m_detected == value) return;
+
+                m_detected = value;
+                RaisePropertyChanged(nameof(Detected));
+            }
+        }
+
         private bool m_invulnerable = false;
         public bool Invulnerable
         {
@@ -181,16 +194,10 @@ namespace Frontier_The_Void_GMTools.Models
             NumberBuildAtATime = otherUnit.NumberBuildAtATime;
 
             SkipAttack = otherUnit.SkipAttack;
+            Detected = otherUnit.Detected;
             Invulnerable = otherUnit.Invulnerable;
 
             CombatForce = otherUnit.CombatForce;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void RaisePropertyChanged(string property = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
 
         public override string ToString()

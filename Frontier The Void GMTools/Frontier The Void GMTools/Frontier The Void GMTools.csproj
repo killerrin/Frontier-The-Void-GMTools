@@ -131,9 +131,11 @@
     <Compile Include="Models\EnumTypes\StarAge.cs" />
     <Compile Include="Models\EnumTypes\StarClassification.cs" />
     <Compile Include="Models\EnumTypes\UnitType.cs" />
+    <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Models\SentientSpecies.cs" />
     <Compile Include="Models\StarSystem.cs" />
     <Compile Include="Models\Unit.cs" />
+    <Compile Include="PageName.cs" />
     <Compile Include="RollDicePage.xaml.cs">
       <DependentUpon>RollDicePage.xaml</DependentUpon>
     </Compile>

@@ -63,6 +63,8 @@
                             <TextBlock Text="Attack" />
                             <TextBox x:Name="unitAttackTextBox" Text="{Binding AttackPower}" Width="200" Margin="5,0,0,0"  PreviewTextInput="CheckNumbersOnly_PreviewTextInput" DataObject.Pasting="TextBoxPaste_CheckNumbers"/>
                         </StackPanel>
+                        <CheckBox x:Name="unitDetectedCheckBox" IsChecked="{Binding Detected}" Content="Detected"/>
+                        <CheckBox x:Name="unitIsCommandAndControlCheckBox" IsChecked="{Binding IsCommandAndControl}" Content="Command and Control"/>
                     </StackPanel>
                 </StackPanel>
             </DockPanel>

@@ -205,6 +205,11 @@ namespace Frontier_The_Void_GMTools.ViewModel
             #region Check Electronic Warfare
             foreach (var attacker in ClonedCombatForces)
             {
+                foreach (var unit in attacker.GetUnits("Electronic Warfare Ship"))
+                {
+                    attacker.AttemptElectronicWarfare = true; break;
+                }
+
                 if (!attacker.AttemptElectronicWarfare)
                     continue;
 
@@ -321,8 +326,97 @@ namespace Frontier_The_Void_GMTools.ViewModel
                     newRound.LogToSummary(string.Format("Rolled 1d{0} : {1}, total {1}", (int)attacker.TotalAttack, damageRoll));
 
                     // Apply Admiral Command Scores
-                    damageDealt += attacker.AdmiralScore;
-                    newRound.LogToSummary(string.Format("+{0} Admiral/Command Score ({1})", attacker.AdmiralScore, attacker.Name));
+                    damageDealt += attacker.CrewScore;
+                    newRound.LogToSummary(string.Format("+{0} Admiral/Command Score ({1})", attacker.CrewScore, attacker.Name));
+
+                    #region Add 10 Damage for Hunter-Killers if its the first round and the unit wasn't detected
+                    if (newRound.RoundNumber == 1)
+                    {
+                        List<Unit> hunterKillers = attacker.GetUnits("Hunter-Killer");
+                        foreach (var hunterKiller in hunterKillers)
+                        {
+                            newRound.LogToSummary("", true, true);
+                            newRound.LogToSummary(string.Format(hunterKiller.Name), true, true);
+
+                            foreach (var defender in defenderList)
+                            {
+                                if (defender.HasAdvancedScanners)
+                                {
+                                    if (Die.Roll(1, 100) > 50)
+                                    {
+                                        newRound.LogToSummary(string.Format("Detected By Advanced Scanners {0}", defender.Name), true, true);
+                                        hunterKiller.Detected = true;
+                                    }
+                                }
+
+                                List<Unit> detectionCapableUnits = new List<Unit>();
+                                foreach (var areaDefenceDestroyer in defender.GetUnits("Area Defence Destroyer"))
+                                    detectionCapableUnits.Add(areaDefenceDestroyer);
+                                foreach (var corvette in defender.GetUnits("Corvette"))
+                                    detectionCapableUnits.Add(corvette);
+
+                                foreach (var detectionCapableUnit in detectionCapableUnits)
+                                {
+                                    if (Die.Roll(1, 100) > 50)
+                                    {
+                                        newRound.LogToSummary(string.Format("Detected By {0}: {1}", detectionCapableUnit.CombatForce.Name, detectionCapableUnit.Name), true, true);
+                                        hunterKiller.Detected = true;
+                                    }
+                                }
+                            }
+
+                            if (!hunterKiller.Detected)
+                            {
+                                newRound.LogToSummary(string.Format("+{0} : Not Detected Attack Bonus", 10), true, true);
+                                damageDealt += 10;
+                            }
+                        }
+                    }
+                    #endregion
+
+                    #region Attack Planet with SSBM Hunter-Killer if its the first round and the unit wasn't detected
+                    if (newRound.RoundNumber == 1)
+                    {
+                        List<Unit> hunterKillers = attacker.GetUnits("SSBM Hunter-Killer");
+                        foreach (var ssbmHunterKiller in hunterKillers)
+                        {
+                            newRound.LogToSummary("", true, true);
+                            newRound.LogToSummary(string.Format(ssbmHunterKiller.Name), true, true);
+
+                            foreach (var defender in defenderList)
+                            {
+                                if (defender.HasAdvancedScanners)
+                                {
+                                    if (Die.Roll(1, 100) > 50)
+                                    {
+                                        newRound.LogToSummary(string.Format("Detected By Advanced Scanners {0}", defender.Name), true, true);
+                                        ssbmHunterKiller.Detected = true;
+                                    }
+                                }
+
+                                List<Unit> detectionCapableUnits = new List<Unit>();
+                                foreach (var areaDefenceDestroyer in defender.GetUnits("Area Defence Destroyer"))
+                                    detectionCapableUnits.Add(areaDefenceDestroyer);
+                                foreach (var hunterKiller in defender.GetUnits("Hunter-Killer"))
+                                    detectionCapableUnits.Add(hunterKiller);
+
+                                foreach (var detectionCapableUnit in detectionCapableUnits)
+                                {
+                                    if (Die.Roll(1, 100) > 50)
+                                    {
+                                        newRound.LogToSummary(string.Format("Detected By {0}: {1}", detectionCapableUnit.CombatForce.Name, detectionCapableUnit.Name), true, true);
+                                        ssbmHunterKiller.Detected = true;
+                                    }
+                                }
+                            }
+
+                            if (!ssbmHunterKiller.Detected)
+                            {
+                                newRound.LogToSummary(string.Format("Not Detected. Important Asset Hit with Weapon of Mass Destruction"), true, true);
+                            }
+                        }
+                    }
+                    #endregion
 
                     // Combine Units and check Negations
                     int totalFighterNegations = 0;
@@ -343,7 +437,7 @@ namespace Frontier_The_Void_GMTools.ViewModel
                         #region Take Damage if Electronic Warfare
                         if (unit.HackResult == ElectronicWarfareResult.TakeDamage)
                         {
-                            int hackDamage = Die.Roll(1, (int)unit.Health);
+                            int hackDamage = Die.Roll(1, (int)(unit.Health / 2));
                             unit.Health -= hackDamage;
                             newRound.LogToSummary(string.Format("+{1} Hack Damage: {0} took {1} points of Damage: Rolled 1d{2} : {1}, total {1}", unit.Name, hackDamage, (int)unit.Health));
                         }
@@ -371,7 +465,9 @@ namespace Frontier_The_Void_GMTools.ViewModel
                                 newRound.LogToSummary(string.Format("Fighter Squadron ({0} Units, {1}) was negated by Defenders Fighter Squadron ({2} Units)", (int)attackingUnit.Health, attackingUnit.CombatForce.Name, totalFighterNegations));
                                 totalFighterNegations -= (int)attackingUnit.Health;
                             }
-                            else if (attackingUnit.Name == "Strike Fighter Squadron")
+                            else if (attackingUnit.Name == "Strike Fighter Squadron" ||
+                                     attackingUnit.Name == "Gun Ship Squadron" ||
+                                     attackingUnit.Name == "Heavy Gunship Squadron")
                             {
                                 int damageNegated = 0;
                                 for (int i = (int)attackingUnit.Health; i > 0; i--)
@@ -381,7 +477,7 @@ namespace Frontier_The_Void_GMTools.ViewModel
                                     totalFighterNegations--;
                                 }
 
-                                newRound.LogToSummary(string.Format("Strike Fighter Squadron ({0} Units, {1}) was negated by Defenders Fighter Squadron ({2} Units) for {3} points of Damage", (int)attackingUnit.Health, attackingUnit.CombatForce.Name, totalFighterNegations, damageNegated));
+                                newRound.LogToSummary(string.Format(attackingUnit.Name + " ({0} Units, {1}) was negated by Defenders Fighter Squadron ({2} Units) for {3} points of Damage", (int)attackingUnit.Health, attackingUnit.CombatForce.Name, totalFighterNegations, damageNegated));
                                 damageDealt -= damageNegated;
                             }
                         }

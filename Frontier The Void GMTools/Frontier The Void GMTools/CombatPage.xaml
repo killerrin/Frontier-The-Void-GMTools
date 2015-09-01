@@ -33,7 +33,7 @@
             <ListBox ItemsSource="{Binding Path=RoundsOfCombat}" Margin="0,5,0,0" VerticalAlignment="Stretch">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Top" x:Name="roundContainer">
                             <StackPanel Orientation="Horizontal">
                                 <Button Content="X" Margin="0,0,0,0" Click="RemoveRoundButton_Clicked"/>
 
@@ -42,7 +42,15 @@
                                         <Run Text="{Binding RoundNumber}" />
                                 </TextBlock>
                             </StackPanel>
-                            <ListBox ItemsSource="{Binding Path=CombatForces}" Height="300" Margin="0,10,0,0" VerticalContentAlignment="Top">
+
+                            <ToggleButton x:Name="hideShowToggleButton" Content="Hide/Show" 
+                                          IsChecked="True" 
+                                          Margin="0,10,0,0" HorizontalAlignment="Stretch"/>
+
+                            <ListBox x:Name="combatForcesListBox" ItemsSource="{Binding Path=CombatForces}" 
+                                     Height="300" Margin="0,5,0,0" 
+                                     VerticalContentAlignment="Top"
+                                     Visibility="{Binding ElementName=hideShowToggleButton, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <StackPanel Orientation="Horizontal" MinWidth="350"/>
@@ -73,15 +81,20 @@
                                                             IsEnabled="{Binding Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}}" Click="AddUnitButton_Clicked"/>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                                                <TextBlock Text="Admiral Score"/>
+                                                <TextBlock Text="Crew Score"/>
                                                 <TextBox Margin="5,0,0,0" Width="20"  PreviewTextInput="CheckNumbersOnly_PreviewTextInput" DataObject.Pasting="TextBoxPaste_CheckNumbers"
-                                                             Text="{Binding AdmiralScore, Mode=TwoWay}"
+                                                             Text="{Binding CrewScore, Mode=TwoWay}"
                                                              IsEnabled="{Binding Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}, Mode=OneWay}"/>
 
                                                 <CheckBox Content="Attempt Electronic Warfare" Margin="10,0,0,0" IsChecked="{Binding AttemptElectronicWarfare, Mode=TwoWay}"
                                                               IsEnabled="{Binding Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}}"/>
 
                                                 <CheckBox Content="Skip Attack" Margin="10,0,0,0" IsChecked="{Binding SkipAttack, Mode=TwoWay}"
+                                                              IsEnabled="{Binding Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}}"/>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                                <CheckBox Content="Has Advanced Scanners" Margin="10,0,0,0" IsChecked="{Binding HasAdvancedScanners, Mode=TwoWay}"
                                                               IsEnabled="{Binding Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}}"/>
                                             </StackPanel>
 
@@ -155,6 +168,9 @@
                                                                 <CheckBox Content="Invulnerable" Margin="10,0,0,0"
                                                                               IsChecked="{Binding Invulnerable, Mode=TwoWay}"
                                                                               IsEnabled="{Binding CombatForce.Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}, Mode=OneWay}"/>
+                                                                <CheckBox Content="Detected" Margin="10,0,0,0"
+                                                                              IsChecked="{Binding Detected, Mode=TwoWay}"
+                                                                              IsEnabled="{Binding CombatForce.Round.RoundLocked, Converter={StaticResource OppositeBooleanConverter}, Mode=OneWay}"/>
                                                             </StackPanel>
                                                         </StackPanel>
                                                     </DataTemplate>
@@ -224,6 +240,9 @@
                 </StackPanel>
 
                 <CheckBox x:Name="commandAndControlCheckBox_addUnit_childWindow" Content="Command and Control" IsChecked="False" Margin="75,5,0,0"/>
+                <CheckBox x:Name="detectedCheckBox_addUnit_childWindow" Content="Detected" Margin="75,5,0,0"
+                          IsChecked="{Binding Detected}" 
+                          DataContext="{Binding ElementName=presetComboBox_addUnit_childWindow, Path=SelectedItem, Mode=OneWay}"/>
 
                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                     <TextBlock Text="Quantity"/>

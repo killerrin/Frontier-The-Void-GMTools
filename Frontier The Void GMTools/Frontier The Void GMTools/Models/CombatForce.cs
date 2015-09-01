@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Frontier_The_Void_GMTools.Models
 {
-    public class CombatForce : INotifyPropertyChanged
+    public class CombatForce : ModelBase
     {
         #region Properties
         private string _name = "";
@@ -26,17 +26,17 @@ namespace Frontier_The_Void_GMTools.Models
             }
         }
 
-        private int _admiralScore = 0;
-        public int AdmiralScore
+        private int _crewScore = 0;
+        public int CrewScore
         {
-            get { return _admiralScore; }
+            get { return _crewScore; }
             set
             {
-                if (_admiralScore == value) return;
+                if (_crewScore == value) return;
 
                 //Debug.WriteLine("AdmiralScore Changed to {0}", value);
-                _admiralScore = value;
-                RaisePropertyChanged(nameof(AdmiralScore));
+                _crewScore = value;
+                RaisePropertyChanged(nameof(CrewScore));
             }
         }
 
@@ -51,6 +51,19 @@ namespace Frontier_The_Void_GMTools.Models
                 //Debug.WriteLine("AttemptHack Changed to {0}", value);
                 _attemptElectronicWarfare = value;
                 RaisePropertyChanged(nameof(AttemptElectronicWarfare));
+            }
+        }
+
+        private bool _hasAdvancedScanners = false;
+        public bool HasAdvancedScanners
+        {
+            get { return _hasAdvancedScanners; }
+            set
+            {
+                if (_hasAdvancedScanners == value) return;
+                
+                _hasAdvancedScanners = value;
+                RaisePropertyChanged(nameof(HasAdvancedScanners));
             }
         }
 
@@ -181,13 +194,9 @@ namespace Frontier_The_Void_GMTools.Models
             Round = otherForce.Round;
             Name = otherForce.Name;
 
-            AdmiralScore = otherForce.AdmiralScore;
+            CrewScore = otherForce.CrewScore;
             AttemptElectronicWarfare = otherForce.AttemptElectronicWarfare;
-
-            //foreach (var attacking in otherForce.Attacking)
-            //{
-            //    Attacking.Add(attacking);
-            //}
+            HasAdvancedScanners = otherForce.HasAdvancedScanners;
 
             IsInvulnerable = otherForce.IsInvulnerable;
             SkipAttack = otherForce.SkipAttack;
@@ -205,6 +214,7 @@ namespace Frontier_The_Void_GMTools.Models
             RaiseHPAPQuantityChanged();
         }
 
+        #region Add/Remove
         public void AddUnit(Unit unit)
         {
             Debug.WriteLine("Adding Unit {0} to {1}", unit.ToString(), Name);
@@ -246,12 +256,42 @@ namespace Frontier_The_Void_GMTools.Models
 
             Attacking.Remove(UI_ATTACKING);
         }
+        #endregion
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void RaisePropertyChanged(string property = "")
+        public bool HasShip(string shipName)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
+            foreach (var unit in Units)
+            {
+                if (unit.Name == shipName)
+                    return true;
+            }
+            return false;
+        }
+
+        public List<Unit> GetUnits(string name)
+        {
+            List<Unit> units = new List<Unit>();
+            foreach (var unit in Units)
+            {
+                if (unit.Name == name)
+                {
+                    units.Add(unit);
+                }
+            }
+            return units;
+        }
+
+        public List<Unit> GetSquadrons()
+        {
+            List<Unit> units = new List<Unit>();
+            foreach (var unit in Units)
+            {
+                if (unit.Name.Contains("Squadron"))
+                {
+                    units.Add(unit);
+                }
+            }
+            return units;
         }
 
         public override string ToString()

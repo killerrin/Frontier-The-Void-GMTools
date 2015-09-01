@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Frontier_The_Void_GMTools.Models
 {
-    public class SentientSpecies
+    public class SentientSpecies : ModelBase
     {
         public ObservableCollection<AnimalClassification> Classifications { get; set; }
         public ObservableCollection<CivilizationTraits> Traits { get; set; }

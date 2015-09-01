@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Frontier_The_Void_GMTools.Models
 {
-    public class CelestialObject
+    public class CelestialObject : ModelBase
     {
         public ObservableCollection<CelestialObject> OrbitingObjects { get; set; }
         public ObservableCollection<SentientSpecies> Sentients { get; set; }

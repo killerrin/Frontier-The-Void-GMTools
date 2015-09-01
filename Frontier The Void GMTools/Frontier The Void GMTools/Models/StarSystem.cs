@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Frontier_The_Void_GMTools.Models
 {
-    public class StarSystem
+    public class StarSystem : ModelBase
     {
         public ObservableCollection<CelestialObject> CelestialBodies { get; set; }
         public StarClassification Classification { get; set; }

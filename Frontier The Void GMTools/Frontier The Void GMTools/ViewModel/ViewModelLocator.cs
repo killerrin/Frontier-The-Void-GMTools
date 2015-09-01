@@ -24,6 +24,7 @@ namespace Frontier_The_Void_GMTools.ViewModel
     /// </summary>
     public class ViewModelLocator
     {
+        public static ViewModelLocator Instance;
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
         /// </summary>
@@ -44,9 +45,9 @@ namespace Frontier_The_Void_GMTools.ViewModel
 
             SimpleIoc.Default.Register<MainWindowViewModel>();
             SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<RollDiceViewModel>();
-            SimpleIoc.Default.Register<FTLPlanetaryGenerationViewModel>();
             SimpleIoc.Default.Register<CombatViewModel>();
+
+            Instance = this;
         }
 
         public MainWindowViewModel vm_MainWindowViewModel
@@ -65,21 +66,8 @@ namespace Frontier_The_Void_GMTools.ViewModel
             }
         }
 
-        public RollDiceViewModel vm_RollDiceViewModel
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<RollDiceViewModel>();
-            }
-        }
-
-        public FTLPlanetaryGenerationViewModel vm_FTLPlanetGenerationViewModel
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<FTLPlanetaryGenerationViewModel>();
-            }
-        }
+        public RollDiceViewModel vm_RollDiceViewModel { get { return new RollDiceViewModel(); } }
+        public FTLPlanetaryGenerationViewModel vm_FTLPlanetGenerationViewModel { get { return new FTLPlanetaryGenerationViewModel(); } }
 
         public CombatViewModel vm_CombatViewModel
         {

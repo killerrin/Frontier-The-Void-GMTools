@@ -11,6 +11,9 @@
       <Cost>0</Cost>
       <BuildRate>0</BuildRate>
       <NumberBuildAtATime>0</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -22,6 +25,9 @@
       <Cost>35</Cost>
       <BuildRate>5</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -33,6 +39,9 @@
       <Cost>30</Cost>
       <BuildRate>5</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -44,6 +53,9 @@
       <Cost>35</Cost>
       <BuildRate>5</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -55,6 +67,9 @@
       <Cost>0</Cost>
       <BuildRate>5</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -66,6 +81,9 @@
       <Cost>0</Cost>
       <BuildRate>0</BuildRate>
       <NumberBuildAtATime>0</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -77,6 +95,9 @@
       <Cost>20</Cost>
       <BuildRate>5</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -88,6 +109,9 @@
       <Cost>21</Cost>
       <BuildRate>5</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -99,6 +123,9 @@
       <Cost>23</Cost>
       <BuildRate>5</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -110,6 +137,23 @@
       <Cost>25</Cost>
       <BuildRate>5</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
+    </Unit>
+    <Unit>
+      <HackResult>None</HackResult>
+      <TypeOfUnit>Space</TypeOfUnit>
+      <Name>SSBM Hunter-Killer</Name>
+      <Health>14</Health>
+      <AttackPower>16</AttackPower>
+      <IsCommandAndControl>false</IsCommandAndControl>
+      <Cost>25</Cost>
+      <BuildRate>5</BuildRate>
+      <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>false</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -121,6 +165,9 @@
       <Cost>0</Cost>
       <BuildRate>0</BuildRate>
       <NumberBuildAtATime>0</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -132,6 +179,9 @@
       <Cost>15</Cost>
       <BuildRate>10</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -143,6 +193,9 @@
       <Cost>16</Cost>
       <BuildRate>10</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -154,6 +207,23 @@
       <Cost>17</Cost>
       <BuildRate>10</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
+    </Unit>
+    <Unit>
+      <HackResult>None</HackResult>
+      <TypeOfUnit>Space</TypeOfUnit>
+      <Name>Hunter-Killer</Name>
+      <Health>12</Health>
+      <AttackPower>14</AttackPower>
+      <IsCommandAndControl>false</IsCommandAndControl>
+      <Cost>20</Cost>
+      <BuildRate>10</BuildRate>
+      <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>false</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -165,6 +235,9 @@
       <Cost>0</Cost>
       <BuildRate>0</BuildRate>
       <NumberBuildAtATime>0</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -176,17 +249,23 @@
       <Cost>10</Cost>
       <BuildRate>15</BuildRate>
       <NumberBuildAtATime>3</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
       <TypeOfUnit>Space</TypeOfUnit>
-      <Name>Area Defence Destroyer</Name>
-      <Health>5</Health>
-      <AttackPower>0</AttackPower>
+      <Name>Heavy Frigate</Name>
+      <Health>3</Health>
+      <AttackPower>3</AttackPower>
       <IsCommandAndControl>false</IsCommandAndControl>
       <Cost>10</Cost>
       <BuildRate>15</BuildRate>
-      <NumberBuildAtATime>2</NumberBuildAtATime>
+      <NumberBuildAtATime>5</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -198,6 +277,9 @@
       <Cost>12</Cost>
       <BuildRate>15</BuildRate>
       <NumberBuildAtATime>2</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -209,6 +291,9 @@
       <Cost>13</Cost>
       <BuildRate>15</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -220,6 +305,9 @@
       <Cost>0</Cost>
       <BuildRate>0</BuildRate>
       <NumberBuildAtATime>0</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -231,6 +319,9 @@
       <Cost>5</Cost>
       <BuildRate>20</BuildRate>
       <NumberBuildAtATime>10</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -242,17 +333,23 @@
       <Cost>7</Cost>
       <BuildRate>20</BuildRate>
       <NumberBuildAtATime>5</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
       <TypeOfUnit>Space</TypeOfUnit>
-      <Name>Heavy Frigate</Name>
-      <Health>3</Health>
-      <AttackPower>3</AttackPower>
+      <Name>Area Defence Destroyer</Name>
+      <Health>5</Health>
+      <AttackPower>0</AttackPower>
       <IsCommandAndControl>false</IsCommandAndControl>
       <Cost>8</Cost>
       <BuildRate>20</BuildRate>
-      <NumberBuildAtATime>5</NumberBuildAtATime>
+      <NumberBuildAtATime>4</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -264,6 +361,9 @@
       <Cost>0</Cost>
       <BuildRate>0</BuildRate>
       <NumberBuildAtATime>0</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -275,6 +375,9 @@
       <Cost>5</Cost>
       <BuildRate>50</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -286,6 +389,9 @@
       <Cost>5</Cost>
       <BuildRate>50</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -297,6 +403,23 @@
       <Cost>5</Cost>
       <BuildRate>50</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
+    </Unit>
+    <Unit>
+      <HackResult>None</HackResult>
+      <TypeOfUnit>Ground</TypeOfUnit>
+      <Name>Heavy Gun Ship Squadron</Name>
+      <Health>6</Health>
+      <AttackPower>30</AttackPower>
+      <IsCommandAndControl>false</IsCommandAndControl>
+      <Cost>12</Cost>
+      <BuildRate>50</BuildRate>
+      <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -308,6 +431,9 @@
       <Cost>0</Cost>
       <BuildRate>0</BuildRate>
       <NumberBuildAtATime>0</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -319,6 +445,9 @@
       <Cost>10</Cost>
       <BuildRate>20</BuildRate>
       <NumberBuildAtATime>2</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -330,6 +459,9 @@
       <Cost>5</Cost>
       <BuildRate>20</BuildRate>
       <NumberBuildAtATime>5</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -341,6 +473,9 @@
       <Cost>13</Cost>
       <BuildRate>15</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -352,6 +487,37 @@
       <Cost>2</Cost>
       <BuildRate>20</BuildRate>
       <NumberBuildAtATime>10</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
+    </Unit>
+    <Unit>
+      <HackResult>None</HackResult>
+      <TypeOfUnit>Space</TypeOfUnit>
+      <Name>Heavy Troop Transport</Name>
+      <Health>8</Health>
+      <AttackPower>0</AttackPower>
+      <IsCommandAndControl>false</IsCommandAndControl>
+      <Cost>15</Cost>
+      <BuildRate>20</BuildRate>
+      <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
+    </Unit>
+    <Unit>
+      <HackResult>None</HackResult>
+      <TypeOfUnit>Space</TypeOfUnit>
+      <Name>Electronic Warfare Ship</Name>
+      <Health>5</Health>
+      <AttackPower>0</AttackPower>
+      <IsCommandAndControl>false</IsCommandAndControl>
+      <Cost>10</Cost>
+      <BuildRate>20</BuildRate>
+      <NumberBuildAtATime>2</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -363,6 +529,9 @@
       <Cost>0</Cost>
       <BuildRate>0</BuildRate>
       <NumberBuildAtATime>0</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -374,6 +543,9 @@
       <Cost>0</Cost>
       <BuildRate>0</BuildRate>
       <NumberBuildAtATime>0</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -385,6 +557,9 @@
       <Cost>1</Cost>
       <BuildRate>45</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -396,6 +571,9 @@
       <Cost>2</Cost>
       <BuildRate>45</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -407,6 +585,9 @@
       <Cost>3</Cost>
       <BuildRate>45</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -418,6 +599,9 @@
       <Cost>2</Cost>
       <BuildRate>45</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -429,6 +613,9 @@
       <Cost>3</Cost>
       <BuildRate>45</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -440,6 +627,9 @@
       <Cost>4</Cost>
       <BuildRate>45</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -451,6 +641,9 @@
       <Cost>3</Cost>
       <BuildRate>45</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -462,6 +655,9 @@
       <Cost>4</Cost>
       <BuildRate>45</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -473,6 +669,9 @@
       <Cost>5</Cost>
       <BuildRate>45</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -484,6 +683,9 @@
       <Cost>5</Cost>
       <BuildRate>45</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -495,6 +697,9 @@
       <Cost>6</Cost>
       <BuildRate>45</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -506,6 +711,9 @@
       <Cost>7</Cost>
       <BuildRate>45</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -517,6 +725,9 @@
       <Cost>6</Cost>
       <BuildRate>45</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -528,6 +739,9 @@
       <Cost>7</Cost>
       <BuildRate>45</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
     <Unit>
       <HackResult>None</HackResult>
@@ -539,6 +753,9 @@
       <Cost>8</Cost>
       <BuildRate>45</BuildRate>
       <NumberBuildAtATime>1</NumberBuildAtATime>
+      <SkipAttack>false</SkipAttack>
+      <Detected>true</Detected>
+      <Invulnerable>false</Invulnerable>
     </Unit>
   </Units>
 </UnitSettings>

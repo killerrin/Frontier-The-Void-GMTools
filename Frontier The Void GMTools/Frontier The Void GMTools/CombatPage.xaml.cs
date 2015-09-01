@@ -143,6 +143,10 @@ namespace Frontier_The_Void_GMTools
                     unit.IsCommandAndControl = commandAndControlCheckBox_addUnit_childWindow.IsChecked.Value;
                 else unit.IsCommandAndControl = false;
 
+                if (detectedCheckBox_addUnit_childWindow.IsChecked.HasValue)
+                    unit.Detected = detectedCheckBox_addUnit_childWindow.IsChecked.Value;
+                else unit.Detected = false;
+
                 try
                 {
                     if (typeOfUnitComboBox_addUnit_childWindow.SelectedIndex < 0 ||

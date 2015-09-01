@@ -50,12 +50,13 @@ namespace Frontier_The_Void_GMTools.ViewModel
             
         }
 
-        public void MakeDefault()
+        #region Unit Statistics
+        public void UnitStatisticsMakeDefault()
         {
             UnitStatistics = new UnitSettings();
             UnitStatistics.SetToDefault();
 
-            Save();
+            UnitStatisticsSave();
         }
 
         public void AddAbove(Unit unit, Unit unitToAdd)
@@ -68,17 +69,16 @@ namespace Frontier_The_Void_GMTools.ViewModel
             UnitStatistics.Units.Remove(unit);
         }
 
-        public void Save()
+        public void UnitStatisticsSave()
         {
             App.UnitStatisticsSettings = UnitStatistics;
             UnitSettings.Save(UnitStatistics);
         }
-        public void Load()
+        public void UnitStatisticsLoad()
         {
             UnitStatistics = UnitSettings.Load();
             App.UnitStatisticsSettings = UnitStatistics;
         }
-
-
+        #endregion
     }
 }

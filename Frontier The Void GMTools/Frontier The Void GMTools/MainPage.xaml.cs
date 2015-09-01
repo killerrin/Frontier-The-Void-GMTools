@@ -22,21 +22,30 @@ namespace Frontier_The_Void_GMTools
     {
         public MainPage()
         {
+            Loaded += MainPage_Loaded;
             InitializeComponent();
+        }
+
+        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Instance.CurrentPage = PageName.MainPage;
         }
 
         private void RollDiceButton_Click(object sender, RoutedEventArgs e)
         {
+            MainWindow.Instance.CurrentPage = PageName.RollDice;
             MainWindow.Instance.frame.Navigate(new Uri("RollDicePage.xaml", UriKind.Relative));
         }
 
         private void FTLPlanetGenerationButton_Click(object sender, RoutedEventArgs e)
         {
+            MainWindow.Instance.CurrentPage = PageName.FTLPlanetaryGenerator;
             MainWindow.Instance.frame.Navigate(new Uri("FTLPlanetGenerationPage.xaml", UriKind.Relative));
         }
 
         private void CombatButton_Click(object sender, RoutedEventArgs e)
         {
+            MainWindow.Instance.CurrentPage = PageName.Combat;
             MainWindow.Instance.frame.Navigate(new Uri("CombatPage.xaml", UriKind.Relative));
         }
     }
